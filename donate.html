@@ -388,6 +388,162 @@
     });
 
   </script>
+  <body>
+  <main>
+   
+       <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Donation Section */
+    #donate {
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      padding: 80px 20px;
+      color: white;
+      text-align: center;
+    }
+
+    #donate h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    #donate p {
+      font-size: 1.1rem;
+      color: #f1f1f1;
+      margin-bottom: 40px;
+    }
+
+    /* Donation Grid */
+    .donate-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .donate-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Donate Box */
+    .donate-box {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .donate-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .donate-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .donate-box h3 i {
+      margin-right: 10px;
+    }
+
+    .donate-box img {
+      width: 250px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .donate-box img:hover {
+      transform: scale(1.05);
+    }
+
+    .donate-box p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .donate-box a {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #2563eb;
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .donate-box a:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Responsive Button */
+    .donate-box a {
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .donate-box a {
+        width: auto;
+      }
+    }
+  </style>
+
+<section id="donate">
+  <div class="donate-container">
+    <h2>Support Our Mission</h2>
+    <p>Your donation helps us provide free fitness, meditation, and nutrition resources for everyone. Contribute today and make a lasting impact!</p>
+
+    <div class="donate-grid">
+      <!-- GPay Section (Domestic) -->
+      <div class="donate-box">
+        <h3><i class="fas fa-indian-rupee-sign" style="color: #16a34a;"></i> Donate via GPay (India)</h3>
+        <img src="IMG.jpg" alt="GPay QR Code" />
+        <p>Scan the QR code using Google Pay or any UPI app.</p>
+      </div>
+
+      <!-- PayPal Section (Foreign) -->
+      <div class="donate-box">
+        <h3><i class="fab fa-paypal" style="color: #0070ba;"></i> Donate via PayPal (Global)</h3>
+        <img src="IMG.jpg" alt="PayPal QR Code" />
+        <p>Scan or click below to donate via PayPal.</p>
+        <a href="https://www.paypal.me/yourpaypalusername" target="_blank">Donate with PayPal</a>
+      </div>
+    </div>
+  </div>
+</section>
   <footer>
   <div class="footer-container">
     <div class="footer-section">
