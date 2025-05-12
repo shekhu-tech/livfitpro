@@ -319,12 +319,122 @@
   }
 </style>
 <!-- Slider Container (after header, before main content) -->
-<div class="image-slider">
-  <div class="slider-background">
-    <!-- Replace with your images -->
-    <img src="d.png" alt="Image 1">
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .image-slider {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .slider-background {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slider-background img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+
+    .slider-background img.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .image-slider {
+        height: 260px;
+        margin-top: 0;
+      }
+
+      
+  </style>
+  <!-- Slider Section -->
+  <div class="image-slider" id="slider">
+    <div class="slider-background">
+      <img src="d0.png" alt="Image 1">
+      <img src="d1.png" alt="Image 2">
+      <img src="d2.png" alt="Image 3">
+      <img src="d3.png" alt="Image 4">
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="slider-nav">
+      <button id="prevBtn">&#10094;</button>
+      <button id="nextBtn">&#10095;</button>
+    </div>
   </div>
-</div>
+
+  <script>
+    const images = document.querySelectorAll('.slider-background img');
+    const totalImages = images.length;
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.remove('active');
+      });
+      images[index].classList.add('active');
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      showImage(currentIndex);
+    }
+
+    // Start auto sliding
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextImage, 7000);
+    }
+
+    // Stop auto sliding
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Event Listeners
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      nextImage();
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      prevImage();
+    });
+
+    // Pause on hover
+    const slider = document.getElementById('slider');
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+
+    // Initialize
+    showImage(currentIndex);
+    startAutoSlide();
+  </script>
 
 <section class="products-section">
    <h2 class="section-title">Morning Detox Drink</h2>
