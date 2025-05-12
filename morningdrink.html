@@ -233,6 +233,165 @@
 
 </header>
 </section>
+  <body>
+  <main>
+    <section>
+   
+  <style>
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .card {
+    position: relative;
+    width: 250px;
+    height: 160px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-background {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card-background {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .btn {
+    background: #ff004f;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .video-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-modal iframe {
+    width: 90vw;
+    height: 50vh;
+    border-radius: 10px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .video-modal iframe {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+    }
+  }
+</style>
+<!-- Slider Container (after header, before main content) -->
+<div class="image-slider">
+  <div class="slider-background">
+    <!-- Replace with your images -->
+    <img src="d.png" alt="Image 1">
+  </div>
+</div>
+
+<section class="products-section">
+   <h2 class="section-title">Morning Detox Drink</h2>
+<div class="cards-container">
+  <!-- Card 1 -->
+ <div class="card" onclick="openVideo('https://www.youtube.com/embed/?autoplay=1&mute=1')">
+  <div class="card-background" style="background-image: url('d0.png');"></div>
+  <div class="card-content">
+    <h3>Warm Lemon Water With Turmeric</h3>
+      <p>Flushes toxins, rehydrates, and wakes up your digestive system gently.</p>
+    <a href="#" class="btn">Start Detoxing Now</a>
+  </div>
+</div>
+
+  <!-- Card 2 -->
+  <div class="card" onclick="openVideo('https://youtube.com/embed/?autoplay=1&mute=1')">
+    <div class="card-background" style="background-image: url('d2.png');"></div>
+    <div class="card-content">
+      <h3>Triphala Water</h3>
+      <p>Powerful herbal remedy to cleanse the gut and balance all three doshas.</p>
+      <a href="#" class="btn">Start Detoxing Now</a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card" onclick="openVideo('https://www.youtube.com/embed/?autoplay=1')">
+    <div class="card-background" style="background-image: url('d3.png');"></div>
+    <div class="card-content">
+       <h3>Ginger Tulsi Tea</h3>
+      <p>Boosts immunity, reduces inflammation, and supports lung health.</p>
+       <a href="#" class="btn">Start Detoxing Now</a>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card" onclick="openVideo('https://www.youtube.com/embed/?autoplay=1')">
+    <div class="card-background" style="background-image: url('d4.png');"></div>
+    <div class="card-content">
+       <h3>Cumin-Coriander-Fennel</h3>
+      <p>Balances metabolism, cools the system, and aids in gentle detoxification.</p>
+       <a href="#" class="btn">Start Detoxing Now</a>
+    </div>
+  </div>
+
+  
+  </div>
+</div>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <span class="modal-close" onclick="closeVideo()">&times;</span>
+  <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+
+<script>
+  function openVideo(url) {
+    document.getElementById('videoFrame').src = url;
+    document.getElementById('videoModal').style.display = 'flex';
+  }
+
+  function closeVideo() {
+    document.getElementById('videoFrame').src = '';
+    document.getElementById('videoModal').style.display = 'none';
+  }
+</script>
+
+</section>
 <style>
   * {
     box-sizing: border-box;
