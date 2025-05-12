@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://www.livfit.pro/</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Zym Workout Page -->
+  <url>
+    <loc>https://www.livfit.pro/zym</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Caleshthenic workout Page -->
+  <url>
+    <loc>https://www.livfit.pro/calesthenic</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Cardio Workout Page -->
+  <url>
+    <loc>https://www.livfit.pro/cardio</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Yoga Page -->
+  <url>
+    <loc>https://www.livfit.pro/yoga</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Meditation Policy -->
+  <url>
+    <loc>https://www.livfit.pro/meditation</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- Morning Drink Service -->
+  <url>
+    <loc>https://www.livfit.pro/morningdrink</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- Diet Page -->
+  <url>
+    <loc>https://www.livfit.pro/Diet</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Weight loss or gain Page -->
+  <url>
+    <loc>https://www.livfit.pro/weight</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Donate Page -->
+  <url>
+    <loc>https://www.livfit.pro/donate</loc>
+    <lastmod>2025-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>
