@@ -58,50 +58,46 @@
   
   <style>
     /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
+   * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #0b0c1d;
       color: #fff;
       overflow-x: hidden;
-      padding-top: 80px;
     }
-    
-    /* Header Styles */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px 30px;
-      border-bottom: 2px solid #00f7ff;
-      box-shadow: 0 0 15px #00f7ff33;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      backdrop-filter: blur(8px);
+
+    /* Header */
+   header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7); /* Transparent black background */
+  padding: 15px 30px;
+  border-bottom: 2px solid #00f7ff;
+  box-shadow: 0 0 15px #00f7ff33;
+  position: fixed; /* <-- THIS IS THE FIX */
+  top: 0;
+  width: 100%; /* Ensure full width */
+  z-index: 1000;
+  backdrop-filter: blur(8px); /* Optional for glass effect */
+}
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #00f7ff;
+      text-shadow: 0 0 5px #00f7ff;
     }
-    
-    .logo img {
-      height: 35px;
-    }
-    
-    /* Navigation Styles */
+
     nav {
       display: flex;
       gap: 20px;
     }
-    
+
     .nav-item {
       position: relative;
     }
-    
+
     .nav-item > a {
       color: white;
       padding: 10px 15px;
@@ -110,13 +106,13 @@
       border-radius: 6px;
       transition: 0.3s;
     }
-    
+
     .nav-item > a:hover {
       border-color: #00f7ff;
       background-color: #1a1a2d;
       box-shadow: 0 0 10px #00f7ff;
     }
-    
+
     .dropdown {
       position: absolute;
       top: 100%;
@@ -130,36 +126,36 @@
       animation: dropdownFade 0.3s ease-in-out;
       z-index: 999;
     }
-    
+
     .dropdown a {
       padding: 10px 16px;
       color: white;
       text-decoration: none;
       transition: 0.3s;
     }
-    
+
     .dropdown a:hover {
       background-color: #00f7ff22;
       color: #00f7ff;
     }
-    
+
     .nav-item:hover .dropdown {
       display: flex;
     }
-    
+
     @keyframes dropdownFade {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    /* Mobile Menu Styles */
+
     .menu-toggle {
       display: none;
       font-size: 24px;
       color: #00f7ff;
       cursor: pointer;
     }
-    
+
+    /* Sidebar */
     .sidebar {
       position: fixed;
       top: 0;
@@ -174,11 +170,11 @@
       padding: 40px 20px;
       overflow-y: auto;
     }
-    
+
     .sidebar.active {
       transform: scale(1);
     }
-    
+
     .sidebar .close-btn {
       font-size: 26px;
       color: #fff;
@@ -187,6 +183,81 @@
       right: 30px;
       cursor: pointer;
     }
+
+    .sidebar .sidebar-logo {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #00f7ff;
+      text-shadow: 0 0 5px #00f7ff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin: 12px 0;
+    }
+
+    .sidebar-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e1e2e;
+      padding: 12px 16px;
+      font-size: 18px;
+      color: #fff;
+      border: 1px solid #00f7ff44;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .sidebar-button i {
+      margin-right: 10px;
+      color: #00f7ff;
+    }
+
+    .sidebar-dropdown {
+      display: none;
+      flex-direction: column;
+      padding-left: 30px;
+      margin-top: 8px;
+    }
+
+    .sidebar-dropdown a {
+      color: #bbb;
+      padding: 6px 0;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar-dropdown a:hover {
+      color: #00f7ff;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      nav { display: none; }
+      .menu-toggle { display: block; }
+    }
+
+
+ 
+
+  /* Global box-sizing fix for Safari and general layout stability */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 80px; /* Adjust based on your header height */
+}
     
     /* Slider Styles */
     .image-slider {
