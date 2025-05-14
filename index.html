@@ -521,25 +521,7 @@ body {
     min-width: 100px;
   }
 }
-    
-  </style>
-</head>
-
-<body>
-  <!-- Header Section -->
- <section>
-  <header>
-    <div class="logo-container">
-  <a href="index.html">
-    <img src="lfit.png" alt="Shekhar Tyagi" class="logo-img">
-  </a>
-  <div class="datetime-container">
-    <span id="datetime"></span>
-  </div>
-</div>
-
-<style>
-  .logo-container {
+.logo-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -578,34 +560,27 @@ body {
       font-size: 8px;
     }
   }
+    
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+ <section>
+  <header>
+    <div class="logo-container">
+  <a href="index.html">
+    <img src="lfit.png" alt="Shekhar Tyagi" class="logo-img">
+  </a>
+  <div class="datetime-container">
+    <span id="datetime"></span>
+  </div>
+</div>
+
+<style>
+  
 </style>
 
-<script>
-  // Wait until everything is loaded in DOM
-  document.addEventListener('DOMContentLoaded', function () {
-    function updateDateTime() {
-      const now = new Date();
-      const options = {
-        weekday: 'short',  // e.g., "Tue"
-        year: 'numeric',
-        month: 'short',    // e.g., "May"
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      };
-
-      const datetimeElement = document.getElementById('datetime');
-      if (datetimeElement) {
-        datetimeElement.textContent = now.toLocaleString('en-US', options);
-      }
-    }
-
-    updateDateTime(); // Show date/time immediately
-    setInterval(updateDateTime, 1000); // Then update every second
-  });
-</script>
 
     <nav>
   <!-- Header Items -->
@@ -931,6 +906,32 @@ body {
         dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
       });
     });
+
+    
+  // Wait until everything is loaded in DOM
+  document.addEventListener('DOMContentLoaded', function () {
+    function updateDateTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'short',  // e.g., "Tue"
+        year: 'numeric',
+        month: 'short',    // e.g., "May"
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+
+      const datetimeElement = document.getElementById('datetime');
+      if (datetimeElement) {
+        datetimeElement.textContent = now.toLocaleString('en-US', options);
+      }
+    }
+
+    updateDateTime(); // Show date/time immediately
+    setInterval(updateDateTime, 1000); // Then update every second
+  });
   </script>
 </body>
 </html>
