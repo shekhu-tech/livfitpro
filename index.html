@@ -228,6 +228,10 @@
       margin-top: 8px;
     }
 
+    .sidebar-dropdown.active {
+      display: flex;
+    }
+
     .sidebar-dropdown a {
       color: #bbb;
       padding: 6px 0;
@@ -519,6 +523,10 @@ body {
   }
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
   </style>
 </head>
 
@@ -608,7 +616,7 @@ body {
     <li>
       <div class="sidebar-button" onclick="toggleDropdown(this)">
         <span><i class="fas fa-dumbbell"></i> Zym Workout</span>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down dropdown-icon"></i>
       </div>
       <div class="sidebar-dropdown">
         <a href="zymbeginner.html">Beginner</a>
@@ -620,7 +628,7 @@ body {
     <li>
       <div class="sidebar-button" onclick="toggleDropdown(this)">
         <span><i class="fas fa-person-walking"></i> Calisthenic Workout</span>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down dropdown-icon"></i>
       </div>
       <div class="sidebar-dropdown">
         <a href="clsbeginner.html">Beginner</a>
@@ -632,7 +640,7 @@ body {
     <li>
       <div class="sidebar-button" onclick="toggleDropdown(this)">
         <span><i class="fas fa-person-walking"></i> Cardio Workout</span>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down dropdown-icon"></i>
       </div>
       <div class="sidebar-dropdown">
         <a href="crdbeginner.html">Beginner</a>
@@ -645,7 +653,7 @@ body {
     <li>
       <div class="sidebar-button" onclick="toggleDropdown(this)">
         <span><i class="fas fa-spa"></i> Yoga</span>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down dropdown-icon"></i>
       </div>
       <div class="sidebar-dropdown">
         <a href="ygabeginner.html">Beginner</a>
@@ -657,7 +665,7 @@ body {
     <li>
       <div class="sidebar-button" onclick="toggleDropdown(this)">
         <span><i class="fas fa-brain"></i> Meditation</span>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down dropdown-icon"></i>
       </div>
       <div class="sidebar-dropdown">
         <a href="mdbeginner.html">Beginner</a>
@@ -667,21 +675,21 @@ body {
       </div>
     </li>
     <li>
-      <li>
-    <a class="sidebar-button no-underline" href="morningdrink.html">
-      <span><i class="fas fa-mug-hot"></i> Morning Drink Coming...</span>
-    </a>
-  </li>
-  <li>
-    <a class="sidebar-button no-underline" href="diet.html">
-      <span><i class="fas fa-apple-alt"></i>Diet Rutin Coming...</span>
-    </a>
-  </li>
-  <li>
-    <a class="sidebar-button no-underline" href="weight.html">
-      <span><i class="fas fa-running"></i>Weight...</span>
-    </a>
-  </li>
+      <a class="sidebar-button no-underline" href="morningdrink.html">
+        <span><i class="fas fa-mug-hot"></i> Morning Drink Coming...</span>
+      </a>
+    </li>
+    <li>
+      <a class="sidebar-button no-underline" href="diet.html">
+        <span><i class="fas fa-apple-alt"></i>Diet Rutin Coming...</span>
+      </a>
+    </li>
+    <li>
+      <a class="sidebar-button no-underline" href="weight.html">
+        <span><i class="fas fa-running"></i>Weight...</span>
+      </a>
+    </li>
+    <li>
       <a class="sidebar-button no-underline" href="donate.html">
         <span><i class="fas fa-donate"></i> Donate</span>
       </a>
@@ -843,16 +851,25 @@ body {
       document.getElementById("sidebar").classList.toggle("active");
     }
 
-    function toggleDropdown(el) {
-      const dropdown = el.nextElementSibling;
-      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    function toggleDropdown(button) {
+      const dropdown = button.nextElementSibling;
+      const icon = button.querySelector('.dropdown-icon');
+      
+      dropdown.classList.toggle('active');
+      
+      if (dropdown.classList.contains('active')) {
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+      } else {
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+      }
     }
 
-    // Initialize dropdowns
-    document.querySelectorAll('.sidebar-button').forEach(button => {
-      button.addEventListener('click', function() {
-        const dropdown = this.nextElementSibling;
-        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    // Close sidebar when clicking on a link
+    document.querySelectorAll('.sidebar-dropdown a, .sidebar-button.no-underline').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById("sidebar").classList.remove("active");
       });
     });
   </script>
