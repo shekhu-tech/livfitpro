@@ -1435,7 +1435,18 @@ body {
 }
 </style>
 
-
+<script>
+  function scrollToCard() {
+    const card = document.getElementById('zymbeginner');
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Optional: highlight effect
+      card.style.transition = 'box-shadow 0.3s';
+      card.style.boxShadow = '0 0 10px 3px #00f';
+      setTimeout(() => card.style.boxShadow = '', 1000);
+    }
+  }
+</script>
  <script>
 
     function toggleSidebar() {
