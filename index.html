@@ -529,14 +529,21 @@ body {
 }
 
   </style>
-   <!-- Popup HTML (insert before </body>) -->
+   <!-- Stylish Popup -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <div id="popup" class="popup">
   <div class="popup-content">
-    <h1>Welcome to livfit.pro</h1>
-    <p>We don’t show ads, and we don’t charge subscriptions.</p>
-    <p>Feel free to donate if you wish — or simply enjoy our service at no cost.</p>
-    <p>हम विज्ञापन नहीं दिखाते और कोई सदस्यता शुल्क नहीं लेते।</p>
-    <p>दान देने वालों की प्रोफाइल हमारी डोनेशन पेज पर प्रदर्शित होगी। धन्यवाद और आनंद लें।</p>
+    <div class="popup-header">
+      <h1>Welcome to <span>livfit.pro</span></h1>
+    </div>
+    <div class="popup-body">
+      <p>💡 We don’t show ads, and we don’t charge subscriptions.</p>
+      <p>✨ Feel free to donate if you wish — or simply enjoy our service at no cost.</p>
+      <p>📢 हम विज्ञापन नहीं दिखाते और कोई सदस्यता शुल्क नहीं लेते।</p>
+      <p>🙏 यदि आप चाहें तो हमें दान दे सकते हैं, नहीं तो कोई बात नहीं — आप वेबसाइट का पूरा उपयोग कर सकते हैं।</p>
+      <p>❤️ दान देने वालों की प्रोफाइल हमारी डोनेशन पेज पर प्रदर्शित होगी। धन्यवाद और आनंद लें।</p>
+    </div>
     <div class="popup-buttons">
       <a href="donate.html" class="btn donate">Donate / दान करें</a>
       <button class="btn continue" onclick="continueToSite()">Continue / जारी रखें</button>
@@ -545,48 +552,60 @@ body {
 </div>
 
 <style>
-  #popup {
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .popup {
     display: none;
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
     padding: 20px;
   }
 
   .popup-content {
-    background: #ffffff;
-    border-radius: 12px;
-    max-width: 550px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    max-width: 650px;
     width: 100%;
-    padding: 30px;
+    padding: 35px 30px;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.5s ease-out;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: zoomIn 0.5s ease;
+    color: #333;
   }
 
-  .popup-content h1 {
-    font-size: 24px;
-    color: #222;
-    margin-bottom: 15px;
+  .popup-header h1 {
+    background: linear-gradient(to right, #0066ff, #00cc99);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 28px;
     font-weight: 600;
+    margin-bottom: 20px;
   }
 
-  .popup-content p {
+  .popup-header span {
+    font-weight: 700;
+  }
+
+  .popup-body p {
     font-size: 16px;
-    color: #555;
-    margin-bottom: 12px;
+    color: #444;
+    margin: 10px 0;
     line-height: 1.6;
   }
 
   .popup-buttons {
+    margin-top: 30px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap;
   }
 
   .btn {
@@ -595,7 +614,7 @@ body {
     border: none;
     cursor: pointer;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 600;
     transition: all 0.3s ease;
     text-decoration: none;
   }
@@ -618,28 +637,28 @@ body {
     background: #218838;
   }
 
-  @keyframes slideUp {
+  @keyframes zoomIn {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: scale(0.8);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
     }
   }
 
   @media (max-width: 480px) {
     .popup-content {
-      padding: 20px;
-    }
-
-    .btn {
-      width: 100%;
+      padding: 25px 20px;
     }
 
     .popup-buttons {
       flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
     }
   }
 </style>
