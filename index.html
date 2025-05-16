@@ -529,117 +529,124 @@ body {
 }
 
   </style>
-    <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .popup-content {
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      width: 100%;
-      max-width: 600px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease-in-out;
-    }
-
-    .popup-content h1 {
-      color: #111;
-      margin-bottom: 20px;
-      font-size: 28px;
-    }
-
-    .popup-content p {
-      color: #444;
-      margin-bottom: 15px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .popup-buttons {
-      margin-top: 25px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .btn {
-      background: linear-gradient(135deg, #007bff, #0056b3);
-      color: white;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 50px;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 480px) {
-      .popup-content {
-        padding: 25px;
-      }
-
-      .btn {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<!-- Popup -->
+   <!-- Popup HTML (insert before </body>) -->
 <div id="popup" class="popup">
   <div class="popup-content">
     <h1>Welcome to livfit.pro</h1>
-    <p>We don't show ads and we don't have any subscription criteria.</p>
-    <p>You may donate if you wish, or just use the website freely.</p>
+    <p>We don’t show ads, and we don’t charge subscriptions.</p>
+    <p>Feel free to donate if you wish — or simply enjoy our service at no cost.</p>
     <p>हम विज्ञापन नहीं दिखाते और कोई सदस्यता शुल्क नहीं लेते।</p>
-    <p>यदि आप चाहें तो हमें दान दे सकते हैं, नहीं तो कोई बात नहीं — आप वेबसाइट का पूरा उपयोग कर सकते हैं।</p>
-    <p>दान देने वालों की प्रोफाइल हमारी डोनेशन पेज पर दिखाई जाएगी। धन्यवाद और आनंद लें।</p>
+    <p>दान देने वालों की प्रोफाइल हमारी डोनेशन पेज पर प्रदर्शित होगी। धन्यवाद और आनंद लें।</p>
     <div class="popup-buttons">
-      <a href="donate.html" class="btn">Donate / दान करें</a>
-      <button onclick="continueToSite()" class="btn">Continue / जारी रखें</button>
+      <a href="donate.html" class="btn donate">Donate / दान करें</a>
+      <button class="btn continue" onclick="continueToSite()">Continue / जारी रखें</button>
     </div>
   </div>
 </div>
 
-<script>
-  const popup = document.getElementById("popup");
+<style>
+  #popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
+  .popup-content {
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 550px;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .popup-content h1 {
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .popup-content p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn.donate {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: #fff;
+  }
+
+  .btn.donate:hover {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+  }
+
+  .btn.continue {
+    background: #28a745;
+    color: white;
+  }
+
+  .btn.continue:hover {
+    background: #218838;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .popup-content {
+      padding: 20px;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .popup-buttons {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
   function continueToSite() {
-    popup.style.display = "none";
+    document.getElementById("popup").style.display = "none";
     localStorage.setItem("popupShownDate", new Date().toDateString());
     window.location.href = "index.html";
   }
@@ -648,7 +655,7 @@ body {
     const lastShown = localStorage.getItem("popupShownDate");
     const today = new Date().toDateString();
     if (lastShown !== today) {
-      popup.style.display = "flex";
+      document.getElementById("popup").style.display = "flex";
     }
   };
 </script>
