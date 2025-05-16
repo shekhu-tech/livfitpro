@@ -542,8 +542,8 @@ body {
     <nav>
   <!-- Header Items -->
   <div class="nav-item">
-    <a href="#">Zym Workout</a>
-    <div class="dropdown">
+    <a href="zym.html">Zym Workout</a>
+   <!--  <div class="dropdown">
       <a href="zymbeginner.html">Beginner</a>
         <a href="zymintermidiate.html">Intermediate</a>
         <a href="zymadvance.html">Advanced</a>
@@ -551,8 +551,8 @@ body {
     </div>
   </div>
   <div class="nav-item">
-    <a href="#">Calisthenic Workout</a>
-    <div class="dropdown">
+    <a href="calesthenic.html">Calisthenic Workout</a>
+   <!--  <div class="dropdown">
       <a href="clsbeginner.html">Beginner</a>
         <a href="clsintermidiate.html">Intermediate</a>
         <a href="clsadvance.html">Advanced</a>
@@ -560,8 +560,8 @@ body {
     </div>
   </div>
    <div class="nav-item">
-    <a href="#">Cardio Workout</a>
-    <div class="dropdown">
+    <a href="cardio.html">Cardio Workout</a>
+    <!-- <div class="dropdown">
       <a href="crdbeginner.html">Beginner</a>
       <a href="crdintermidiate.html">Intermediate</a>
       <a href="crdadvance.html">Advanced</a>
@@ -569,8 +569,8 @@ body {
     </div>
   </div>
   <div class="nav-item">
-    <a href="#">Yoga</a>
-    <div class="dropdown">
+    <a href="yoga.html">Yoga</a>
+    <!-- <div class="dropdown">
       <a href="ygabeginner.html">Beginner</a>
         <a href="ygaintermidiate.html">Intermediate</a>
         <a href="ygaadvance.html">Advanced</a>
@@ -578,8 +578,8 @@ body {
     </div>
   </div>
   <div class="nav-item">
-    <a href="#">Meditation</a>
-    <div class="dropdown">
+    <a href="meditation.html">Meditation</a>
+     <!--<div class="dropdown">
       <a href="mdbeginner.html">Beginner</a>
         <a href="mdintermidiate.html">Intermediate</a>
         <a href="mdadvance.html">Advanced</a>
@@ -607,18 +607,18 @@ body {
 <div class="sidebar" id="sidebar">
   <div class="close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
    <div class="sidebar-logo">
-    <a href="#">
+    <a href="index.html">
       <img src="lfit.png" alt="Livfit" style="height: 35px;">
     </a>
   </div>
   <ul>
     <!-- Repeat for each category -->
     <li>
-      <div class="sidebar-button" onclick="toggleDropdown(this)">
-        <span><i class="fas fa-dumbbell"></i> Zym Workout</span>
-        <i class="fas fa-chevron-down dropdown-icon"></i>
-      </div>
-      <div class="sidebar-dropdown">
+     <a class="sidebar-button no-underline" href="zym.html">
+  <span><i class="fas fa-dumbbell"></i> Zym Workout</span>
+  <i class="fas fa-chevron-down dropdown-icon"></i>
+</a>
+     <!--  <div class="sidebar-dropdown">
         <a href="zymbeginner.html">Beginner</a>
         <a href="zymintermidiate.html">Intermediate</a>
         <a href="zymadvance.html">Advanced</a>
@@ -626,11 +626,11 @@ body {
       </div>
     </li>
     <li>
-      <div class="sidebar-button" onclick="toggleDropdown(this)">
-        <span><i class="fas fa-person-walking"></i> Calisthenic Workout</span>
-        <i class="fas fa-chevron-down dropdown-icon"></i>
-      </div>
-      <div class="sidebar-dropdown">
+     <a class="sidebar-button no-underline" href="calesthenic.html">
+  <span><i class="fas fa-person-walking"></i> Calisthenic Workout</span>
+  <i class="fas fa-chevron-down dropdown-icon"></i>
+</a>
+      <!---<div class="sidebar-dropdown">
         <a href="clsbeginner.html">Beginner</a>
         <a href="clsintermidiate.html">Intermediate</a>
         <a href="clsadvance.html">Advanced</a>
@@ -638,11 +638,11 @@ body {
       </div>
     </li>
     <li>
-      <div class="sidebar-button" onclick="toggleDropdown(this)">
-        <span><i class="fas fa-person-walking"></i> Cardio Workout</span>
-        <i class="fas fa-chevron-down dropdown-icon"></i>
-      </div>
-      <div class="sidebar-dropdown">
+      <a class="sidebar-button no-underline" href="cardio.html">
+  <span><i class="fas fa-heartbeat"></i> Cardio Workout</span>
+  <i class="fas fa-chevron-down dropdown-icon"></i>
+</a>
+     <!--- <div class="sidebar-dropdown">
         <a href="crdbeginner.html">Beginner</a>
       <a href="crdintermidiate.html">Intermediate</a>
       <a href="crdadvance.html">Advanced</a>
@@ -651,11 +651,12 @@ body {
     </li>
 
     <li>
-      <div class="sidebar-button" onclick="toggleDropdown(this)">
-        <span><i class="fas fa-spa"></i> Yoga</span>
-        <i class="fas fa-chevron-down dropdown-icon"></i>
-      </div>
-      <div class="sidebar-dropdown">
+     <a class="sidebar-button no-underline" href="yoga.html">
+  <span><i class="fas fa-spa"></i> Yoga</span>
+  <i class="fas fa-chevron-down dropdown-icon"></i>
+</a>
+
+    <!---  <div class="sidebar-dropdown">
         <a href="ygabeginner.html">Beginner</a>
         <a href="ygaintermidiate.html">Intermediate</a>
         <a href="ygaadvance.html">Advanced</a>
@@ -663,11 +664,11 @@ body {
       </div>
     </li>
     <li>
-      <div class="sidebar-button" onclick="toggleDropdown(this)">
-        <span><i class="fas fa-brain"></i> Meditation</span>
-        <i class="fas fa-chevron-down dropdown-icon"></i>
-      </div>
-      <div class="sidebar-dropdown">
+      <a class="sidebar-button no-underline" href="meditation.html.html">
+  <span><i class="fas fa-brain"></i> Meditation</span>
+  <i class="fas fa-chevron-down dropdown-icon"></i>
+</a>
+     <!--- <div class="sidebar-dropdown">
         <a href="mdbeginner.html">Beginner</a>
         <a href="mdintermidiate.html">Intermediate</a>
         <a href="mdadvance.html">Advanced</a>
@@ -676,17 +677,17 @@ body {
     </li>
     <li>
       <a class="sidebar-button no-underline" href="morningdrink.html">
-        <span><i class="fas fa-mug-hot"></i> Morning Drink Coming...</span>
+        <span><i class="fas fa-mug-hot"></i> Morning Detox Drink...</span>
       </a>
     </li>
     <li>
       <a class="sidebar-button no-underline" href="diet.html">
-        <span><i class="fas fa-apple-alt"></i>Diet Rutin Coming...</span>
+        <span><i class="fas fa-apple-alt"></i>Diet Rutin Plan</span>
       </a>
     </li>
     <li>
       <a class="sidebar-button no-underline" href="weight.html">
-        <span><i class="fas fa-running"></i>Weight...</span>
+        <span><i class="fas fa-running"></i>Weight Gain/Loss</span>
       </a>
     </li>
     <li>
