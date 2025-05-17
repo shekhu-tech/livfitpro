@@ -370,13 +370,16 @@
     <img src="rn.png" alt="Image 1">
   </div>
 </div>
-  
+
+
+
+
  <body>
   <main>
    <section class="products-section">
    <h2 class="section-title">Zym Workout</h2>
+
   <div class="cards-container">
-     <div class="cards-container">
     <div class="card">
       <a href="zymbeginner.html" class="card-link">
   <div class="card-background" style="background-image: url('Zym1.png');"></div>
@@ -415,8 +418,6 @@
       </div>
     </div>
 </section>
- 
- 
 <style>
   
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -601,7 +602,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 1000px) {
+    @media (max-width: 1500px) {
       nav { display: none; }
       .menu-toggle { display: block; }
     }
@@ -754,18 +755,7 @@ body {
 }
 </style>
 
-<script>
-  function scrollToCard() {
-    const card = document.getElementById('zymbeginner');
-    if (card) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // Optional: highlight effect
-      card.style.transition = 'box-shadow 0.3s';
-      card.style.boxShadow = '0 0 10px 3px #00f';
-      setTimeout(() => card.style.boxShadow = '', 1000);
-    }
-  }
-</script>
+
  <script>
 
     function toggleSidebar() {
