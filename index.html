@@ -858,31 +858,33 @@ header {
 
   <!-- JavaScript -->
   <script>
-    // Video Slider
-     const videos = document.querySelectorAll('.video-slider video');
-    let current = 0;
+    // Slider Functionality
+    const images = document.querySelectorAll('.slider-background img');
+    const totalImages = images.length;
+    let currentIndex = 0;
+    let autoSlideInterval;
 
-    // Pause all videos except current
-    function showVideo(index) {
-      videos.forEach((video, i) => {
-        video.classList.remove('active');
-        video.pause();
-        if (i === index) {
-          video.classList.add('active');
-          video.currentTime = 0;
-          video.play();
-        }
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.remove('active');
       });
+      images[index].classList.add('active');
     }
 
-    setInterval(() => {
-      current = (current + 1) % videos.length;
-      showVideo(current);
-    }, 5000);
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      showImage(currentIndex);
+    }
 
-    // Initial setup
-    showVideo(current);
-    // Mobile Menu
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextImage, 7000);
+    }
+
+    // Initialize slider
+    showImage(currentIndex);
+    startAutoSlide();
+
+    // Mobile Menu Functionality
     function toggleSidebar() {
       document.getElementById("sidebar").classList.toggle("active");
     }
