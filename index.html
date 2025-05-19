@@ -8,7 +8,7 @@
   <meta name="msvalidate.01" content="10BD441956768FC33C57DBCB1A513EAD" />
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="LivFit.pro –Your ultimate destination for holistic fitness, mindful living, and powerful transformation." />
+  <meta name="description" content="LivFit.pro – Where Wellness Meets Lifestyle. Unlock your healthiest, most vibrant self with LivFit.pro — your ultimate destination for holistic fitness, mindful living, and powerful transformation." />
   <meta name="keywords" content="fitness, zym, wellness, yoga, meditation, diet plans, healthy living, fitness programs" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="LivFit Team" />
@@ -51,21 +51,11 @@
     }
   }
   </script>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-85BS0P5CWL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-85BS0P5CWL');
-</script>
   
   <!-- FontAwesome and Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css">
   
-    
   <style>
     /* Global Styles */
    * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -238,10 +228,6 @@
       margin-top: 8px;
     }
 
-    .sidebar-dropdown.active {
-      display: flex;
-    }
-
     .sidebar-dropdown a {
       color: #bbb;
       padding: 6px 0;
@@ -259,6 +245,9 @@
       .menu-toggle { display: block; }
     }
 
+
+ 
+
   /* Global box-sizing fix for Safari and general layout stability */
 *,
 *::before,
@@ -269,95 +258,127 @@
 body {
   padding-top: 80px; /* Adjust based on your header height */
 }
-    
-    /* Slider Styles */
-    .image-slider {
-      width: 100%;
-      height: 100vh;
+
+      /* Video slider container */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+
+    .video-slider {
       position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
       overflow: hidden;
-      margin-top: 10px;
     }
-    
-    .slider-background {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-    
-    .slider-background img {
+
+    .video-slider video {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      transition: opacity 1s ease;
+      z-index: 0;
     }
-    
-    .slider-background img.active {
+
+    .video-slider video.active {
       opacity: 1;
-      transform: scale(1);
       z-index: 1;
     }
-    
+
     /* Products Section */
     .products-section {
       padding: 4rem 2rem;
       background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       text-align: center;
     }
-    
+
     .section-title {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
       color: #fff;
       margin-bottom: 3rem;
       background: linear-gradient(to right, #ff416c, #ff4b2b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    
+
     .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      overflow: hidden;
-      height: 270px;
-      width: 100%;
-      max-width: 399px;
-      position: relative;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 260px;
-    }
-    
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #ff4b2b;
-    }
-    
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.card {
+  flex: 1 1 300px; /* grow, shrink, base width */
+  max-width: 399px;
+  aspect-ratio: 16 / 9; /* keeps 16:9 ratio */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  background: black;
+  min-width: 250px; /* so card doesn’t get too small */
+}
+
+.card video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  border-radius: 0 0 10px 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Optional: smaller screen tweaks */
+@media (max-width: 400px) {
+  .cards-container {
+    gap: 10px;
+  }
+  .card {
+    flex-basis: 100%;
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
     /* Footer Styles */
     footer {
       background: #0f1123;
       padding: 2rem;
       text-align: center;
     }
-    
+
     .footer-buttons {
       margin-top: 20px;
       text-align: center;
     }
-    
+
     .footer-btn {
       background-color: transparent;
       color: white;
@@ -370,325 +391,30 @@ body {
       border: 1px solid white;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
+
     .footer-btn:hover {
       background-color: #3498db;
       color: white;
     }
-    
+
     /* Responsive Styles */
     @media (max-width: 1000px) {
       nav { display: none; }
       .menu-toggle { display: block; }
+      .video-slider { height: 60vh; }
     }
-    
+
     @media (max-width: 768px) {
-      .image-slider {
-        height: 260px;
-        margin-top: 0;
-      }
-      
-      .cards-container {
-        flex-direction: column;
-        align-items: center;
-      }
+      .products-section { padding: 2rem 1rem; }
+      .card { height: auto; }
     }
-    
-    @media (max-width: 480px) {
-      .products-section {
-        padding: 2rem 1rem;
-      }
-      
-      .card {
-        height: auto;
-      }
-    }
+  </style>
+</head>
 
-    .products-section {
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  height: 270px;
-  width: 100%;
-  max-width: 399px;
-  position: relative;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 260px; /* Ensures enough room */
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #ff4b2b;
-}
-
-.card-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.7;
-  z-index: 1;
-}
-
-.card-content {
-  padding: 0.2rem;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-}
-
-.card-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.card-content p {
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
-}
-
-.btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 30px;
-  background: #ff416c;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
-
-.btn:hover {
-  background: #ff416c;
-  box-shadow: 0 0 10px transparent;
-}
-
-/* Responsive adjustments for tablets and below */
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Extra responsiveness for small mobile devices */
-@media (max-width: 480px) {
-  .products-section {
-    padding: 2rem 1rem;
-  }
-
-  .card {
-    height: auto;
-  }
-
-  .card-content h3 {
-    font-size: 1.1rem;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    width: auto;
-    min-width: 100px;
-  }
-}
-
-.no-underline {
-  text-decoration: none;
-}
-
-</style>
-   <!-- Stylish Popup -->
-   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-<div id="popup" class="popup">
-  <div class="popup-content">
-    <div class="popup-header">
-      <h1>Welcome to <span>livfit.pro</span></h1>
-    </div>
-    <div class="popup-body">
-      <p>💡 We don’t show ads, and we don’t charge subscriptions.</p>
-      <p>✨ Feel free to donate if you wish — or simply enjoy our service at no cost.</p>
-      <p>📢 हम विज्ञापन नहीं दिखाते और कोई सदस्यता शुल्क नहीं लेते।</p>
-      <p>🙏 यदि आप चाहें तो हमें दान दे सकते हैं, नहीं तो कोई बात नहीं — आप वेबसाइट का पूरा उपयोग कर सकते हैं।</p>
-      <p>❤️ दान देने वालों की प्रोफाइल हमारी डोनेशन पेज पर प्रदर्शित होगी। धन्यवाद और आनंद लें।</p>
-    </div>
-    <div class="popup-buttons">
-      <a href="donate.html" class="btn donate">Donate / दान करें</a>
-      <button class="btn continue" onclick="continueToSite()">Continue / जारी रखें</button>
-    </div>
-  </div>
-</div>
-
-<style>
-  body {
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: gray;
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .popup-content {
-    background: gray;
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    max-width: 650px;
-    width: 100%;
-    padding: 35px 30px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: zoomIn 0.5s ease;
-    color: white;
-  }
-
-  .popup-header h1 {
-    background: white;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-
-  .popup-header span {
-    font-weight: 700;
-  }
-
-  .popup-body p {
-    font-size: 16px;
-    color: white;
-    margin: 10px 0;
-    line-height: 1.6;
-  }
-
-  .popup-buttons {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .btn {
-    padding: 12px 25px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .btn.donate {
-    background: linear-gradient(135deg, #ff6b6b, #ff4757);
-    color: #fff;
-  }
-
-  .btn.donate:hover {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-  }
-
-  .btn.continue {
-    background: #28a745;
-    color: white;
-  }
-
-  .btn.continue:hover {
-    background: #218838;
-  }
-
-  @keyframes zoomIn {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .popup-content {
-      padding: 25px 20px;
-    }
-
-    .popup-buttons {
-      flex-direction: column;
-    }
-
-    .btn {
-      width: 100%;
-    }
-  }
-</style>
-
-<script>
-  function continueToSite() {
-    document.getElementById("popup").style.display = "none";
-    localStorage.setItem("popupShownDate", new Date().toDateString());
-    window.location.href = "index.html";
-  }
-
-  window.onload = function () {
-    const lastShown = localStorage.getItem("popupShownDate");
-    const today = new Date().toDateString();
-    if (lastShown !== today) {
-      document.getElementById("popup").style.display = "flex";
-    }
-  };
-</script> -->
+<body>
   <!-- Header Section -->
  <section>
+   <section>
   <header>
    <div class="sidebar-logo"> 
     <a href="index.html">
@@ -703,7 +429,7 @@ body {
       <a href="zymbeginner.html">Beginner</a>
         <a href="zymintermidiate.html">Intermediate</a>
         <a href="zymadvance.html">Advanced</a>
-        <a href="zympro.html">Pro</a> <!-- Add Pro item here
+        <a href="zympro.html">Pro</a>  Add Pro item here
     </div> -->
   </div>
   <div class="nav-item">
@@ -712,7 +438,7 @@ body {
       <a href="clsbeginner.html">Beginner</a>
         <a href="clsintermidiate.html">Intermediate</a>
         <a href="clsadvance.html">Advanced</a>
-        <a href="clspro.html">Pro</a> <!-- Add Pro item here
+        <a href="clspro.html">Pro</a>  Add Pro item here
     </div> -->
   </div>
    <div class="nav-item">
@@ -721,7 +447,7 @@ body {
       <a href="crdbeginner.html">Beginner</a>
       <a href="crdintermidiate.html">Intermediate</a>
       <a href="crdadvance.html">Advanced</a>
-      <a href="crdpro.html">Pro</a> <!-- Add Pro item here 
+      <a href="crdpro.html">Pro</a>  Add Pro item here 
     </div>-->
   </div>
   <div class="nav-item">
@@ -730,7 +456,7 @@ body {
       <a href="ygabeginner.html">Beginner</a>
         <a href="ygaintermidiate.html">Intermediate</a>
         <a href="ygaadvance.html">Advanced</a>
-        <a href="ygapro.html">Pro</a> <!-- Add Pro item here
+        <a href="ygapro.html">Pro</a>  Add Pro item here
     </div> -->
   </div>
   <div class="nav-item">
@@ -739,7 +465,7 @@ body {
       <a href="mdbeginner.html">Beginner</a>
         <a href="mdintermidiate.html">Intermediate</a>
         <a href="mdadvance.html">Advanced</a>
-        <a href="mdpro.html">Pro</a> <!-- Add Pro item here 
+        <a href="mdpro.html">Pro</a>  Add Pro item here 
     </div>-->
   </div>
   <div class="nav-item">
@@ -780,7 +506,7 @@ body {
         <a href="zymbeginner.html">Beginner</a>
         <a href="zymintermidiate.html">Intermediate</a>
         <a href="zymadvance.html">Advanced</a>
-        <a href="zympro.html">Pro</a> <!-- Add Pro item here 
+        <a href="zympro.html">Pro</a>  Add Pro item here 
       </div>-->
    
     <li>
@@ -794,7 +520,7 @@ body {
         <a href="clsbeginner.html">Beginner</a>
         <a href="clsintermidiate.html">Intermediate</a>
         <a href="clsadvance.html">Advanced</a>
-        <a href="clspro.html">Pro</a> <!-- Add Pro item here 
+        <a href="clspro.html">Pro</a>  Add Pro item here 
       </div>-->
    
     <li>
@@ -808,7 +534,7 @@ body {
         <a href="crdbeginner.html">Beginner</a>
       <a href="crdintermidiate.html">Intermediate</a>
       <a href="crdadvance.html">Advanced</a>
-      <a href="crdpro.html">Pro</a> <!-- Add Pro item here 
+      <a href="crdpro.html">Pro</a>  Add Pro item here 
       </div>-->
 
 
@@ -823,7 +549,7 @@ body {
         <a href="ygabeginner.html">Beginner</a>
         <a href="ygaintermidiate.html">Intermediate</a>
         <a href="ygaadvance.html">Advanced</a>
-        <a href="ygapro.html">Pro</a> <!-- Add Pro item here 
+        <a href="ygapro.html">Pro</a> Add Pro item here 
       </div>-->
   
     
@@ -838,7 +564,7 @@ body {
         <a href="mdbeginner.html">Beginner</a>
         <a href="mdintermidiate.html">Intermediate</a>
         <a href="mdadvance.html">Advanced</a>
-        <a href="mdpro.html">Pro</a> <!-- Add Pro item here 
+        <a href="mdpro.html">Pro</a> Add Pro item here 
       </div>-->
  
     
@@ -873,106 +599,154 @@ body {
 </header>
 </section>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Image Slider -->
-    <div class="image-slider" id="slider">
+  <!-- Video Slider -->
+    <div class="video-slider" id="slider">
       <div class="slider-background">
-        <img src="rn.png" alt="Zym Workout" class="active">
-        <img src="cs.png" alt="Calisthenic Workout">
-        <img src="cr.png" alt="Cardio Workout">
-        <img src="y.png" alt="Yoga">
-        <img src="m.png" alt="Meditation">
-        <img src="d.png" alt="Morning Drink">
-        <img src="DTE.png" alt="Diet Rutin">
-        <img src="WT.png" alt="Weight Management">
+        <video class="active" autoplay muted loop playsinline>
+          <source src="one.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="two.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="three.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="four.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="five.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="six.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="seven.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <video autoplay muted loop playsinline>
+          <source src="eight.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
       </div>
     </div>
 
-    <!-- Products Section -->
+   <!-- Products Section -->
    <section class="products-section">
-   <h1 class="section-title">Start Your Journey</h1>
-  <div class="cards-container">
-    <div class="card">
+   <h2 class="section-title">Start Your Journey</h2>
 
-      <a href="zym.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div></a>
+  <div class="cards-container"> 
+
+  <div class="card">
+    <a href="zym.html" class="card-link">
+      <!-- Video replaces background image -->
+      <video autoplay muted loop playsinline>
+        <source src="one.mp4" type="video/mp4" />
+        Your browser does not support video.
+      </video>
       <div class="card-content">
-         <h3>Zym Workout</h3>
-       <!-- <a href="#" class="btn">Buy Now</a> -->
+        <h3>Zym Workout</h3>
       </div>
-    </div>
-
-
-    <div class="card">
-      <a href="calesthenic.html" class="card-link">
-  <div class="card-background" style="background-image: url('cs.png');"></div></a>
-      <div class="card-content">
-         <h3>Clesthenic Workout</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-
-
-    <div class="card">
-      <a href="cardio.html" class="card-link">
-  <div class="card-background" style="background-image: url('cr.png');"></div></a>
-      <div class="card-content">
-         <h3>Cardio/Desi Mehnat</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-
-
-    <div class="card">
-      <a href="yoga.html" class="card-link">
-  <div class="card-background" style="background-image: url('y.png');"></div></a>
-      <div class="card-content">
-         <h3>Yoga</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-
-
-    <div class="card">
-      <a href="meditation.html" class="card-link">
-  <div class="card-background" style="background-image: url('m.png');"></div></a>
-      <div class="card-content">
-      <h3>Meditation</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="morningdrink.html" class="card-link">
-  <div class="card-background" style="background-image: url('d.png');"></div></a>
-      <div class="card-content">
-      <h3>Morning Detox Drink</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="diet.html" class="card-link">
-  <div class="card-background" style="background-image: url('DTE.png');"></div></a>
-      <div class="card-content">
-      <h3>Diet Rutin Plan</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="weight.html" class="card-link">
-  <div class="card-background" style="background-image: url('WT.png');"></div></a>
-      <div class="card-content">
-      <h3>Weight Gain/Loss</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
+    </a>
   </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="two.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Clesthenic Workout</h3>
+      </div>
+    </a>
+  </div>
+ 
+  <div class="card">
+    <a href="zym.html" class="card-link">
+      <!-- Video replaces background image -->
+      <video autoplay muted loop playsinline>
+        <source src="three.mp4" type="video/mp4" />
+        Your browser does not support video.
+      </video>
+      <div class="card-content">
+        <h3>Cardio Workout</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="four.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Yoga</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="five.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Meditation</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="six.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Morning Detox Drink</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="seven.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Diet Plan</h3>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="calesthenic.html" class="card-link">
+      <video autoplay muted loop playsinline>
+        <source src="eight.mp4" type="video/mp4" />
+      </video>
+      <div class="card-content">
+        <h3>Weight/Gain/Loss</h3>
+      </div>
+    </a>
+  </div>
+</div>
 </section>
-    </section>
-  </main>
 
   <!-- Footer -->
-  <footer>
+   <footer>
     <div class="footer-container">
       <div class="footer-section">
         <div class="footer-buttons">
@@ -993,56 +767,45 @@ body {
 
   <!-- JavaScript -->
   <script>
-    // Slider Functionality
-    const images = document.querySelectorAll('.slider-background img');
-    const totalImages = images.length;
-    let currentIndex = 0;
-    let autoSlideInterval;
+    // Video Slider
+     const videos = document.querySelectorAll('.video-slider video');
+    let current = 0;
 
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.classList.remove('active');
+    // Pause all videos except current
+    function showVideo(index) {
+      videos.forEach((video, i) => {
+        video.classList.remove('active');
+        video.pause();
+        if (i === index) {
+          video.classList.add('active');
+          video.currentTime = 0;
+          video.play();
+        }
       });
-      images[index].classList.add('active');
     }
 
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % totalImages;
-      showImage(currentIndex);
-    }
+    setInterval(() => {
+      current = (current + 1) % videos.length;
+      showVideo(current);
+    }, 5000);
 
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(nextImage, 7000);
-    }
-
-    // Initialize slider
-    showImage(currentIndex);
-    startAutoSlide();
-
-    // Mobile Menu Functionality
+    // Initial setup
+    showVideo(current);
+    // Mobile Menu
     function toggleSidebar() {
       document.getElementById("sidebar").classList.toggle("active");
     }
 
-    function toggleDropdown(button) {
-      const dropdown = button.nextElementSibling;
-      const icon = button.querySelector('.dropdown-icon');
-      
-      dropdown.classList.toggle('active');
-      
-      if (dropdown.classList.contains('active')) {
-        icon.classList.remove('fa-chevron-down');
-        icon.classList.add('fa-chevron-up');
-      } else {
-        icon.classList.remove('fa-chevron-up');
-        icon.classList.add('fa-chevron-down');
-      }
+    function toggleDropdown(el) {
+      const dropdown = el.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    // Close sidebar when clicking on a link
-    document.querySelectorAll('.sidebar-dropdown a, .sidebar-button.no-underline').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById("sidebar").classList.remove("active");
+    // Initialize dropdowns
+    document.querySelectorAll('.sidebar-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const dropdown = this.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
       });
     });
   </script>
