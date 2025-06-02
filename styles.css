@@ -640,3 +640,39 @@
     max-width: auto;
   }
 }
+
+
+
+.social-nav {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icon {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.fb {
+  background-color: #e1306c; /* Instagram color */
+}
+
+.tw {
+  background-color: #3b5998; /* Facebook color */
+}
+
+.ln {
+  background-color: #fffc00; /* Snapchat color */
+  color: #000; /* Snapchat uses black text */
+}
+
+.social-icon:hover {
+  opacity: 0.85;
+}
