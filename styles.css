@@ -6,22 +6,23 @@
     }
     
     :root {
-      --isme-blue: #0056b3;       /* Primary blue */
-      --isme-dark-blue: #003366;  /* Dark blue */
+      --isme-blue: gray;       /* Primary blue */
+      --isme-dark-blue: black;  /* Dark blue */
       --isme-orange: #ff6600;     /* Primary orange */
       --isme-light-orange: #ff9933; /* Light orange */
       --isme-white: #ffffff;
-      --isme-light-gray: #f5f5f5;
-      --isme-dark-gray: #333333;
+      --isme-light-gray: gray;
+      --isme-dark-gray: gray;
     }
     
     body {
       font-family: 'Segoe UI', 'Roboto', sans-serif;
-      background: var(--isme-light-gray);
-      color: var(--isme-dark-gray);
+      background: gray;
+      color: gray;
       overflow-x: hidden;
       line-height: 1.6;
     }
+
 
     /* Header with ISME Colors */
     header {
