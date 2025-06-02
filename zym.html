@@ -72,122 +72,6 @@
  <!-- Header will be injected here -->
   <div id="header-container"></div>
   <!-- Main Content -->
- 
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  /* Container for the image transition */
-  .image-slider {
-    width: 100vw; /* Full screen width */
-    height: 100vh; /* Full screen height by default */
-    position: relative;
-    overflow: hidden; /* Hide overflow to keep it neat */
-    margin-top: 10px; /* Add a little space after the header */
-  }
-
-  /* Container for the background images */
-  .slider-background {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    transition: transform 1s ease-in-out; /* Smooth transition for sliding */
-  }
-
-  /* Individual images inside the slider */
-  .slider-background img {
-    width: 100%; /* Image takes up full width of the container */
-    height: 100%;
-    object-fit: cover; /* Ensure the images fill the container properly */
-    position: absolute;
-    opacity: 0; /* Initially make the images invisible */
-    transform: scale(0.8); /* Initially make the image smaller */
-    transition: opacity 1s, transform 1s; /* Smooth transition for opacity and zoom effect */
-  }
-
-  /* Make each image visible one by one using nth-child */
-  .slider-background img:nth-child(1) {
-    background-color: black; /* Tomato */
-    opacity: 1;
-    transform: scale(1); /* Zoom-in effect */
-  }
-
-  .slider-background img:nth-child(2) {
-    background-color: black; /* DodgerBlue */
-  }
-
-  .slider-background img:nth-child(3) {
-    background-color: black; /* LimeGreen */
-  }
-
-  .slider-background img:nth-child(4) {
-    background-color: black; /* DeepPink */
-  }
-
-  /* Custom Navigation buttons (Next and Previous) */
-  .slider-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-  }
-
-  .slider-nav button {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 25px;
-    font-size: 18px;
-    cursor: pointer;
-    width: 50px; /* Fixed width for buttons */
-    height: 50px; /* Fixed height for buttons */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .slider-nav button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-
-  /* Ensuring the left button is visible */
-  .slider-nav button:first-child {
-    left: 10px;
-  }
-
-  /* Media query for mobile devices */
-  @media (max-width: 768px) {
-    header {
-      padding: 5px 0; /* Reduced padding on mobile */
-    }
-
-    .image-slider {
-      height: 260px; /* Fixed height of 260px on mobile */
-      margin-top: 0; /* Remove any margin on top of the slider */
-    }
-
-    body {
-      margin: 0; /* No margin for the body */
-    }
-  }
-  .no-underline {
-  text-decoration: none;
-  color: inherit;
-}
-</style>
-
-<!-- Slider Container (after header, before main content) -->
-<div class="image-slider">
-  <div class="slider-background">
-    <!-- Replace with your images -->
-    <img src="rn.png" alt="Image 1">
-  </div>
-</div>
  <body>
   <main>
    <section class="products-section">
@@ -236,7 +120,7 @@
 <style>
 .products-section {
   padding: 4rem 2rem;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  background: white;
   text-align: center;
 }
 
