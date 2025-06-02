@@ -567,3 +567,31 @@
       background: var(--isme-dark-blue);
       transform: translateY(-5px);
     }
+
+        
+    /* Responsive Sidebar Logo */
+.sidebar-logo {
+  text-align: center;
+  padding: 0px 0;
+  margin-bottom: 0px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo img {
+  max-width: auto;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+/* Adjust logo size for different screens */
+@media (max-width: 768px) {
+  .sidebar-logo img {
+    max-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-logo img {
+    max-width: auto;
+  }
+}
