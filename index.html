@@ -9,8 +9,7 @@
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="LivFit.pro – Where Wellness Meets Lifestyle. Unlock your healthiest, most vibrant self with LivFit.pro — your ultimate destination for holistic fitness, mindful living, and powerful transformation." />
-  <meta name="keywords" content="gym workouts, free gym plans, calisthenics training, calisthenics exercises, cardio workouts, cardio exercises, yoga for beginners, yoga poses, meditation techniques, meditation for stress relief, diet plan, diet plans free, detox plan, detox diet, weight loss tips, weight loss diet, weight gain tips, muscle gain workouts, fitness training, home workouts, fitness plans, health and fitness, fat burning exercises, bodyweight exercises, healthy lifestyle, fitness motivation, workout routines, strength training, flexibility exercises, weight management, nutrition tips, healthy diet, clean eating, intermittent fasting, fat loss plan, lean muscle gain, wellness programs, mental wellness, mindfulness meditation, pranayama, breathing exercises, HIIT workouts, aerobic exercise, endurance training, gym workout plans, calisthenics for beginners, yoga for weight loss, yoga for flexibility, guided meditation, detox cleanse, healthy habits, weight gain diet, bodybuilding diet, personal fitness coach, fitness blog, online fitness programs, free fitness coaching, holistic health, physical fitness, calorie burning workouts, wellness tips, strength building, gym exercises, muscle toning, fat reduction, body transformation, fat loss workouts, balanced diet, fitness goals, healthy eating tips, lifestyle changes, workout plans for men, workout plans for women, cardio training, meditation music, stress management, mental health exercises, fat loss tips, diet meal plans, clean eating plan, fat burning diet, yoga meditation, gym tips, fitness challenges, home calisthenics, fitness apps, yoga classes online, healthy living, nutrition plans, fitness community, workout motivation
-">
+  <meta name="keywords" content="gym workouts, free gym plans, calisthenics training, calisthenics exercises, cardio workouts, cardio exercises, yoga for beginners, yoga poses, meditation techniques, meditation for stress relief, diet plan, diet plans free, detox plan, detox diet, weight loss tips, weight loss diet, weight gain tips, muscle gain workouts, fitness training, home workouts, fitness plans, health and fitness, fat burning exercises, bodyweight exercises, healthy lifestyle, fitness motivation, workout routines, strength training, flexibility exercises, weight management, nutrition tips, healthy diet, clean eating, intermittent fasting, fat loss plan, lean muscle gain, wellness programs, mental wellness, mindfulness meditation, pranayama, breathing exercises, HIIT workouts, aerobic exercise, endurance training, gym workout plans, calisthenics for beginners, yoga for weight loss, yoga for flexibility, guided meditation, detox cleanse, healthy habits, weight gain diet, bodybuilding diet, personal fitness coach, fitness blog, online fitness programs, free fitness coaching, holistic health, physical fitness, calorie burning workouts, wellness tips, strength building, gym exercises, muscle toning, fat reduction, body transformation, fat loss workouts, balanced diet, fitness goals, healthy eating tips, lifestyle changes, workout plans for men, workout plans for women, cardio training, meditation music, stress management, mental health exercises, fat loss tips, diet meal plans, clean eating plan, fat burning diet, yoga meditation, gym tips, fitness challenges, home calisthenics, fitness apps, yoga classes online, healthy living, nutrition plans, fitness community, workout motivation">
   <meta name="robots" content="index, follow" />
   <meta name="author" content="LivFit Team" />
   
@@ -58,753 +57,174 @@
   <link rel="stylesheet" href="styles.css">
   
   <style>
-    /* Global Styles */
-   * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0b0c1d;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    /* Header */
-   header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.7); /* Transparent black background */
-  padding: 15px 30px;
-  border-bottom: 2px solid #00f7ff;
-  box-shadow: 0 0 15px #00f7ff33;
-  position: fixed; /* <-- THIS IS THE FIX */
-  top: 0;
-  width: 100%; /* Ensure full width */
-  z-index: 1000;
-  backdrop-filter: blur(8px); /* Optional for glass effect */
-}
-
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #00f7ff;
-      text-shadow: 0 0 5px #00f7ff;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    .nav-item {
-      position: relative;
-    }
-
-    .nav-item > a {
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
-      border: 2px solid transparent;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-
-    .nav-item > a:hover {
-      border-color: #00f7ff;
-      background-color: #1a1a2d;
-      box-shadow: 0 0 10px #00f7ff;
-    }
-
-    .dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #111827;
-      border: 1px solid #00f7ff33;
-      display: none;
-      flex-direction: column;
-      min-width: 170px;
-      border-radius: 6px;
-      animation: dropdownFade 0.3s ease-in-out;
-      z-index: 999;
-    }
-
-    .dropdown a {
-      padding: 10px 16px;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .dropdown a:hover {
-      background-color: #00f7ff22;
-      color: #00f7ff;
-    }
-
-    .nav-item:hover .dropdown {
-      display: flex;
-    }
-
-    @keyframes dropdownFade {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 24px;
-      color: #00f7ff;
-      cursor: pointer;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: #0f1123;
-      transform: scale(0);
-      transform-origin: top right;
-      transition: transform 0.4s ease;
-      z-index: 9999;
-      padding: 40px 20px;
-      overflow-y: auto;
-    }
-
-    .sidebar.active {
-      transform: scale(1);
-    }
-
-    .sidebar .close-btn {
-      font-size: 26px;
-      color: #fff;
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      cursor: pointer;
-    }
-
-    .sidebar .sidebar-logo {
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 30px;
-      color: #00f7ff;
-      text-shadow: 0 0 5px #00f7ff;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar li {
-      margin: 12px 0;
-    }
-
-    .sidebar-button {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #1e1e2e;
-      padding: 12px 16px;
-      font-size: 18px;
-      color: #fff;
-      border: 1px solid #00f7ff44;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .sidebar-button i {
-      margin-right: 10px;
-      color: #00f7ff;
-    }
-
-    .sidebar-dropdown {
-      display: none;
-      flex-direction: column;
-      padding-left: 30px;
-      margin-top: 8px;
-    }
-
-    .sidebar-dropdown a {
-      color: #bbb;
-      padding: 6px 0;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .sidebar-dropdown a:hover {
-      color: #00f7ff;
-    }
-
-    /* Responsive */
-    @media (max-width: 1000px) {
-      nav { display: none; }
-      .menu-toggle { display: block; }
-    }
-
-
- 
-
-  /* Global box-sizing fix for Safari and general layout stability */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  padding-top: 80px; /* Adjust based on your header height */
-}
-    
-    /* Slider Styles */
-    .image-slider {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    
-    .slider-background {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-    
-    .slider-background img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    }
-    
-    .slider-background img.active {
-      opacity: 1;
-      transform: scale(1);
-      z-index: 1;
-    }
-    
-    /* Products Section */
-    .products-section {
-      padding: 4rem 2rem;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      text-align: center;
-    }
-    
-    .section-title {
-      font-size: 1.5rem;
-      color: #fff;
-      margin-bottom: 3rem;
-      background: linear-gradient(to right, #ff416c, #ff4b2b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      overflow: hidden;
-      height: 270px;
-      width: 100%;
-      max-width: 399px;
-      position: relative;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 260px;
-    }
-    
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #ff4b2b;
-    }
-    
-    /* Footer Styles */
-    footer {
-      background: #0f1123;
-      padding: 2rem;
-      text-align: center;
-    }
-    
-    .footer-buttons {
-      margin-top: 20px;
-      text-align: center;
-    }
-    
-    .footer-btn {
-      background-color: transparent;
-      color: white;
-      padding: 10px 20px;
-      margin: 10px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 16px;
-      display: inline-block;
-      border: 1px solid white;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    
-    .footer-btn:hover {
-      background-color: #3498db;
-      color: white;
-    }
-    
-    /* Responsive Styles */
-    @media (max-width: 1000px) {
-      nav { display: none; }
-      .menu-toggle { display: block; }
-    }
-    
-    @media (max-width: 768px) {
-      .image-slider {
-        height: 260px;
-        margin-top: 0;
-      }
-      
-      .cards-container {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .products-section {
-        padding: 2rem 1rem;
-      }
-      
-      .card {
-        height: auto;
-      }
-    }
-
-    .products-section {
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  height: 270px;
-  width: 100%;
-  max-width: 399px;
-  position: relative;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 260px; /* Ensures enough room */
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #ff4b2b;
-}
-
-.card-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.7;
-  z-index: 1;
-}
-
-.card-content {
-  padding: 0.2rem;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-}
-
-.card-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.card-content p {
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
-}
-
-.btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 30px;
-  background: #ff416c;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
-
-.btn:hover {
-  background: #ff416c;
-  box-shadow: 0 0 10px transparent;
-}
-
-/* Responsive adjustments for tablets and below */
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Extra responsiveness for small mobile devices */
-@media (max-width: 480px) {
-  .products-section {
-    padding: 2rem 1rem;
-  }
-
-  .card {
-    height: auto;
-  }
-
-  .card-content h3 {
-    font-size: 1.1rem;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    width: auto;
-    min-width: 100px;
-  }
-}
     
   </style>
 </head>
 
 <body>
-  <!-- Header Section -->
- <section>
-  <header>
-    <div class="logo">
-  <a href="index.html">
-   <img src="lfit.png" alt="" style="height: 35px;">
-  </a>
-</div>
-    <nav>
-  <!-- Header Items -->
-  <div class="nav-item">
-    <a href="zym.html">Zym Workout</a>
-  </div>
-      
-  <div class="nav-item">
-    <a href="calesthenic.html">Calisthenic Workout</a>
-  </div>
-      
-   <div class="nav-item">
-    <a href="cardio.html">Cardio Workout</a>
-  </div>
-      
-  <div class="nav-item">
-    <a href="yoga.html">Yoga</a>
-  </div>
-      
-  <div class="nav-item">
-    <a href="meditation.html">Meditation</a>
-    </div>
-      
-  </div>
-  <div class="nav-item">
-    <a href="morningdrink.html">Morning Detox Dring</a>
-  </div>
-   <div class="nav-item">
-    <a href="diet.html">Diet Rutin Plan</a>
-  </div>
-  <div class="nav-item">
-    <a href="weight.html">Weight Gain/Loss</a>
-  </div>
-   
-  <div class="nav-item">
-    <a href="donate.html">Donate</a>
-  </div>
-</nav>
-<div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-  <div class="close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
-  <div class="sidebar-logo">
-    <a href="#">
-      <img src="lfit.png" alt="" style="height: 35px;">
-    </a>
-  </div>
-  <ul>
-    <!-- Repeat for each category -->
-    <li>
-       <a class="sidebar-button no-underline"zym.html">
-        <span><i class="fas fa-dumbbell"></i> Zym Workout</span>
-       </a>
-    </li>
-    
-    <li>
-       <a class="sidebar-button no-underline" href="calesthenic.html">
-        <span><i class="fas fa-person-walking"></i> Calisthenic Workout</span>
-       </a>
-    </li>
-    
-    <li>
-       <a class="sidebar-button no-underline" href="cardio.html">
-        <span><i class="fas fa-person-walking"></i> Cardio Workout</span>
-        </a>
-    </li>
-
-    <li>
-      <a class="sidebar-button no-underline" href="yoga.html">
-        <span><i class="fas fa-spa"></i> Yoga</span>
-        </a>
-    </li>
-    
-    <li>
-      <a class="sidebar-button no-underline" href="meditation.html">
-        <span><i class="fas fa-brain"></i> Meditation</span>
-      </a>
-    </li>
-    
-    <li>
-      <li>
-    <a class="sidebar-button no-underline" href="morningdrink.html">
-      <span><i class="fas fa-mug-hot"></i> Morning Detox Drink</span>
-    </a>
-  </li>
-    
-  <li>
-    <a class="sidebar-button no-underline" href="diet.html">
-      <span><i class="fas fa-apple-alt"></i>Diet Rutin Plan</span>
-    </a>
-  </li>
-    
-  <li>
-    <a class="sidebar-button no-underline" href="weight.html">
-      <span><i class="fas fa-running"></i>Weight Gain/Loss</span>
-    </a>
-  </li>
-    
-      <a class="sidebar-button no-underline" href="donate.html">
-        <span><i class="fas fa-donate"></i> Donate</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-</header>
-</section>
-
+  <!-- Header will be injected here -->
+  <div id="header-container"></div>
   <!-- Main Content -->
   <main>
     <!-- Image Slider -->
     <div class="image-slider" id="slider">
       <div class="slider-background">
-        <img src="rn.png" alt="Zym Workout" class="active">
-        <img src="cs.png" alt="Calisthenic Workout">
+        <img src="rn.png" alt="Gym Workout" class="active">
+        <img src="cs.png" alt="Calisthenics Workout">
         <img src="cr.png" alt="Cardio Workout">
         <img src="y.png" alt="Yoga">
         <img src="m.png" alt="Meditation">
-        <img src="d.png" alt="Morning Drink">
-        <img src="dte.png" alt="Diet Rutin">
+        <img src="d.png" alt="Detox Drinks">
+        <img src="dte.png" alt="Diet Plans">
         <img src="WT.png" alt="Weight Management">
+      </div>
+      <div class="slider-overlay">
+        <h1>Transform Your Life With LivFit</h1>
+        <p>Discover personalized fitness programs, yoga sessions, and nutrition plans tailored to your goals</p>
+        <a href="#programs" class="slider-btn">Explore Programs</a>
       </div>
     </div>
 
     <!-- Products Section -->
-   <section class="products-section">
-   <h2 class="section-title">Start Your Journey</h2>
-  <div class="cards-container">
-    <div class="card">
+    <section class="products-section" id="programs">
+      <h2 class="section-title">Start Your Fitness Journey</h2>
+      <div class="cards-container">
+        <div class="card">
+          <a href="zym.html" class="card-link">
+            <div class="card-background" style="background-image: url('rn.png');"></div>
+            <div class="card-category">Strength</div>
+            <div class="card-content">
+              <h3>Gym Workout Plans</h3>
+              <p>Build muscle and strength with our professional gym workout programs</p>
+            </div>
+          </a>
+        </div>
 
-      <a href="zym.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div></a>
-      <div class="card-content">
-         <h3>Zym Workout</h3>
-       <!-- <a href="#" class="btn">Buy Now</a> -->
+        <div class="card">
+          <a href="calesthenic.html" class="card-link">
+            <div class="card-background" style="background-image: url('cs.png');"></div>
+            <div class="card-category">Bodyweight</div>
+            <div class="card-content">
+              <h3>Calisthenics Training</h3>
+              <p>Master your bodyweight with progressive calisthenics exercises</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="cardio.html" class="card-link">
+            <div class="card-background" style="background-image: url('cr.png');"></div>
+            <div class="card-category">Endurance</div>
+            <div class="card-content">
+              <h3>Cardio Workouts</h3>
+              <p>Boost your endurance and burn fat with effective cardio routines</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="yoga.html" class="card-link">
+            <div class="card-background" style="background-image: url('y.png');"></div>
+            <div class="card-category">Flexibility</div>
+            <div class="card-content">
+              <h3>Yoga Sessions</h3>
+              <p>Improve flexibility, balance and mental clarity with our yoga programs</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="meditation.html" class="card-link">
+            <div class="card-background" style="background-image: url('m.png');"></div>
+            <div class="card-category">Mindfulness</div>
+            <div class="card-content">
+              <h3>Meditation Techniques</h3>
+              <p>Reduce stress and improve focus with guided meditation sessions</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="morningdrink.html" class="card-link">
+            <div class="card-background" style="background-image: url('d.png');"></div>
+            <div class="card-category">Nutrition</div>
+            <div class="card-content">
+              <h3>Detox Drinks</h3>
+              <p>Start your day right with healthy morning detox drink recipes</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="diet.html" class="card-link">
+            <div class="card-background" style="background-image: url('dte.png');"></div>
+            <div class="card-category">Nutrition</div>
+            <div class="card-content">
+              <h3>Diet Plans</h3>
+              <p>Customized diet plans for weight loss, gain or maintenance</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="weight.html" class="card-link">
+            <div class="card-background" style="background-image: url('WT.png');"></div>
+            <div class="card-category">Transformation</div>
+            <div class="card-content">
+              <h3>Weight Management</h3>
+              <p>Comprehensive guides for healthy weight loss or gain</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card">
+          <a href="user.html" class="card-link">
+            <div class="card-background" style="background-image: url('us.png');"></div>
+            <div class="card-category">User</div>
+            <div class="card-content">
+              <h3>Our Users</h3>
+              <p>See how many people has connected with us</p>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
 
-
-    <div class="card">
-      <a href="calesthenic.html" class="card-link">
-  <div class="card-background" style="background-image: url('cs.png');"></div></a>
-      <div class="card-content">
-         <h3>Clesthenic Workout</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
+    <!-- Features Section -->
+    <section class="products-section" style="background: var(--isme-light-gray);">
+      <h2 class="section-title">Why Choose LivFit?</h2>
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-content" style="text-align: center;">
+            <i class="fas fa-user-tie" style="font-size: 3rem; color: var(--isme-orange); margin-bottom: 1rem;"></i>
+            <h3>Expert Guidance</h3>
+            <p>Our programs are designed by certified fitness trainers and nutritionists</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-content" style="text-align: center;">
+            <i class="fas fa-bullseye" style="font-size: 3rem; color: var(--isme-orange); margin-bottom: 1rem;"></i>
+            <h3>Goal-Oriented</h3>
+            <p>Customized plans tailored to your specific fitness objectives</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-content" style="text-align: center;">
+            <i class="fas fa-heartbeat" style="font-size: 3rem; color: var(--isme-orange); margin-bottom: 1rem;"></i>
+            <h3>Holistic Approach</h3>
+            <p>Combining exercise, nutrition and mental wellness for complete health</p>
+          </div>
+        </div>
       </div>
-    </div>
-
-
-    <div class="card">
-      <a href="cardio.html" class="card-link">
-  <div class="card-background" style="background-image: url('cr.png');"></div></a>
-      <div class="card-content">
-         <h3>Cardio/Desi Mehnat</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-
-
-    <div class="card">
-      <a href="yoga.html" class="card-link">
-  <div class="card-background" style="background-image: url('y.png');"></div></a>
-      <div class="card-content">
-         <h3>Yoga</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-
-
-    <div class="card">
-      <a href="meditation.html" class="card-link">
-  <div class="card-background" style="background-image: url('m.png');"></div></a>
-      <div class="card-content">
-      <h3>Meditation</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="morningdrink.html" class="card-link">
-  <div class="card-background" style="background-image: url('d.png');"></div></a>
-      <div class="card-content">
-      <h3>Morning Detox Drink</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="diet.html" class="card-link">
-  <div class="card-background" style="background-image: url('dte.png');"></div></a>
-      <div class="card-content">
-      <h3>Diet Rutin Plan</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="weight.html" class="card-link">
-  <div class="card-background" style="background-image: url('WT.png');"></div></a>
-      <div class="card-content">
-      <h3>Weight Gain/Loss</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-  </div>
-</section>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <div class="footer-buttons">
-          <a href="zym.html" class="footer-btn">Zym Workout</a>
-          <a href="calesthenic.html" class="footer-btn">Calisthenic Workout</a>
-          <a href="cardio.html" class="footer-btn">Cardio Workout</a>
-          <a href="yoga.html" class="footer-btn">Yoga</a>
-          <a href="meditation.html" class="footer-btn">Meditation</a>
-          <a href="policy.html" class="footer-btn">Privacy Policy</a>
-          <a href="morningdrink.html" class="footer-btn">Morning Drink</a>
-          <a href="diet.html" class="footer-btn">Diet Rutin</a>
-          <a href="weight.html" class="footer-btn">Weight</a>
-          <a href="donate.html" class="footer-btn">Donate</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+    <!-- JavaScript to inject header and footer -->
+  <script src="script.js" defer></script>
 
-  <!-- JavaScript -->
-  <script>
-    // Slider Functionality
-    const images = document.querySelectorAll('.slider-background img');
-    const totalImages = images.length;
-    let currentIndex = 0;
-    let autoSlideInterval;
-
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.classList.remove('active');
-      });
-      images[index].classList.add('active');
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % totalImages;
-      showImage(currentIndex);
-    }
-
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(nextImage, 7000);
-    }
-
-    // Initialize slider
-    showImage(currentIndex);
-    startAutoSlide();
-
-    // Mobile Menu Functionality
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("active");
-    }
-
-    function toggleDropdown(el) {
-      const dropdown = el.nextElementSibling;
-      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    // Initialize dropdowns
-    document.querySelectorAll('.sidebar-button').forEach(button => {
-      button.addEventListener('click', function() {
-        const dropdown = this.nextElementSibling;
-        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-      });
-    });
-  </script>
 </body>
 </html>
