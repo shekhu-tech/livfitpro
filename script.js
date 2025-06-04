@@ -244,7 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(currentIndex);
     startAutoSlide();
 
-// Create style element
+<script>
+  // Create style element
   const style = document.createElement('style');
   style.textContent = `
     .floating-register-button {
@@ -296,3 +297,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add the button to the body
   document.body.appendChild(button);
+</script>
