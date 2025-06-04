@@ -243,3 +243,56 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize slider
     showImage(currentIndex);
     startAutoSlide();
+
+// Create style element
+  const style = document.createElement('style');
+  style.textContent = `
+    .floating-register-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      z-index: 1000;
+    }
+
+    .register-button-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 97px;
+      width: 27px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .register-button-inner:hover {
+      background-color: #0056b3;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Create the anchor element
+  const button = document.createElement('a');
+  button.href = 'register.html';
+  button.className = 'floating-register-button';
+
+  // Create the inner div
+  const innerDiv = document.createElement('div');
+  innerDiv.className = 'register-button-inner';
+  innerDiv.textContent = 'Register';
+
+  // Nest the inner div inside the anchor
+  button.appendChild(innerDiv);
+
+  // Add the button to the body
+  document.body.appendChild(button);
