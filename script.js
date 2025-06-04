@@ -10,6 +10,9 @@ function injectHeader() {
         </a>
       </div>
       <nav>
+      <div class="nav-item">
+          <a href="register.html">Register</a>
+        </div>
         <div class="nav-item">
           <a href="zym.html">Gym</a>
         </div>
@@ -56,6 +59,11 @@ function injectHeader() {
           </a>
         </div>
         <ul>
+        <li>
+            <a class="sidebar-button" href="register.html">
+              <span><i class="fas fa-register"></i>Register</span>
+            </a>
+          </li>
           <li>
             <a class="sidebar-button" href="zym.html">
               <span><i class="fas fa-dumbbell"></i> Gym Workout</span>
