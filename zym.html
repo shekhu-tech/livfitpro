@@ -69,191 +69,321 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
- <!-- Header will be injected here -->
+<body>
+  <!-- Header will be injected here -->
   <div id="header-container"></div>
+  
   <!-- Main Content -->
- <body>
   <main>
-   <section class="products-section">
-   <h2 class="section-title">Zym Workout</h2>
+    <section class="products-section">
+      <h2 class="section-title">Gym Workout</h2>
 
-  <div class="cards-container">
-    <div class="card">
-      <a href="zymbeginner.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div>
-</a>
-      <div class="card-content">
-         <h3>Beginner</h3>
-       <!-- <a href="#" class="btn">Buy Now</a> -->
+      <div class="cards-container">
+        <!-- Beginner Program Card -->
+        <div class="card" id="mainCard1"> 
+          <div class="card-background" style="background-image: url('rn.png');"></div>
+          <div class="card-content">
+            <h3>Beginner Program</h3>
+          </div>
+        </div>
+
+        <!-- Intermediate Program Card -->
+        <div class="card" id="mainCard2"> 
+          <div class="card-background" style="background-image: url('rn.png');"></div>
+          <div class="card-content">
+            <h3>Intermediate Program</h3>
+          </div>
+        </div>
+
+        <!-- Advanced Program Card -->
+        <div class="card" id="mainCard3"> 
+          <div class="card-background" style="background-image: url('rn.png');"></div>
+          <div class="card-content">
+            <h3>Advanced Program</h3>
+          </div>
+        </div>
+
+        <!-- Pro Program Card -->
+        <div class="card" id="mainCard4"> 
+          <div class="card-background" style="background-image: url('rn.png');"></div>
+          <div class="card-content">
+            <h3>Pro Program</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Popup (Single Modal for all cards) -->
+  <div class="modal" id="popupModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2 id="modalTitle">30-Day Ultimate Challenge</h2>
+      <div class="day-cards">
+        <!-- JS will inject day cards here -->
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <a href="zymintermidiate.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div>
-</a>
-      <div class="card-content">
-         <h3>Intermediate</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="zymadvance.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div>
-</a>
-      <div class="card-content">
-         <h3>Advanced</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="zympro.html" class="card-link">
-  <div class="card-background" style="background-image: url('rn.png');"></div>
-</a>
-      <div class="card-content">
-      <h3>Pro</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-</section>
+  <!-- Footer will be injected here -->
+  <div id="footer-container"></div>
 
-<style>
-.products-section {
-  padding: 4rem 2rem;
-  background: gray;
-  text-align: center;
-}
+  <!-- JavaScript -->
+  <script>
+    // Get all elements
+    const cards = {
+      1: { element: document.getElementById('mainCard1'), program: 'Beginner', href: 'zimbeginermix.html' },
+      2: { element: document.getElementById('mainCard2'), program: 'Intermediate', href: 'zimintermidiate.html' },
+      3: { element: document.getElementById('mainCard3'), program: 'Advanced', href: 'zimadvance.html' },
+      4: { element: document.getElementById('mainCard4'), program: 'Pro', href: 'zimpro.html' }
+    };
+    
+    const popupModal = document.getElementById('popupModal');
+    const closeModal = document.getElementById('closeModal');
+    const dayCardsContainer = document.querySelector('.day-cards');
+    const modalTitle = document.getElementById('modalTitle');
 
-.section-title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    // Function to open modal with specific program
+    function openModal(programName, hrefPrefix) {
+      // Clear previous days
+      dayCardsContainer.innerHTML = '';
+      
+      // Set modal title based on program
+      modalTitle.textContent = `🔥 30-Day ${programName} Challenge`;
+      
+      // Add days
+      for (let i = 1; i <= 30; i++) {
+        const dayLink = document.createElement('a');
+        dayLink.href = `${hrefPrefix}`;
+        dayLink.textContent = `Day ${i}`;
+        dayCardsContainer.appendChild(dayLink);
+      }
+      
+      // Show modal
+      popupModal.style.display = 'flex';
+    }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
+    // Add event listeners to all cards
+    Object.values(cards).forEach(card => {
+      card.element.addEventListener('click', () => openModal(card.program, card.href));
+    });
 
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  height: 270px;
-  width: 100%;
-  max-width: 399px;
-  position: relative;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 260px; /* Ensures enough room */
-}
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      popupModal.style.display = 'none';
+    });
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #ff4b2b;
-}
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === popupModal) {
+        popupModal.style.display = 'none';
+      }
+    });
+  </script>
 
-.card-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.7;
-  z-index: 1;
-}
+  <style>
+    /* Products Section */
+    .products-section {
+      padding: 4rem 2rem;
+      background: gray;
+      text-align: center;
+    }
 
-.card-content {
-  padding: 0.2rem;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-}
+    .section-title {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 3rem;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.card-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-.card-content p {
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
-}
+    /* Card Styles */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 270px;
+      position: relative;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 260px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 30px;
-  background: #ff416c;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #ff4b2b;
+    }
 
-.btn:hover {
-  background: #ff416c;
-  box-shadow: 0 0 10px transparent;
-}
+    .card-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+      z-index: 1;
+    }
 
-/* Responsive adjustments for tablets and below */
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+    .card-content {
+      padding: 1rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
 
-/* Extra responsiveness for small mobile devices */
-@media (max-width: 480px) {
-  .products-section {
-    padding: 2rem 1rem;
-  }
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin: 0;
+      color: white;
+      text-align: center;
+    }
 
-  .card {
-    height: auto;
-  }
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 15, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
 
-  .card-content h3 {
-    font-size: 1.1rem;
-  }
+    .modal-content {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      padding: 30px 20px 40px;
+      width: 100%;
+      max-width: 950px;
+      border-radius: 20px;
+      overflow-y: auto;
+      max-height: 90vh;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    width: auto;
-    min-width: 100px;
-  }
-}
-</style>
+    .close-btn {
+      font-size: 28px;
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      cursor: pointer;
+      color: #fff;
+      transition: color 0.2s;
+    }
 
-</div>
-  </section>
-</main>
-   <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
-    <!-- JavaScript to inject header and footer -->
+    .close-btn:hover {
+      color: #ff4b2b;
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #00e6e6;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.4);
+    }
+
+    /* Day Cards Grid */
+    .day-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
+      padding: 0 10px;
+    }
+
+    .day-cards a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      padding: 22px;
+      border-radius: 14px;
+      background: rgba(0, 255, 255, 0.07);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .day-cards a:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,255,0.6);
+      background: rgba(0, 255, 255, 0.12);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Scrollbar Styling */
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: rgba(0,255,255,0.4);
+      border-radius: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .products-section {
+        padding: 2rem 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .day-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+
+      .card-content h3 {
+        font-size: 1.3rem;
+      }
+      
+      .modal-content h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+
+  <!-- JavaScript to inject header and footer -->
   <script src="script.js" defer></script>
-  </body>
+</body>
 </html>
