@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(currentIndex);
     startAutoSlide();
 
-<script>
+
   // Create style element
   const style = document.createElement('style');
   style.textContent = `
@@ -297,4 +297,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add the button to the body
   document.body.appendChild(button);
-</script>
+
