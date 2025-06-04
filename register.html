@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Livfit.pro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+ <body>
+    <!-- Header will be injected here -->
+  <div id="header-container"></div>
+   
+  <main>
+    <br>
+    <br>
+  <style>
+  
+    .container { 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* This centers the container itself */
+}
+
+    .box {
+      background: darkblue;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px 25px;
+      flex: 1 1 350px;
+      max-width: 500px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      color: #fff;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .main-heading {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #fff;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin: 20px 0 10px;
+      color: #ffd700;
+      font-weight: 600;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    h2::before {
+      content: "\f058"; /* check-circle icon */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.1rem;
+      color: #00ffcc;
+    }
+
+    ul.steps {
+      list-style: none;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+
+    ul.steps li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 12px;
+      color: #f1f1f1;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    ul.steps li::before {
+      content: "\f054"; /* arrow icon */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 0.9rem;
+      color: #00ffc3;
+    }
+
+    .qr-code {
+      width: 100%;
+      max-width: 180px;
+      margin: 0 auto 15px;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .main-heading {
+        font-size: 1.5rem;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-heading {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+
+  <div class="container">
+    <!-- Box 1 -->
+    <div class="box">
+      <h1 class="main-heading">Registration 1</h1>
+
+       <!-- UPI QR Code Image -->
+      <img src="IMG.jpg" alt="UPI QR Code" class="qr-code" />
+      <h2>Register Without Social Media</h2>
+      <ul class="steps">
+        <li>You will be registered with us directly.</li>
+        <li>We charge ₹99 for this registration.</li>
+        <li>Your profile will be listed without social media links.</li>
+        <li>After registration, upload a screenshot of the UPI payment for profile update.</li>
+      </ul>
+      <button class="btn"><i class="fas fa-user-plus"></i> Register Without Social Media</button>
+    </div>
+
+    <!-- Box 2 -->
+    <div class="box">
+      <h1 class="main-heading">Registration 2</h1>
+      
+      <!-- UPI QR Code Image -->
+      <img src="IMG.jpg" alt="UPI QR Code" class="qr-code" />
+      
+      <h2>Register With Social Media</h2>
+      <ul class="steps">
+        <li>You will be registered with us directly.</li>
+        <li>We charge ₹199 for this registration.</li>
+        <li>Your profile will include your social media links.</li>
+        <li>After registration, upload a screenshot of the UPI payment for profile update.</li>
+      </ul>
+      <button class="btn"><i class="fas fa-link"></i> Register With Social Media</button>
+    </div>
+  </div>
+</div>
+<br>
+    <br>
+</main>
+     <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+    <!-- JavaScript to inject header and footer -->
+  <script src="script.js" defer></script>
+  </body>
+</html>
