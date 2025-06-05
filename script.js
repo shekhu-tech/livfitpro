@@ -1,108 +1,29 @@
 function injectVisitorCounter() {
-  const headerContainer = document.getElementById('header-container');
+  // Find header element
+  const header = document.querySelector('header#main-header') || document.body.firstElementChild;
+  if (!header) {
+    console.warn('No header found!');
+    return;
+  }
 
+  // Create container div
   const visitorDiv = document.createElement('div');
-  visitorDiv.innerHTML = `
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+  visitorDiv.style.background = '#f5f1e6';
+  visitorDiv.style.padding = '10px';
+  visitorDiv.style.textAlign = 'center';
+  visitorDiv.style.fontSize = '20px';
+  visitorDiv.style.fontWeight = 'bold';
+  visitorDiv.style.fontFamily = "'Playfair Display', serif";
+  visitorDiv.textContent = 'Visitor Count: Loading...';
 
-      #visitor-count-container {
-        background: linear-gradient(145deg, #e9dac1, #fff);
-        padding: 20px 10px;
-        text-align: center;
-        border-bottom: 2px solid #c6aa7f;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        font-family: 'Playfair Display', serif;
-      }
-      #counter-title {
-        font-size: 1.5rem;
-        color: #4a3f35;
-        margin-bottom: 10px;
-      }
-      .digit-box-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .digit-box {
-        width: 40px;
-        height: 60px;
-        background-color: #fff9f0;
-        color: #6c5138;
-        font-size: 1.8rem;
-        font-weight: bold;
-        border-radius: 8px;
-        border: 2px solid #c6aa7f;
-        box-shadow: inset -2px -2px 5px rgba(255,255,255,0.8),
-                    inset 2px 2px 5px rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease;
-      }
-      .digit-box:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 8px rgba(198, 170, 127, 0.6);
-      }
-      @media (max-width: 500px) {
-        .digit-box {
-          width: 30px;
-          height: 45px;
-          font-size: 1.4rem;
-        }
-        #counter-title {
-          font-size: 1.2rem;
-        }
-      }
-    </style>
+  // Insert above header
+  header.parentNode.insertBefore(visitorDiv, header);
 
-    <div id="visitor-count-container">
-      <div id="counter-title">Visitor Count</div>
-      <div class="digit-box-container" id="digit-boxes">Loading...</div>
-    </div>
-  `;
-
-  // Insert above the header
-  headerContainer.parentNode.insertBefore(visitorDiv, headerContainer);
-
-  // IP logic
-  async function getIPAddress() {
-    const res = await fetch('https://api.ipify.org?format=json');
-    const data = await res.json();
-    return data.ip;
-  }
-
-  async function countVisitor() {
-    const ip = await getIPAddress();
-    let storedIPs = JSON.parse(localStorage.getItem('visitorIPs') || '[]');
-    let totalCount = parseInt(localStorage.getItem('visitorCount') || '0');
-
-    if (!storedIPs.includes(ip)) {
-      storedIPs.push(ip);
-      totalCount += 1;
-      localStorage.setItem('visitorIPs', JSON.stringify(storedIPs));
-      localStorage.setItem('visitorCount', totalCount);
-    }
-
-    displayDigits(totalCount);
-  }
-
-  function displayDigits(count) {
-    const str = count.toString().padStart(4, '0');
-    const container = document.getElementById('digit-boxes');
-    container.innerHTML = '';
-    for (let digit of str) {
-      const box = document.createElement('div');
-      box.className = 'digit-box';
-      box.textContent = digit;
-      container.appendChild(box);
-    }
-  }
-
-  countVisitor();
+  // Show some dummy count after 1 second for testing
+  setTimeout(() => {
+    visitorDiv.textContent = 'Visitor Count: 1234';
+  }, 1000);
 }
-
 
 // Function to inject header
 function injectHeader() {
