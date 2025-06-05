@@ -326,6 +326,7 @@ function initializeSite() {
 
 // Inject components when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  injectVisitorCounter();   // <- ye nayi line add karo yahan
   injectHeader();
   injectFooter();
   initializeSite();
