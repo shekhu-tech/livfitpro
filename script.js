@@ -1,30 +1,3 @@
-function injectVisitorCounter() {
-  // Find header element
-  const header = document.querySelector('header#main-header') || document.body.firstElementChild;
-  if (!header) {
-    console.warn('No header found!');
-    return;
-  }
-
-  // Create container div
-  const visitorDiv = document.createElement('div');
-  visitorDiv.style.background = '#f5f1e6';
-  visitorDiv.style.padding = '10px';
-  visitorDiv.style.textAlign = 'center';
-  visitorDiv.style.fontSize = '20px';
-  visitorDiv.style.fontWeight = 'bold';
-  visitorDiv.style.fontFamily = "'Playfair Display', serif";
-  visitorDiv.textContent = 'Visitor Count: Loading...';
-
-  // Insert above header
-  header.parentNode.insertBefore(visitorDiv, header);
-
-  // Show some dummy count after 1 second for testing
-  setTimeout(() => {
-    visitorDiv.textContent = 'Visitor Count: 1234';
-  }, 1000);
-}
-
 // Function to inject header
 function injectHeader() {
   const headerContainer = document.getElementById('header-container');
