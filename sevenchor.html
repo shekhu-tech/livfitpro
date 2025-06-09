@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="google-site-verification" content="6zbgXhnR9GrxQxZn2cXCIABHA9HxnjGRZOGAK6bcUPs" />
+  <meta name="msvalidate.01" content="10BD441956768FC33C57DBCB1A513EAD" />
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="LivFit.pro – Where Wellness Meets Lifestyle. Unlock your healthiest, most vibrant self with LivFit.pro — your ultimate destination for holistic fitness, mindful living, and powerful transformation." />
+  <meta name="keywords" content="gym workouts, free gym plans, calisthenics training, calisthenics exercises, cardio workouts, cardio exercises, yoga for beginners, yoga poses, meditation techniques, meditation for stress relief, diet plan, diet plans free, detox plan, detox diet, weight loss tips, weight loss diet, weight gain tips, muscle gain workouts, fitness training, home workouts, fitness plans, health and fitness, fat burning exercises, bodyweight exercises, healthy lifestyle, fitness motivation, workout routines, strength training, flexibility exercises, weight management, nutrition tips, healthy diet, clean eating, intermittent fasting, fat loss plan, lean muscle gain, wellness programs, mental wellness, mindfulness meditation, pranayama, breathing exercises, HIIT workouts, aerobic exercise, endurance training, gym workout plans, calisthenics for beginners, yoga for weight loss, yoga for flexibility, guided meditation, detox cleanse, healthy habits, weight gain diet, bodybuilding diet, personal fitness coach, fitness blog, online fitness programs, free fitness coaching, holistic health, physical fitness, calorie burning workouts, wellness tips, strength building, gym exercises, muscle toning, fat reduction, body transformation, fat loss workouts, balanced diet, fitness goals, healthy eating tips, lifestyle changes, workout plans for men, workout plans for women, cardio training, meditation music, stress management, mental health exercises, fat loss tips, diet meal plans, clean eating plan, fat burning diet, yoga meditation, gym tips, fitness challenges, home calisthenics, fitness apps, yoga classes online, healthy living, nutrition plans, fitness community, workout motivation">
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="LivFit Team" />
+  
+  <!-- Title -->
+  <title>LivFit.pro – Where Wellness Meets Lifestyle</title>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://livfit.pro/" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="LivFit - Fitness, Wellness, and Healthy Living" />
+  <meta property="og:description" content="LivFit offers the best fitness programs, yoga, meditation, and diet plans to help you live a healthier life. Join us today!" />
+  <meta property="og:image" content="https://livfit.pro/images/og-image.jpg" />
+  <meta property="og:url" content="https://livfit.pro/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LivFit" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LivFit - Fitness, Wellness, and Healthy Living" />
+  <meta name="twitter:description" content="LivFit offers the best fitness programs, yoga, meditation, and diet plans to help you live a healthier life. Join us today!" />
+  <meta name="twitter:image" content="https://livfit.pro/images/twitter-card.jpg" />
+  <meta name="twitter:creator" content="@livfit" />
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LivFit",
+    "url": "https://livfit.pro",
+    "logo": "https://livfit.pro/images/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-800-555-5555",
+      "contactType": "Customer Service",
+      "areaServed": "US",
+      "availableLanguage": "English"
+    }
+  }
+  </script>
+  <!-- Clarity tracking code for https://livfit.pro/ -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rukbv5x3cm");
+</script>
+  
+  <!-- FontAwesome and Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+  
+<body> 
+  <!-- Header will be injected here -->
+  <div id="header-container"></div>
+  <!-- Main Content -->
+  <main>
+
+     <style>
+        /* CSS Variables for easy theme adjustments */
+        :root {
+            --bg-color: #f4f1de; /* Light, classic background (cream/off-white) */
+            --text-color: #3d405b; /* Dark, muted blue-grey text */
+            --heading-color: #e07a5f; /* Warm, classic terracotta/salmon heading color */
+            --card-bg-base: #ffffff; /* Pure white card background */
+            --card-border: #a8dadc; /* Light teal/blueish border */
+            --card-shadow: rgba(0, 0, 0, 0.05); /* Softer, subtle shadow */
+        }
+
+        /* --- Global Styles --- */
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            box-sizing: border-box;
+            color: var(--text-color);
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- Cards Container (CSS Grid) --- */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+            gap: 30px; /* Space between cards */
+            max-width: 1200px; /* Max width for the container */
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* --- Individual Card Link & Base Styling --- */
+        /* The 'a' tag now wraps the card div to make the entire card clickable */
+        .card-link {
+            text-decoration: none; /* Remove underline from link */
+            color: inherit; /* Inherit text color from its children */
+            display: block; /* Make the link take up the full card area */
+            height: 100%; /* Ensure link covers the entire card height */
+        }
+
+        .card {
+            background-color: var(--card-bg-base);
+            border-radius: 8px; /* Slightly rounded corners */
+            border: 1px solid var(--card-border); /* Subtle border */
+            box-shadow: 5px 5px 10px var(--card-shadow); /* Soft shadow */
+            overflow: hidden;
+            position: relative; 
+            text-align: center;
+            padding: 30px 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+            cursor: pointer;
+            min-height: 57px; /* Ensured consistent card height, reverted from 57px */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Ensure the card's hover effects apply when hovering the link */
+        }
+
+        .card-link:hover .card { /* Apply hover effect to the card when its parent link is hovered */
+            transform: translateY(-5px); /* Lift slightly on hover */
+            box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+        }
+
+        /* --- Card Inner Content --- */
+        .card-inner {
+            position: relative;
+            z-index: 2; /* Ensures text is visible */
+        }
+
+        .card h2 {
+            font-family: 'Playfair Display', serif; /* Classic serif font for card titles */
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+        h1 {
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-weight: 500;
+    font-size: 1.5rem; /* Slightly larger for better visual impact */
+    text-align: center; /* Correct property to center text */
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+    line-height: 1.2;
+    padding: 0 1rem; /* Adds spacing on small screens */
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 0;
+            color: var(--text-color);
+        }
+
+        /* --- Specific Card Subtle Background Adjustments (No Icons) --- */
+
+        /* Kamvasna (Lust) */
+        .kamvasna {
+            background-color: rgba(255, 182, 193, 0.05); /* Very subtle pink tint */
+        }
+
+        /* Krodh (Anger) */
+        .krodh {
+            background-color: rgba(220, 20, 60, 0.05); /* Very subtle crimson tint */
+        }
+
+        /* Lobh (Greed) */
+        .lobh {
+            background-color: rgba(255, 215, 0, 0.05); /* Very subtle gold tint */
+        }
+
+        /* Moh (Attachment) */
+        .moh {
+            background-color: rgba(100, 149, 237, 0.05); /* Very subtle cornflower blue tint */
+        }
+
+        /* Ahankar (Ego) */
+        .ahankar {
+            background-color: rgba(147, 112, 219, 0.05); /* Very subtle medium purple tint */
+        }
+
+        /* Man (Mind) */
+        .man {
+            background-color: rgba(0, 128, 0, 0.05); /* Very subtle green tint */
+        }
+
+        /* Maya (Illusion) */
+        .maya {
+            background-color: rgba(105, 105, 105, 0.05); /* Very subtle dim grey tint */
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+                padding: 10px;
+            }
+
+            .card {
+                padding: 25px 15px;
+            }
+
+             h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem); /* Adjust heading size */
+            }
+
+            .card h2 {
+                font-size: 1.8rem;
+            }
+
+            .card p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+    <!-- Header will be injected here -->
+  <div id="header-container"></div>
+  <!-- Main Content -->
+
+  <br>
+  <br>
+             <h1>Check Your 7 "Chor"</h1>
+               <br>
+  <br>
+    <div class="cards-container">
+        <a href="kamvashnachecker.html" class="card-link">
+            <div class="card kamvasna">
+                <div class="card-inner">
+                    <h2>Kamvasna</h2>
+                    <p>The seductive whisper of desire.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="anger.html" class="card-link">
+            <div class="card krodh">
+                <div class="card-inner">
+                    <h2>Krodh</h2>
+                    <p>The burning inferno of rage.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="lobh.html" class="card-link">
+            <div class="card lobh">
+                <div class="card-inner">
+                    <h2>Lobh</h2>
+                    <p>The insatiable hunger for more.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="mohhh.html" class="card-link">
+            <div class="card moh">
+                <div class="card-inner">
+                    <h2>Moh</h2>
+                    <p>The invisible chains of attachment.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="ahenkar.html" class="card-link">
+            <div class="card ahankar">
+                <div class="card-inner">
+                    <h2>Ahankar</h2>
+                    <p>The towering illusion of self-importance.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="mannn.html" class="card-link">
+            <div class="card man">
+                <div class="card-inner">
+                    <h2>Man</h2>
+                    <p>The restless wanderer of thoughts.</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="mayaaa.html" class="card-link">
+            <div class="card maya">
+                <div class="card-inner">
+                    <h2>Maya</h2>
+                    <p>The grand illusion, the deceptive veil.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+   
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+    <!-- JavaScript to inject header and footer -->
+  <script src="script.js" defer></script>
+
+
+</body>
+</html>
