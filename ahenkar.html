@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अहंकार चेकर कैलकुलेटर (100 प्रश्न)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f44336; /* Red - for assertiveness, strong personality */
+            --secondary-color: #d32f2f; /* Darker Red */
+            --accent-color: #ff9800; /* Orange for accent/strength */
+            --light-bg: #ffebee; /* Very light red/pink background */
+            --dark-text: #333;
+            --light-text: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 2rem 0;
+            height: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .quiz-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .question-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #ffcdd2; /* Light Red tint */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #ef9a9a; /* Darker red tint on hover */
+            border-color: var(--primary-color);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .custom-radio {
+            position: absolute;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 2px solid var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked ~ .custom-radio {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-radio::after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .option input:checked ~ .custom-radio::after {
+            display: block;
+        }
+
+        .option-text {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: var(--dark-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .score-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #F44336, #4CAF50); /* Red (high ego) to Green (low ego) gradient */
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .result-message {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            padding: 0 1rem;
+        }
+
+        .restart-btn {
+            margin-top: 2rem;
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #e65100; /* Darker orange */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option-text {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .result-title {
+                font-size: 1.5rem;
+            }
+            
+            .score {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .options {
+                gap: 8px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+            
+            .custom-radio {
+                height: 18px;
+                width: 18px;
+            }
+            
+            .option-text {
+                font-size: 0.85rem;
+                margin-left: 8px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animation for options */
+        @keyframes optionAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .option {
+            animation: optionAppear 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .option:nth-child(1) { animation-delay: 0.1s; }
+        .option:nth-child(2) { animation-delay: 0.2s; }
+        .option:nth-child(3) { animation-delay: 0.3s; }
+        .option:nth-child(4) { animation-delay: 0.4s; }
+        .option:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Loading spinner */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-crown"></i> अहंकार चेकर कैलकुलेटर</h1>
+            <p class="subtitle">100 प्रश्नों के साथ आपके अहंकार के स्तर का विस्तृत विश्लेषण</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+
+        <div id="quiz" class="quiz-container"></div>
+
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prev-btn" disabled>
+                <i class="fas fa-arrow-left"></i> पिछला
+            </button>
+            <button class="btn btn-primary" id="next-btn">
+                अगला <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                परिणाम देखें <i class="fas fa-chart-bar"></i>
+            </button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">आपका अहंकार का स्तर</h2>
+            <div class="score" id="score">0%</div>
+            
+            <div class="score-bar">
+                <div class="score-progress" id="score-progress"></div>
+            </div>
+            
+            <div class="score-labels">
+                <span>बहुत कम अहंकार</span>
+                <span>कम अहंकार</span>
+                <span>सामान्य</span>
+                <span>उच्च अहंकार</span>
+                <span>बहुत उच्च अहंकार</span>
+            </div>
+            
+            <div class="result-message" id="result-message"></div>
+            
+            <button class="btn restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> फिर से शुरू करें
+            </button>
+        </div>
+    </div>
+
+    <div class="fab" id="fab" title="प्रगति देखें">
+        <i class="fas fa-chart-pie"></i>
+    </div>
+
+    <script>
+        const questions = [
+            // Section 1: आत्म-केंद्रितता (Self-centeredness) - 20 Questions
+            {
+                question: "1. क्या आप अपनी उपलब्धियों के बारे में दूसरों से अक्सर बात करते हैं?",
+                options: [
+                    { text: "नहीं, मैं विनम्र रहता हूँ", value: 4 },
+                    { text: "कभी-कभी, जब पूछा जाए", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "2. क्या आपको लगता है कि आप दूसरों से बेहतर हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी को समान मानता हूँ", value: 4 },
+                    { text: "कभी-कभी, कुछ खास क्षेत्रों में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "3. क्या आप दूसरों की सलाह पर आसानी से ध्यान नहीं देते?",
+                options: [
+                    { text: "नहीं, मैं दूसरों की बात सुनता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मुझे पता हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "4. क्या आप हमेशा अपनी जरूरतों और इच्छाओं को दूसरों से ऊपर रखते हैं?",
+                options: [
+                    { text: "नहीं, मैं संतुलन रखता हूँ", value: 4 },
+                    { text: "कभी-कभी, जब जरूरी हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "5. क्या आपको दूसरों की प्रशंसा और मान्यता की बहुत जरूरत होती है?",
+                options: [
+                    { text: "नहीं, मुझे आत्म-संतुष्टि है", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "6. क्या आप दूसरों की गलतियों को उजागर करना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सकारात्मक रहता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मुझे सुधार करना हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "7. क्या आप हमेशा सही साबित होना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे सच चाहिए", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "8. क्या आप दूसरों को अपने से कमतर दिखाकर खुद को बड़ा महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी का सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "9. क्या आप अपनी कमजोरियों को स्वीकार करने में कठिनाई महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें सुधारता हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "10. क्या आप दूसरों की सफलता से ईर्ष्या महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं खुश होता हूँ", value: 4 },
+                    { text: "शायद, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "11. क्या आपको दूसरों से विशेष व्यवहार की उम्मीद होती है?",
+                options: [
+                    { text: "नहीं, मैं सभी के साथ समान व्यवहार करता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मैं महत्वपूर्ण हूँ", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "12. क्या आप दूसरों के ध्यान का केंद्र बनना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे शांति पसंद है", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "13. क्या आप अपनी गलतियों को दूसरों पर थोपते हैं?",
+                options: [
+                    { text: "नहीं, मैं जिम्मेदारी लेता हूँ", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "14. क्या आप दूसरों से सलाह लेने से बचते हैं, क्योंकि आपको लगता है कि आप सब जानते हैं?",
+                options: [
+                    { text: "नहीं, मैं सलाह लेता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "15. क्या आपको लगता है कि आप सभी समस्याओं का समाधान कर सकते हैं?",
+                options: [
+                    { text: "नहीं, मैं विनम्र रहता हूँ", value: 4 },
+                    { text: "हाँ, ज्यादातर", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "16. क्या आप दूसरों को अपने विचारों को मानने के लिए मजबूर करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अगर मैं दृढ़ विश्वास में हूँ", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "17. क्या आप अपनी विफलताओं के लिए दूसरों को दोषी ठहराते हैं?",
+                options: [
+                    { text: "नहीं, मैं जिम्मेदारी लेता हूँ", value: 4 },
+                    { text: "शायद, अगर वे जिम्मेदार हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "18. क्या आप दूसरों के विचारों का उपहास करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अगर वे बहुत अजीब हों", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "19. क्या आप हमेशा अपनी प्रशंसा करना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मैं विनम्र रहता हूँ", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "20. क्या आप दूसरों को नियंत्रित करने की कोशिश करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें स्वतंत्रता देता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे परवाह हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+
+            // Section 2: श्रेष्ठता का भाव (Sense of Superiority) - 20 Questions
+            {
+                question: "21. क्या आपको लगता है कि आपके पास दूसरों से बेहतर स्वाद है?",
+                options: [
+                    { text: "नहीं, हर किसी की अपनी पसंद है", value: 4 },
+                    { text: "हाँ, शायद", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "22. क्या आप दूसरों की क्षमताओं को कम आंकते हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी की क्षमताओं का सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अगर वे अनुभवहीन हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "23. क्या आप हमेशा अपनी राय को सबसे महत्वपूर्ण मानते हैं?",
+                options: [
+                    { text: "नहीं, मैं दूसरों की बात सुनता हूँ", value: 4 },
+                    { text: "हाँ, अगर मुझे लगता है कि यह सही है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "24. क्या आपको लगता है कि आपके पास दूसरों से अधिक ज्ञान है?",
+                options: [
+                    { text: "नहीं, मैं हमेशा सीख रहा हूँ", value: 4 },
+                    { text: "हाँ, कुछ क्षेत्रों में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "25. क्या आप दूसरों को अपने से कम बुद्धिमान मानते हैं?",
+                options: [
+                    { text: "नहीं, सभी बुद्धिमान होते हैं", value: 4 },
+                    { text: "शायद, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "26. क्या आप दूसरों की उपलब्धियों को कमतर आंकते हैं?",
+                options: [
+                    { text: "नहीं, मैं सराहना करता हूँ", value: 4 },
+                    { text: "शायद, अगर वे बहुत छोटे हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "27. क्या आप हमेशा दूसरों को यह दिखाना चाहते हैं कि आप उनसे बेहतर हैं?",
+                options: [
+                    { text: "नहीं, मुझे इसकी जरूरत नहीं है", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "28. क्या आप दूसरों को नीचा दिखाकर खुद को बेहतर महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे पसंद नहीं", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "29. क्या आप दूसरों की सलाह को अनावश्यक मानते हैं?",
+                options: [
+                    { text: "नहीं, मैं खुला रहता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "30. क्या आप दूसरों को अपने से कम सफल मानते हैं?",
+                options: [
+                    { text: "नहीं, सफलता सबके लिए अलग है", value: 4 },
+                    { text: "शायद, अगर वे संघर्ष कर रहे हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "31. क्या आपको लगता है कि आप दूसरों से अधिक मेहनती हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी मेहनत पर ध्यान देता हूँ", value: 4 },
+                    { text: "हाँ, ज्यादातर", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "32. क्या आप दूसरों की गलतियों पर हंसते हैं?",
+                options: [
+                    { text: "नहीं, मैं सहानुभूति रखता हूँ", value: 4 },
+                    { text: "शायद, अगर वह मजाक में हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "33. क्या आप दूसरों से अधिक जिम्मेदार महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, सभी अपनी जिम्मेदारियां निभाते हैं", value: 4 },
+                    { text: "हाँ, कुछ स्थितियों में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "34. क्या आप दूसरों को अपने से कम अनुभवी मानते हैं?",
+                options: [
+                    { text: "नहीं, हर कोई सीखता है", value: 4 },
+                    { text: "शायद, अगर वे नए हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "35. क्या आपको लगता है कि आपके फैसले दूसरों से बेहतर होते हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी के विचारों का सम्मान करता हूँ", value: 4 },
+                    { text: "हाँ, ज्यादातर", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "36. क्या आप दूसरों को अपनी उपलब्धियों के बारे में डींग मारते हैं?",
+                options: [
+                    { text: "नहीं, मैं विनम्र रहता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर वे रुचि रखते हों", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "37. क्या आप दूसरों को अपनी गलतियों के लिए तुरंत डांटते हैं?",
+                options: [
+                    { text: "नहीं, मैं धैर्य रखता हूँ", value: 4 },
+                    { text: "शायद, अगर मैं चिड़चिड़ा हूँ", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "38. क्या आप दूसरों की राय को आसानी से खारिज कर देते हैं?",
+                options: [
+                    { text: "नहीं, मैं सुनता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "39. क्या आप हमेशा दूसरों से अधिक योग्य महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी जगह जानता हूँ", value: 4 },
+                    { text: "हाँ, कुछ स्थितियों में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "40. क्या आप दूसरों को अपने से कमतर दिखाकर खुद को श्रेष्ठ साबित करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे ऐसा नहीं करना चाहिए", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+
+            // Section 3: आलोचना के प्रति प्रतिक्रिया (Reaction to Criticism) - 20 Questions
+            {
+                question: "41. क्या आप आलोचना को व्यक्तिगत रूप से लेते हैं?",
+                options: [
+                    { text: "नहीं, मैं इसे सीखने के अवसर के रूप में देखता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "42. क्या आप आलोचना मिलने पर बचाव का रुख अपनाते हैं?",
+                options: [
+                    { text: "नहीं, मैं सुनता हूँ और समझता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "43. क्या आपको लगता है कि लोग आपको गलत समझते हैं जब वे आपकी आलोचना करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उनकी बात समझता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "44. क्या आप आलोचना के बाद गुस्सा या चिड़चिड़ापन महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं शांत रहता हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत ज्यादा", value: 1 }
+                ]
+            },
+            {
+                question: "45. क्या आप दूसरों को उनकी आलोचना के लिए माफ नहीं कर पाते?",
+                options: [
+                    { text: "नहीं, मैं माफ कर देता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "46. क्या आप आलोचना से बचने के लिए जोखिम लेने से बचते हैं?",
+                options: [
+                    { text: "नहीं, मैं जोखिम लेता हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "47. क्या आप आलोचना मिलने पर दूसरों से दूरी बना लेते हैं?",
+                options: [
+                    { text: "नहीं, मैं संवाद करता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "48. क्या आप आलोचना को अपनी प्रतिष्ठा के लिए खतरा मानते हैं?",
+                options: [
+                    { text: "नहीं, मैं आत्मविश्वासी हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "49. क्या आप आलोचना मिलने पर दूसरों को जवाब देना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मैं शांत रहता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "50. क्या आप आलोचना से बचने के लिए सच छिपाते हैं?",
+                options: [
+                    { text: "नहीं, मैं ईमानदार रहता हूँ", value: 4 },
+                    { text: "शायद, अगर वह बहुत बुरा हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "51. क्या आप आलोचना से बचने के लिए दूसरों की गलतियों को छुपाते हैं?",
+                options: [
+                    { text: "नहीं, मैं पारदर्शी रहता हूँ", value: 4 },
+                    { text: "शायद, अगर वह छोटा हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "52. क्या आप दूसरों की आलोचना सुनकर निराश हो जाते हैं?",
+                options: [
+                    { text: "नहीं, मैं मजबूत रहता हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत ज्यादा", value: 1 }
+                ]
+            },
+            {
+                question: "53. क्या आप दूसरों को अपनी आलोचना के लिए बदला लेने की सोचते हैं?",
+                options: [
+                    { text: "नहीं, मैं माफ कर देता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे बहुत गुस्सा हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "54. क्या आप आलोचना मिलने पर अपनी कमियों को दूसरों पर थोपते हैं?",
+                options: [
+                    { text: "नहीं, मैं जिम्मेदारी लेता हूँ", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "55. क्या आप दूसरों को अपनी आलोचना के लिए जवाबदेह ठहराते हैं?",
+                options: [
+                    { text: "नहीं, मैं शांत रहता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "56. क्या आप आलोचना से बचने के लिए अपनी उपलब्धियों को बढ़ा-चढ़ाकर बताते हैं?",
+                options: [
+                    { text: "नहीं, मैं ईमानदार रहता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे प्रशंसा चाहिए", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "57. क्या आप आलोचना से बचने के लिए दूसरों को खुश करने की कोशिश करते हैं?",
+                options: [
+                    { text: "नहीं, मैं खुद के लिए जीता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "58. क्या आप आलोचना मिलने पर दूसरों से बहस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सुनता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "59. क्या आप आलोचना से बचने के लिए अपनी गलतियों को छुपाते हैं?",
+                options: [
+                    { text: "नहीं, मैं ईमानदार रहता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे शर्मिंदगी हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "60. क्या आप आलोचना से बचने के लिए दूसरों पर आरोप लगाते हैं?",
+                options: [
+                    { text: "नहीं, मैं जिम्मेदारी लेता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे बहुत गुस्सा हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+
+            // Section 4: मान्यता की चाह (Desire for Recognition) - 20 Questions
+            {
+                question: "61. क्या आप हमेशा दूसरों से प्रशंसा और वाहवाही चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे आत्म-संतुष्टि है", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "62. क्या आप दूसरों को यह दिखाना चाहते हैं कि आप कितने महान हैं?",
+                options: [
+                    { text: "नहीं, मुझे इसकी जरूरत नहीं है", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "63. क्या आप दूसरों से अधिक ध्यान और देखभाल प्राप्त करना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं आत्मनिर्भर हूँ", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "64. क्या आप हमेशा दूसरों के ध्यान का केंद्र बनना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे शांति पसंद है", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "65. क्या आप दूसरों की नजरों में ज्ञानी बनना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे परवाह नहीं", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, मुझे बहुत पसंद है", value: 2 },
+                    { text: "हाँ, यह मेरी प्राथमिकता है", value: 1 }
+                ]
+            },
+            {
+                question: "66. क्या आप दूसरों को अपनी उपलब्धियों के बारे में बार-बार बताते हैं?",
+                options: [
+                    { text: "नहीं, मैं विनम्र रहता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "67. क्या आप हमेशा दूसरों से अधिक प्रशंसा और मान्यता चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे परवाह नहीं", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, मुझे बहुत पसंद है", value: 2 },
+                    { text: "हाँ, यह मेरी प्राथमिकता है", value: 1 }
+                ]
+            },
+            {
+                question: "68. क्या आप दूसरों के सामने अपनी उपलब्धियों को बढ़ा-चढ़ाकर बताते हैं?",
+                options: [
+                    { text: "नहीं, मैं ईमानदार रहता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे प्रशंसा चाहिए", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "69. क्या आप हमेशा दूसरों को अपने से कम बुद्धिमान दिखाना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी का सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "70. क्या आप दूसरों की नजरों में सबसे महत्वपूर्ण व्यक्ति बनना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी जगह जानता हूँ", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "71. क्या आप दूसरों से प्रतिस्पर्धा करते हैं कि कौन अधिक प्रशंसा प्राप्त कर सकता है?",
+                options: [
+                    { text: "नहीं, मुझे इसमें कोई दिलचस्पी नहीं", value: 4 },
+                    { text: "कभी-कभी, मजाक में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "72. क्या आप दूसरों को अपने से कमतर दिखाकर खुद को श्रेष्ठ महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे पसंद नहीं", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "73. क्या आप हमेशा दूसरों से अधिक योग्य महसूस करना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी जगह जानता हूँ", value: 4 },
+                    { text: "हाँ, कुछ स्थितियों में", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "74. क्या आप दूसरों को अपनी समस्याओं के बारे में बताकर सहानुभूति प्राप्त करते हैं?",
+                options: [
+                    { text: "नहीं, मैं आत्मनिर्भर हूँ", value: 4 },
+                    { text: "हाँ, अगर मुझे मदद चाहिए", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "75. क्या आप दूसरों को खुश करने के लिए अपनी पहचान खो देते हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी पहचान बनाए रखता हूँ", value: 4 },
+                    { text: "कभी-कभी, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "76. क्या आप दूसरों की नजरों में महान बनना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे परवाह नहीं", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, मुझे बहुत पसंद है", value: 2 },
+                    { text: "हाँ, यह मेरी प्राथमिकता है", value: 1 }
+                ]
+            },
+            {
+                question: "77. क्या आप हमेशा दूसरों से अधिक सफल दिखना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं अपनी सफलता पर ध्यान देता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "78. क्या आप दूसरों को अपने से कमतर दिखाकर खुद को सुरक्षित महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, मैं आत्मविश्वासी हूँ", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "79. क्या आप हमेशा दूसरों की नजरों में सही होना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मुझे सच चाहिए", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "80. क्या आप दूसरों से अधिक ज्ञानी बनकर खुद को महत्वपूर्ण महसूस करते हैं?",
+                options: [
+                    { text: "नहीं, ज्ञान साझा करना महत्वपूर्ण है", value: 4 },
+                    { text: "हाँ, अच्छा लगता है", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+
+            // Section 5: नियंत्रण की इच्छा (Desire for Control) - 20 Questions
+            {
+                question: "81. क्या आप हमेशा दूसरों को नियंत्रित करने की कोशिश करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें स्वतंत्रता देता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे परवाह हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "82. क्या आप दूसरों के जीवन में बहुत अधिक हस्तक्षेप करते हैं?",
+                options: [
+                    { text: "नहीं, मैं दूसरों को जगह देता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मुझे परवाह हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "83. क्या आप हमेशा अपनी दिनचर्या और योजनाओं पर नियंत्रण रखना चाहते हैं?",
+                options: [
+                    { text: "नहीं, मैं लचीला हूँ", value: 4 },
+                    { text: "हाँ, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "84. क्या आप दूसरों को अपने अनुसार काम करने के लिए प्रेरित करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें अपना रास्ता चुनने देता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मेरा तरीका बेहतर हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "85. क्या आप दूसरों की गलतियों को तुरंत सुधारते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें सीखने देता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "86. क्या आप दूसरों पर भरोसा नहीं करते?",
+                options: [
+                    { text: "नहीं, मैं भरोसा करता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "87. क्या आप हमेशा अपने तरीकों से काम करना पसंद करते हैं?",
+                options: [
+                    { text: "नहीं, मैं लचीला हूँ", value: 4 },
+                    { text: "हाँ, मुझे अपने तरीके पसंद हैं", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "88. क्या आप दूसरों को अपने अनुसार सोचने के लिए प्रेरित करते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन्हें सोचने देता हूँ", value: 4 },
+                    { text: "कभी-कभी, अगर मेरा विचार बेहतर हो", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "89. क्या आप दूसरों पर बहुत अधिक निर्भरता दिखाते हैं?",
+                options: [
+                    { text: "नहीं, मैं आत्मनिर्भर हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "90. क्या आप हमेशा दूसरों को यह दिखाना चाहते हैं कि आप प्रभारी हैं?",
+                options: [
+                    { text: "नहीं, मुझे इसकी जरूरत नहीं है", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "91. क्या आप दूसरों को अपने से कमतर महसूस कराते हैं ताकि आप नियंत्रण में रह सकें?",
+                options: [
+                    { text: "नहीं, मुझे ऐसा नहीं करना चाहिए", value: 4 },
+                    { text: "शायद, अनजाने में", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "92. क्या आप दूसरों को अपनी इच्छा के विरुद्ध काम करने के लिए मजबूर करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे बहुत परवाह हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "93. क्या आप दूसरों को अपनी समस्याओं के लिए दोषी ठहराते हैं ताकि आप अपनी जिम्मेदारी से बच सकें?",
+                options: [
+                    { text: "नहीं, मैं जिम्मेदारी लेता हूँ", value: 4 },
+                    { text: "शायद, अगर मैं दबाव में हूँ", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "94. क्या आप हमेशा दूसरों के फैसलों पर सवाल उठाते हैं?",
+                options: [
+                    { text: "नहीं, मैं उन पर भरोसा करता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "95. क्या आप दूसरों को अपनी शक्ति दिखाने की कोशिश करते हैं?",
+                options: [
+                    { text: "नहीं, मुझे इसकी जरूरत नहीं है", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "96. क्या आप दूसरों को नियंत्रित करने के लिए भावनात्मक ब्लैकमेल का उपयोग करते हैं?",
+                options: [
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 4 },
+                    { text: "शायद, अगर मुझे बहुत गुस्सा हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "97. क्या आप दूसरों को अपनी इच्छा के विरुद्ध काम करने के लिए मजबूर करते हैं?",
+                options: [
+                    { text: "नहीं, मैं सम्मान करता हूँ", value: 4 },
+                    { text: "शायद, अगर मुझे बहुत परवाह हो", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "98. क्या आप दूसरों पर बहुत अधिक निर्भरता दिखाते हैं ताकि आप उन्हें नियंत्रित कर सकें?",
+                options: [
+                    { text: "नहीं, मैं आत्मनिर्भर हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "99. क्या आप हमेशा दूसरों को अपनी बात मनवाने की कोशिश करते हैं?",
+                options: [
+                    { text: "नहीं, मैं दूसरों की बात सुनता हूँ", value: 4 },
+                    { text: "हाँ, कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "100. क्या आप दूसरों को अपनी गलतियों के लिए तुरंत डांटते हैं ताकि वे आपसे डरें?",
+                options: [
+                    { text: "नहीं, मैं धैर्य रखता हूँ", value: 4 },
+                    { text: "शायद, अगर मैं चिड़चिड़ा हूँ", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const userAnswers = {}; // Store answers {questionIndex: selectedValue}
+        const totalQuestions = questions.length;
+        const maxPossibleScore = totalQuestions * 4; // Each question has max 4 points
+
+        const quizDiv = document.getElementById('quiz');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizProgress = document.getElementById('quiz-progress');
+        const loader = document.getElementById('loader');
+        const resultContainer = document.getElementById('result-container');
+        const scoreDisplay = document.getElementById('score');
+        const scoreProgress = document.getElementById('score-progress');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const fab = document.getElementById('fab');
+
+        function loadQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                const q = questions[currentQuestionIndex];
+                let optionsHtml = '';
+                q.options.forEach((option, optionIndex) => {
+                    const isChecked = userAnswers[currentQuestionIndex] === option.value;
+                    optionsHtml += `
+                        <div class="option">
+                            <input type="radio" id="q${currentQuestionIndex}o${optionIndex}" name="q${currentQuestionIndex}" value="${option.value}" ${isChecked ? 'checked' : ''}>
+                            <label for="q${currentQuestionIndex}o${optionIndex}">
+                                <span class="custom-radio"></span>
+                                <span class="option-text">${option.text}</span>
+                            </label>
+                        </div>
+                    `;
+                });
+
+                quizDiv.innerHTML = `
+                    <div class="question-counter">प्रश्न ${currentQuestionIndex + 1} / ${totalQuestions}</div>
+                    <div class="question">${q.question}</div>
+                    <div class="options">${optionsHtml}</div>
+                `;
+
+                // Add event listeners for radio buttons
+                quizDiv.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', (event) => {
+                        userAnswers[currentQuestionIndex] = parseInt(event.target.value);
+                        updateNavigationButtons();
+                    });
+                });
+
+                updateNavigationButtons();
+                updateProgressBar();
+            } else {
+                showResult();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            quizProgress.style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'none' : 'flex';
+            submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'flex' : 'none';
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                // Ensure an option is selected before moving next
+                if (userAnswers[currentQuestionIndex] === undefined) {
+                    alert('कृपया अगले प्रश्न पर जाने से पहले एक विकल्प चुनें।');
+                    return;
+                }
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        function calculateScore() {
+            let totalScore = 0;
+            for (const key in userAnswers) {
+                totalScore += userAnswers[key];
+            }
+            // Normalize score to a percentage (higher percentage means lower Ahankar)
+            // Max score is totalQuestions * 4 (if all are 4 points)
+            // Min score is totalQuestions * 1 (if all are 1 point)
+            // Convert score to a 0-100 scale where 100 is excellent (low Ahankar).
+
+            const minPossibleScore = totalQuestions * 1;
+            const scoreRange = maxPossibleScore - minPossibleScore; // 400 - 100 = 300
+            const adjustedScore = totalScore - minPossibleScore; // score between 0 and 300
+            const percentage = (adjustedScore / scoreRange) * 100; // normalized to 0-100
+            return Math.round(percentage);
+        }
+
+        function getResultMessage(percentage) {
+            let message = "";
+            let color = "";
+            // Adjust ranges for Ahankar: higher % means lower Ahankar, lower % means more Ahankar
+            if (percentage >= 80) { // High score = Very Low Ahankar
+                message = "उत्कृष्ट! आप में अहंकार का स्तर बहुत कम है। आप विनम्र, दूसरों का सम्मान करने वाले और यथार्थवादी व्यक्ति हैं।";
+                color = "#4CAF50"; // Green for low Ahankar
+            } else if (percentage >= 60) {
+                message = "अच्छा! आप ज्यादातर स्थितियों में अहंकार से दूर रहते हैं, लेकिन कुछ क्षेत्रों में ध्यान देने की आवश्यकता है।";
+                color = "#8BC34A"; // Light Green
+            } else if (percentage >= 40) {
+                message = "औसत। आपको अपने अहंकार के स्तर पर काम करने की आवश्यकता है। अपनी आत्म-केंद्रितता के प्रति अधिक जागरूक रहें।";
+                color = "#FFC107"; // Amber
+            } else if (percentage >= 20) {
+                message = "चिंताजनक। आपको अपने अहंकार के स्तर पर गंभीरता से ध्यान देने की आवश्यकता है। यह आपके जीवन और रिश्तों को नकारात्मक रूप से प्रभावित कर सकता है।";
+                color = "#FF9800"; // Orange
+            } else { // Low score = Very High Ahankar
+                message = "बहुत चिंताजनक! आप में अहंकार का स्तर बहुत उच्च है। यह आपके जीवन और रिश्तों को नकारात्मक रूप से प्रभावित कर सकता है। आपको आत्म-निरीक्षण और बदलाव पर विचार करना चाहिए।";
+                color = "#F44336"; // Red for high Ahankar
+            }
+            scoreProgress.style.backgroundColor = color;
+            return message;
+        }
+
+        function showResult() {
+            if (Object.keys(userAnswers).length !== totalQuestions) {
+                if (!confirm('आपने सभी प्रश्नों का उत्तर नहीं दिया है। क्या आप फिर भी परिणाम देखना चाहते हैं?')) {
+                    return;
+                }
+            }
+
+            quizDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+            fab.style.display = 'none'; // Hide FAB on result page
+
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+                const finalScore = calculateScore();
+                scoreDisplay.textContent = `${finalScore}%`;
+                scoreProgress.style.width = `${finalScore}%`;
+                resultMessage.innerHTML = getResultMessage(finalScore);
+            }, 1500); // Simulate loading time
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            quizDiv.style.display = 'block';
+            resultContainer.style.display = 'none';
+            fab.style.display = 'flex'; // Show FAB on quiz start
+            loadQuestion();
+            updateProgressBar();
+        }
+
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', showResult);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // FAB functionality - allows jumping to the result even if not all questions are answered
+        fab.addEventListener('click', () => {
+            showResult();
+        });
+
+        // Initial load
+        loadQuestion();
+    </script>
+     <style>
+    .floating-home-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .home-button-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 70px;
+      width: 23px;
+      background-color: #28a745; /* Green background for Home */
+      color: white;
+      font-weight: bold;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .home-button-inner:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+  <a href="index.html" class="floating-home-button">
+    <div class="home-button-inner">
+      Home
+    </div>
+  </a>
+</body>
+</html>

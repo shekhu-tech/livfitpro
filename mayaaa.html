@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>माया चेकर कैलकुलेटर (100 प्रश्न)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #9C27B0; /* Purple - for mysticism, illusion */
+            --secondary-color: #673AB7; /* Deeper Purple */
+            --accent-color: #E040FB; /* Pink for accent/highlight */
+            --light-bg: #F3E5F5; /* Very light purple background */
+            --dark-text: #333;
+            --light-text: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            /* Using the generated image as background */
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczOaT8P4_gZf8e8_2Y8gD1c7r7p3zG_T8x2e1QJ-mE4Q8j0J5k_B6y9E0L8L5H0J4fC-z7R9P2Y_hB1d8mQ=w2000-h2000'); /* Replace with your desired image URL if needed */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: overlay; /* To blend with the background color */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 2rem 0;
+            height: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .quiz-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .question-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #E1BEE7; /* Light Purple tint */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #CE93D8; /* Darker purple tint on hover */
+            border-color: var(--primary-color);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .custom-radio {
+            position: absolute;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 2px solid var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked ~ .custom-radio {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-radio::after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .option input:checked ~ .custom-radio::after {
+            display: block;
+        }
+
+        .option-text {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: var(--dark-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .score-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #F44336, #4CAF50); /* Red (high illusion) to Green (low illusion) gradient */
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .result-message {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            padding: 0 1rem;
+        }
+
+        .restart-btn {
+            margin-top: 2rem;
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #D81B60; /* Darker Pink */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option-text {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .result-title {
+                font-size: 1.5rem;
+            }
+            
+            .score {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .options {
+                gap: 8px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+            
+            .custom-radio {
+                height: 18px;
+                width: 18px;
+            }
+            
+            .option-text {
+                font-size: 0.85rem;
+                margin-left: 8px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animation for options */
+        @keyframes optionAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .option {
+            animation: optionAppear 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .option:nth-child(1) { animation-delay: 0.1s; }
+        .option:nth-child(2) { animation-delay: 0.2s; }
+        .option:nth-child(3) { animation-delay: 0.3s; }
+        .option:nth-child(4) { animation-delay: 0.4s; }
+        .option:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Loading spinner */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-mask"></i> माया चेकर कैलकुलेटर</h1>
+            <p class="subtitle">100 प्रश्नों के साथ माया के प्रभाव का विश्लेषण</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+
+        <div id="quiz" class="quiz-container"></div>
+
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prev-btn" disabled>
+                <i class="fas fa-arrow-left"></i> पिछला
+            </button>
+            <button class="btn btn-primary" id="next-btn">
+                अगला <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                परिणाम देखें <i class="fas fa-chart-bar"></i>
+            </button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">माया का प्रभाव</h2>
+            <div class="score" id="score">0%</div>
+            
+            <div class="score-bar">
+                <div class="score-progress" id="score-progress"></div>
+            </div>
+            
+            <div class="score-labels">
+                <span>बहुत प्रभावित</span>
+                <span>कुछ प्रभावित</span>
+                <span>तटस्थ</span>
+                <span>कम प्रभावित</span>
+                <span>अप्रभावित</span>
+            </div>
+            
+            <div class="result-message" id="result-message"></div>
+            
+            <button class="btn restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> फिर से शुरू करें
+            </button>
+        </div>
+    </div>
+
+    <div class="fab" id="fab" title="प्रगति देखें">
+        <i class="fas fa-chart-pie"></i>
+    </div>
+
+    <script>
+        const questions = [
+            // Section 1: संसार की वास्तविकता (Reality of the World) - 20 Questions
+            {
+                question: "1. क्या आप मानते हैं कि संसार जैसा दिखता है, वैसा ही है?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, बिल्कुल नहीं", value: 4 }
+                ]
+            },
+            {
+                question: "2. क्या आप भौतिक वस्तुओं को स्थायी मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, क्षणभंगुर", value: 4 }
+                ]
+            },
+            {
+                question: "3. क्या आप अपनी इंद्रियों पर पूरी तरह भरोसा करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, हमेशा नहीं", value: 4 }
+                ]
+            },
+            {
+                question: "4. क्या आप मानते हैं कि समय एक रैखिक प्रवाह है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, यह जटिल है", value: 4 }
+                ]
+            },
+            {
+                question: "5. क्या आप मानते हैं कि मृत्यु अंतिम सत्य है?",
+                 options: [
+                    { text: "हाँ, अंतिम है", value: 1 },
+                    { text: "शायद, मेरे लिए", value: 2 },
+                    { text: "अनिश्चित", value: 3 },
+                    { text: "नहीं, पुनर्जन्म होता है", value: 4 }
+                ]
+            },
+            {
+                question: "6. क्या आप मानते हैं कि व्यक्तिगत पहचान स्थिर रहती है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, बदलती रहती है", value: 4 }
+                ]
+            },
+            {
+                question: "7. क्या आप मानते हैं कि भावनाएं वास्तविकता का सही प्रतिनिधित्व करती हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, भ्रामक हो सकती हैं", value: 4 }
+                ]
+            },
+            {
+                question: "8. क्या आप मानते हैं कि ज्ञान केवल अनुभव से आता है?",
+                options: [
+                    { text: "हाँ, केवल अनुभव से", value: 1 },
+                    { text: "ज्यादातर अनुभव से", value: 2 },
+                    { text: "अनुभव और अंतर्ज्ञान", value: 3 },
+                    { text: "नहीं, अंतर्ज्ञान भी महत्वपूर्ण है", value: 4 }
+                ]
+            },
+            {
+                question: "9. क्या आप मानते हैं कि सभी घटनाएं कारण और प्रभाव के नियम से बंधी हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, कुछ अप्रत्याशित हैं", value: 4 }
+                ]
+            },
+            {
+                question: "10. क्या आप मानते हैं कि संसार एक उद्देश्यपूर्ण योजना के अनुसार चल रहा है?",
+                options: [
+                    { text: "हाँ, एक योजना है", value: 1 },
+                    { text: "शायद कोई योजना है", value: 2 },
+                    { text: "अनिश्चित", value: 3 },
+                    { text: "नहीं, यह यादृच्छिक है", value: 4 }
+                ]
+            },
+            {
+                 question: "11. क्या आपको लगता है कि आपकी पहचान आपके शरीर और मन तक ही सीमित है?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, यह अधिक व्यापक है", value: 4 }
+                ]
+            },
+            {
+                question: "12. क्या आप मानते हैं कि सुख और दुख बाहरी परिस्थितियों पर निर्भर करते हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, आंतरिक स्थिति महत्वपूर्ण है", value: 4 }
+                ]
+            },
+            {
+                question: "13. क्या आप मानते हैं कि संसार में सब कुछ वैसा ही है जैसा वह दिखता है?",
+                options: [
+                    { text: "हाँ, जैसा दिखता है वैसा ही है", value: 1 },
+                    { text: "ज्यादातर वैसा ही है", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, इसमें गहराई है", value: 4 }
+                ]
+            },
+            {
+                question: "14. क्या आप मानते हैं कि कर्म का सिद्धांत अटल है?",
+                options: [
+                    { text: "हाँ, अटल है", value: 1 },
+                    { text: "ज्यादातर अटल है", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, इसमें बदलाव संभव है", value: 4 }
+                ]
+            },
+            {
+                question: "15. क्या आप मानते हैं कि हमारा भविष्य पूर्व निर्धारित है?",
+                options: [
+                    { text: "हाँ, पूर्व निर्धारित है", value: 1 },
+                    { text: "ज्यादातर पूर्व निर्धारित है", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, हम स्वतंत्र हैं", value: 4 }
+                ]
+            },
+            {
+                question: "16. क्या आप मानते हैं कि संसार में सब कुछ अलग है और एक दूसरे से स्वतंत्र है?",
+                options: [
+                    { text: "हाँ, सब अलग है", value: 1 },
+                    { text: "ज्यादातर अलग है", value: 2 },
+                    { text: "कुछ हद तक अलग है", value: 3 },
+                    { text: "नहीं, सब जुड़ा हुआ है", value: 4 }
+                ]
+            },
+            {
+                question: "17. क्या आप मानते हैं कि हमारी इच्छाएं हमेशा पूरी होनी चाहिए?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, त्याग भी ज़रूरी है", value: 4 }
+                ]
+            },
+            {
+                question: "18. क्या आप मानते हैं कि ज्ञान केवल तर्क और बुद्धि से प्राप्त होता है?",
+                options: [
+                    { text: "हाँ, केवल तर्क से", value: 1 },
+                    { text: "ज्यादातर तर्क से", value: 2 },
+                    { text: "तर्क और अंतर्ज्ञान", value: 3 },
+                    { text: "नहीं, अंतर्ज्ञान भी ज़रूरी है", value: 4 }
+                ]
+            },
+            {
+                question: "19. क्या आप मानते हैं कि संसार में सब कुछ एक निश्चित नियम के अनुसार चलता है?",
+                options: [
+                    { text: "हाँ, निश्चित नियम", value: 1 },
+                    { text: "ज्यादातर निश्चित नियम", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, परिवर्तनशील है", value: 4 }
+                ]
+            },
+            {
+                question: "20. क्या आप मानते हैं कि मृत्यु के बाद कुछ भी नहीं रहता?",
+                options: [
+                    { text: "हाँ, कुछ नहीं रहता", value: 1 },
+                    { text: "शायद कुछ नहीं रहता", value: 2 },
+                    { text: "अनिश्चित", value: 3 },
+                    { text: "नहीं, कुछ रहता है", value: 4 }
+                ]
+            },
+
+            // Section 2: व्यक्तिगत भ्रम (Personal Illusions) - 20 Questions
+            {
+                question: "21. क्या आप अपने नाम और रूप को अपनी असली पहचान मानते हैं?",
+                options: [
+                    { text: "हाँ, यही मैं हूँ", value: 1 },
+                    { text: "ज्यादातर यही हूँ", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, यह अस्थायी है", value: 4 }
+                ]
+            },
+            {
+                question: "22. क्या आप अपनी उपलब्धियों को अपनी योग्यता का प्रमाण मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, परिस्थितियाँ भी मायने रखती हैं", value: 4 }
+                ]
+            },
+            {
+                question: "23. क्या आप अपनी राय को हमेशा सही मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, गलत हो सकती है", value: 4 }
+                ]
+            },
+            {
+                question: "24. क्या आप अपनी भावनाओं को अपना नियंत्रण मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे बदलती रहती हैं", value: 4 }
+                ]
+            },
+            {
+                question: "25. क्या आप अपनी इच्छाओं को अपनी ज़रूरतें मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे अलग हैं", value: 4 }
+                ]
+            },
+            {
+                question: "26. क्या आप अपनी समस्याओं को अपनी नियति मानते हैं?",
+                options: [
+                    { text: "हाँ, नियति है", value: 1 },
+                    { text: "ज्यादातर नियति है", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, समाधान संभव है", value: 4 }
+                ]
+            },
+            {
+                question: "27. क्या आप अपनी सफलताओं को अपनी मेहनत का फल मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, भाग्य भी मायने रखता है", value: 4 }
+                ]
+            },
+            {
+                question: "28. क्या आप अपने ज्ञान को अंतिम सत्य मानते हैं?",
+                options: [
+                    { text: "हाँ, अंतिम सत्य", value: 1 },
+                    { text: "ज्यादातर अंतिम सत्य", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, यह बदल सकता है", value: 4 }
+                ]
+            },
+            {
+                question: "29. क्या आप अपनी चिंताओं को वास्तविक खतरे मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, अक्सर काल्पनिक होती हैं", value: 4 }
+                ]
+            },
+            {
+                question: "30. क्या आप अपने डर को अपनी सीमाएं मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, उन्हें पार किया जा सकता है", value: 4 }
+                ]
+            },
+            {
+                 question: "31. क्या आप मानते हैं कि आपका अतीत आपको परिभाषित करता है?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, मैं वर्तमान में जीता हूँ", value: 4 }
+                ]
+            },
+            {
+                question: "32. क्या आप मानते हैं कि आपकी भावनाएं आपको नियंत्रित करती हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, मैं उन्हें नियंत्रित कर सकता हूँ", value: 4 }
+                ]
+            },
+            {
+                question: "33. क्या आप मानते हैं कि आपकी राय हमेशा सही होती है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, यह गलत हो सकती है", value: 4 }
+                ]
+            },
+            {
+                question: "34. क्या आप मानते हैं कि आपकी इच्छाएं आपकी ज़रूरतें हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे अलग हैं", value: 4 }
+                ]
+            },
+            {
+                question: "35. क्या आप मानते हैं कि आपकी समस्याएं आपकी नियति हैं?",
+                options: [
+                    { text: "हाँ, नियति है", value: 1 },
+                    { text: "ज्यादातर नियति है", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, समाधान संभव है", value: 4 }
+                ]
+            },
+            {
+                question: "36. क्या आप मानते हैं कि आपकी सफलताएं केवल आपकी मेहनत का फल हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, भाग्य भी मायने रखता है", value: 4 }
+                ]
+            },
+            {
+                question: "37. क्या आप मानते हैं कि आपका ज्ञान अंतिम सत्य है?",
+                options: [
+                    { text: "हाँ, अंतिम सत्य", value: 1 },
+                    { text: "ज्यादातर अंतिम सत्य", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, यह बदल सकता है", value: 4 }
+                ]
+            },
+            {
+                question: "38. क्या आप मानते हैं कि आपकी चिंताएं हमेशा वास्तविक खतरे हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, अक्सर काल्पनिक होती हैं", value: 4 }
+                ]
+            },
+            {
+                question: "39. क्या आप मानते हैं कि आपके डर आपकी सीमाएं हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, उन्हें पार किया जा सकता है", value: 4 }
+                ]
+            },
+            {
+                question: "40. क्या आप मानते हैं कि आप अपने विचारों के स्वामी हैं?",
+                options: [
+                     { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, मैं अपने विचारों का गुलाम हूँ", value: 4 }
+                ]
+            },
+
+            // Section 3: द्वैत का भ्रम (Illusion of Duality) - 20 Questions
+            {
+                question: "41. क्या आप दुनिया को 'सही' और 'गलत' में विभाजित करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, यह जटिल है", value: 4 }
+                ]
+            },
+            {
+                question: "42. क्या आप अपने आप को दूसरों से अलग मानते हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, हम सब जुड़े हुए हैं", value: 4 }
+                ]
+            },
+            {
+                question: "43. क्या आप अच्छे और बुरे के स्पष्ट भेद पर विश्वास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे सापेक्ष हैं", value: 4 }
+                ]
+            },
+            {
+                question: "44. क्या आप मानते हैं कि आपके पास एक अलग 'आत्मा' है जो शरीर से स्वतंत्र है?",
+                options: [
+                    { text: "हाँ, यह अलग है", value: 1 },
+                    { text: "शायद अलग है", value: 2 },
+                    { text: "अनिश्चित", value: 3 },
+                    { text: "नहीं, यह अविभाज्य है", value: 4 }
+                ]
+            },
+            {
+                question: "45. क्या आप मानते हैं कि ईश्वर और मनुष्य पूरी तरह से अलग हैं?",
+                options: [
+                    { text: "हाँ, बिल्कुल अलग", value: 1 },
+                    { text: "ज्यादातर अलग", value: 2 },
+                    { text: "कुछ समानताएं हैं", value: 3 },
+                    { text: "नहीं, वे जुड़े हुए हैं", value: 4 }
+                ]
+            },
+            {
+                question: "46. क्या आप घटनाओं को 'जीत' या 'हार' के रूप में देखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे अनुभव हैं", value: 4 }
+                ]
+            },
+            {
+                question: "47. क्या आप मानते हैं कि आप भाग्य के निर्माता हैं या उसके शिकार?",
+                options: [
+                    { text: "पूरी तरह से निर्माता", value: 1 },
+                    { text: "ज्यादातर निर्माता", value: 2 },
+                    { text: "कुछ हद तक दोनों", value: 3 },
+                    { text: "पूरी तरह से शिकार", value: 4 } // Maya often leads to feeling of being a victim of circumstances
+                ]
+            },
+            {
+                question: "48. क्या आप मानते हैं कि सुख और दुख एक दूसरे से स्वतंत्र हैं?",
+                options: [
+                    { text: "हाँ, स्वतंत्र हैं", value: 1 },
+                    { text: "ज्यादातर स्वतंत्र हैं", value: 2 },
+                    { text: "कुछ हद तक जुड़े हैं", value: 3 },
+                    { text: "नहीं, वे एक ही सिक्के के दो पहलू हैं", value: 4 }
+                ]
+            },
+            {
+                question: "49. क्या आप मानते हैं कि आत्मा और शरीर दो अलग-अलग अस्तित्व हैं?",
+                options: [
+                    { text: "हाँ, बिल्कुल अलग", value: 1 },
+                    { text: "ज्यादातर अलग", value: 2 },
+                    { text: "कुछ हद तक जुड़े हैं", value: 3 },
+                    { text: "नहीं, वे अविभाज्य हैं", value: 4 }
+                ]
+            },
+            {
+                question: "50. क्या आप मानते हैं कि आप अपने आसपास की दुनिया से अलग हैं?",
+                options: [
+                    { text: "हाँ, मैं अलग हूँ", value: 1 },
+                    { text: "ज्यादातर अलग", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, मैं इसका हिस्सा हूँ", value: 4 }
+                ]
+            },
+            {
+                 question: "51. क्या आप मानते हैं कि 'मैं' और 'मेरा' वास्तविक हैं?",
+                options: [
+                    { text: "हाँ, वास्तविक हैं", value: 1 },
+                    { text: "ज्यादातर वास्तविक हैं", value: 2 },
+                    { text: "शायद", value: 3 },
+                    { text: "नहीं, वे भ्रम हैं", value: 4 }
+                ]
+            },
+            {
+                question: "52. क्या आप मानते हैं कि धन और संपत्ति आपको स्थायी खुशी दे सकते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे अस्थायी हैं", value: 4 }
+                ]
+            },
+            {
+                question: "53. क्या आप मानते हैं कि आपका सामाजिक दर्जा आपकी पहचान को परिभाषित करता है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, यह अस्थायी है", value: 4 }
+                ]
+            },
+            {
+                question: "54. क्या आप मानते हैं कि दूसरों की राय आपके मूल्य को निर्धारित करती है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, मेरा मूल्य मेरे भीतर है", value: 4 }
+                ]
+            },
+            {
+                question: "55. क्या आप मानते हैं कि बाहरी दुनिया आपके आंतरिक शांति को प्रभावित करती है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, आंतरिक शांति स्थिर रहती है", value: 4 }
+                ]
+            },
+            {
+                question: "56. क्या आप मानते हैं कि आप अपने पर्यावरण से अलग हैं?",
+                options: [
+                    { text: "हाँ, मैं अलग हूँ", value: 1 },
+                    { text: "ज्यादातर अलग", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, मैं इसका हिस्सा हूँ", value: 4 }
+                ]
+            },
+            {
+                question: "57. क्या आप मानते हैं कि ज्ञान और अज्ञान पूरी तरह से अलग हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, वे जुड़े हुए हैं", value: 4 }
+                ]
+            },
+            {
+                question: "58. क्या आप मानते हैं कि आपके विचार आपकी वास्तविकता बनाते हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 1 },
+                    { text: "ज्यादातर हाँ", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, वास्तविकता स्वतंत्र है", value: 4 }
+                ]
+            },
+            {
+                question: "59. क्या आप मानते हैं कि दुख और सुख बाहरी परिस्थितियों के कारण होते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 1 },
+                    { text: "ज्यादातर समय", value: 2 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "नहीं, वे आंतरिक स्थिति पर निर्भर करते हैं", value: 4 }
+                ]
+            },
+            {
+                question: "60. क्या आप मानते हैं कि आपके जीवन का उद्देश्य केवल भौतिक सफलता है?",
+                options: [
+                    { text: "हाँ, केवल भौतिक सफलता", value: 1 },
+                    { text: "ज्यादातर भौतिक सफलता", value: 2 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "नहीं, आध्यात्मिक विकास भी महत्वपूर्ण है", value: 4 }
+                ]
+            },
+
+            // Section 4: कर्म और परिणाम (Karma and Consequences) - 20 Questions
+            {
+                question: "61. क्या आप मानते हैं कि हर क्रिया का परिणाम होता है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, भाग्य पर निर्भर करता है", value: 1 }
+                ]
+            },
+            {
+                question: "62. क्या आप अपने कार्यों की जिम्मेदारी लेते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, दूसरों पर दोष डालता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "63. क्या आप मानते हैं कि आपके वर्तमान अनुभव आपके पिछले कर्मों का परिणाम हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 4 },
+                    { text: "ज्यादातर हाँ", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, केवल भाग्य", value: 1 }
+                ]
+            },
+            {
+                question: "64. क्या आप भविष्य के लिए अच्छे कर्म करने का प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "65. क्या आप मानते हैं कि आपकी सोच आपके जीवन को प्रभावित करती है?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 4 },
+                    { text: "ज्यादातर हाँ", value: 3 },
+                    { text: "कुछ हद तक", value: 2 },
+                    { text: "नहीं, यह अप्रभावी है", value: 1 }
+                ]
+            },
+            {
+                question: "66. क्या आप दूसरों के प्रति दयालु और सहानुभूतिपूर्ण रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अपने बारे में सोचता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "67. क्या आप मानते हैं कि आपके कर्मों से आपके जीवन की दिशा तय होती है?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 4 },
+                    { text: "ज्यादातर हाँ", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, भाग्य पर निर्भर करता है", value: 1 }
+                ]
+            },
+            {
+                question: "68. क्या आप नकारात्मक विचारों और भावनाओं को नियंत्रित करने का प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं उन्हें नियंत्रित नहीं कर सकता", value: 1 }
+                ]
+            },
+            {
+                question: "69. क्या आप मानते हैं कि सेवाभाव से कार्य करने से आपको शांति मिलती है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे इसमें रुचि नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "70. क्या आप मानते हैं कि आपके शब्द और विचार भी कर्म हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, केवल क्रियाएं कर्म हैं", value: 1 }
+                ]
+            },
+            {
+                 question: "71. क्या आप मानते हैं कि आपके चुनाव आपके जीवन को आकार देते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं असहाय हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "72. क्या आप नकारात्मकता से बचते हैं और सकारात्मकता का अभ्यास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं आसानी से नकारात्मक हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "73. क्या आप मानते हैं कि आपके प्रयासों से आपके भाग्य में बदलाव आ सकता है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, यह पूर्वनिर्धारित है", value: 1 }
+                ]
+            },
+            {
+                question: "74. क्या आप दूसरों की मदद करने में आनंद महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं स्वार्थी हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "75. क्या आप मानते हैं कि हर समस्या का समाधान संभव है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, कुछ समस्याएं असाध्य हैं", value: 1 }
+                ]
+            },
+            {
+                question: "76. क्या आप अपने कार्यों के दीर्घकालिक परिणामों पर विचार करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं तात्कालिक परिणामों पर ध्यान देता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "77. क्या आप मानते हैं कि सकारात्मक दृष्टिकोण से जीवन में सुधार आता है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, यह अप्रभावी है", value: 1 }
+                ]
+            },
+            {
+                question: "78. क्या आप दूसरों को माफ करने में सहज महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे माफ करना मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "79. क्या आप मानते हैं कि आपके विचार आपकी दुनिया को बनाते हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 4 },
+                    { text: "ज्यादातर हाँ", value: 3 },
+                    { text: "कुछ हद तक", value: 2 },
+                    { text: "नहीं, यह वास्तविकता है", value: 1 }
+                ]
+            },
+            {
+                question: "80. क्या आप मानते हैं कि आप अपने भाग्य के निर्माता हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं भाग्य का शिकार हूँ", value: 1 }
+                ]
+            },
+
+            // Section 5: आत्म-साक्षात्कार की दिशा (Towards Self-Realization) - 20 Questions
+            {
+                question: "81. क्या आप अक्सर अपने 'स्व' के बारे में सोचते हैं?",
+                options: [
+                    { text: "हाँ, गहराई से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "82. क्या आप मानते हैं कि भौतिक दुनिया से परे भी कुछ है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, केवल भौतिक दुनिया है", value: 1 }
+                ]
+            },
+            {
+                question: "83. क्या आप स्वयं को शरीर या मन से अधिक मानते हैं?",
+                options: [
+                    { text: "हाँ, मैं अधिक हूँ", value: 4 },
+                    { text: "शायद अधिक हूँ", value: 3 },
+                    { text: "अनिश्चित", value: 2 },
+                    { text: "नहीं, मैं केवल शरीर और मन हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "84. क्या आप ध्यान या आत्म-चिंतन का अभ्यास करते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "85. क्या आप संसार की नश्वरता को स्वीकार करते हैं?",
+                options: [
+                    { text: "हाँ, पूरी तरह से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मैं इसे स्थायी मानता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "86. क्या आप स्वयं को सभी जीवित प्राणियों से जुड़ा हुआ मानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अलग हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "87. क्या आप जीवन के गहरे अर्थ की तलाश करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "88. क्या आप मानते हैं कि सच्चा सुख भीतर से आता है, बाहरी वस्तुओं से नहीं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, बाहरी चीजें सुख देती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "89. क्या आप अपने मन को शांत और स्थिर रखने का प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरा मन अशांत रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "90. क्या आप मानते हैं कि सत्य एक है, भले ही उसके कई रूप हों?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, कई सत्य हैं", value: 1 }
+                ]
+            },
+            {
+                 question: "91. क्या आप अपने अस्तित्व के बारे में गहराई से सोचते हैं?",
+                options: [
+                    { text: "हाँ, अक्सर", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "92. क्या आप मानते हैं कि सच्ची स्वतंत्रता बाहरी बंधन से मुक्ति है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कुछ हद तक", value: 2 },
+                    { text: "नहीं, यह आंतरिक है", value: 1 }
+                ]
+            },
+            {
+                question: "93. क्या आप आत्म-जागरूकता बढ़ाने के लिए प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे इसमें रुचि नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "94. क्या आप मानते हैं कि आपका असली स्वरूप शाश्वत और अविनाशी है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, मैं नश्वर हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "95. क्या आप अपने अहंकार को नियंत्रित करने का प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरा अहंकार मुझ पर हावी है", value: 1 }
+                ]
+            },
+            {
+                question: "96. क्या आप मानते हैं कि जीवन का अंतिम लक्ष्य मोक्ष या मुक्ति है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, मुझे इसमें रुचि नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "97. क्या आप मानते हैं कि सभी भेद (जाति, धर्म, लिंग) कृत्रिम हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कुछ हद तक", value: 2 },
+                    { text: "नहीं, वे वास्तविक हैं", value: 1 }
+                ]
+            },
+            {
+                question: "98. क्या आप 'मैं' और 'मेरा' की भावना से मुक्त होने का प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे यह भावना पसंद है", value: 1 }
+                ]
+            },
+            {
+                question: "99. क्या आप मानते हैं कि आंतरिक ज्ञान बाहरी ज्ञान से अधिक महत्वपूर्ण है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कुछ हद तक", value: 2 },
+                    { text: "नहीं, बाहरी ज्ञान अधिक महत्वपूर्ण है", value: 1 }
+                ]
+            },
+            {
+                question: "100. क्या आप मानते हैं कि अज्ञानता ही दुख का मूल कारण है?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "शायद", value: 2 },
+                    { text: "नहीं, दुख के कई कारण हैं", value: 1 }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const userAnswers = {}; // Store answers {questionIndex: selectedValue}
+        const totalQuestions = questions.length;
+        const maxPossibleScore = totalQuestions * 4; // Each question has max 4 points
+
+        const quizDiv = document.getElementById('quiz');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizProgress = document.getElementById('quiz-progress');
+        const loader = document.getElementById('loader');
+        const resultContainer = document.getElementById('result-container');
+        const scoreDisplay = document.getElementById('score');
+        const scoreProgress = document.getElementById('score-progress');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const fab = document.getElementById('fab');
+
+        function loadQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                const q = questions[currentQuestionIndex];
+                let optionsHtml = '';
+                q.options.forEach((option, optionIndex) => {
+                    const isChecked = userAnswers[currentQuestionIndex] === option.value;
+                    optionsHtml += `
+                        <div class="option">
+                            <input type="radio" id="q${currentQuestionIndex}o${optionIndex}" name="q${currentQuestionIndex}" value="${option.value}" ${isChecked ? 'checked' : ''}>
+                            <label for="q${currentQuestionIndex}o${optionIndex}">
+                                <span class="custom-radio"></span>
+                                <span class="option-text">${option.text}</span>
+                            </label>
+                        </div>
+                    `;
+                });
+
+                quizDiv.innerHTML = `
+                    <div class="question-counter">प्रश्न ${currentQuestionIndex + 1} / ${totalQuestions}</div>
+                    <div class="question">${q.question}</div>
+                    <div class="options">${optionsHtml}</div>
+                `;
+
+                // Add event listeners for radio buttons
+                quizDiv.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', (event) => {
+                        userAnswers[currentQuestionIndex] = parseInt(event.target.value);
+                        updateNavigationButtons();
+                    });
+                });
+
+                updateNavigationButtons();
+                updateProgressBar();
+            } else {
+                showResult();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            quizProgress.style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'none' : 'flex';
+            submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'flex' : 'none';
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                // Ensure an option is selected before moving next
+                if (userAnswers[currentQuestionIndex] === undefined) {
+                    alert('कृपया अगले प्रश्न पर जाने से पहले एक विकल्प चुनें।');
+                    return;
+                }
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        function calculateScore() {
+            let totalScore = 0;
+            for (const key in userAnswers) {
+                totalScore += userAnswers[key];
+            }
+            // Normalize score to a percentage (higher percentage means less influence of Maya)
+            // Max score is totalQuestions * 4 (if all are 4 points, meaning least affected by Maya)
+            // Min score is totalQuestions * 1 (if all are 1 point, meaning most affected by Maya)
+            // Convert score to a 0-100 scale where 100 is excellent (least affected by Maya).
+
+            const minPossibleScore = totalQuestions * 1;
+            const scoreRange = maxPossibleScore - minPossibleScore; // 400 - 100 = 300
+            const adjustedScore = totalScore - minPossibleScore; // score between 0 and 300
+            const percentage = (adjustedScore / scoreRange) * 100; // normalized to 0-100
+            return Math.round(percentage);
+        }
+
+        function getResultMessage(percentage) {
+            let message = "";
+            let color = "";
+            // Adjust ranges for Maya: higher % means less influence of Maya.
+            if (percentage >= 80) { // High score = Less affected by Maya
+                message = "उत्कृष्ट! आप माया के भ्रमों से बहुत कम प्रभावित हैं। आपकी चेतना स्पष्ट और आत्म-ज्ञान की दिशा में है।";
+                color = "#4CAF50"; // Green for low illusion
+            } else if (percentage >= 60) {
+                message = "अच्छा! आप ज्यादातर स्थितियों में माया के प्रभावों को समझते हैं और उनसे अप्रभावित रहते हैं।";
+                color = "#8BC34A"; // Light Green
+            } else if (percentage >= 40) {
+                message = "तटस्थ। आप माया के कुछ भ्रमों से प्रभावित हैं, लेकिन उनमें से निकलने की संभावना है। आत्म-चिंतन का अभ्यास करें।";
+                color = "#FFC107"; // Amber
+            } else if (percentage >= 20) {
+                message = "चिंताजनक। आप माया के भ्रमों से काफी प्रभावित हैं। यह आपके जीवन की वास्तविकता को देखने के तरीके को प्रभावित कर सकता है।";
+                color = "#FF9800"; // Orange
+            } else { // Low score = Most affected by Maya
+                message = "बहुत चिंताजनक! आप माया के गहरे भ्रम में हैं। आपको आत्म-ज्ञान और वास्तविकता को समझने के लिए गंभीर प्रयास करने की आवश्यकता है।";
+                color = "#F44336"; // Red for high illusion
+            }
+            scoreProgress.style.backgroundColor = color;
+            return message;
+        }
+
+        function showResult() {
+            if (Object.keys(userAnswers).length !== totalQuestions) {
+                if (!confirm('आपने सभी प्रश्नों का उत्तर नहीं दिया है। क्या आप फिर भी परिणाम देखना चाहते हैं?')) {
+                    return;
+                }
+            }
+
+            quizDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+            fab.style.display = 'none'; // Hide FAB on result page
+
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+                const finalScore = calculateScore();
+                scoreDisplay.textContent = `${finalScore}%`;
+                scoreProgress.style.width = `${finalScore}%`; // Score goes from 0-100%. Red to Green gradient.
+                resultMessage.innerHTML = getResultMessage(finalScore);
+            }, 1500); // Simulate loading time
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            quizDiv.style.display = 'block';
+            resultContainer.style.display = 'none';
+            fab.style.display = 'flex'; // Show FAB on quiz start
+            loadQuestion();
+            updateProgressBar();
+        }
+
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', showResult);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // FAB functionality - allows jumping to the result even if not all questions are answered
+        fab.addEventListener('click', () => {
+            showResult();
+        });
+
+        // Initial load
+        loadQuestion();
+    </script>
+    <style>
+    .floating-home-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .home-button-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 70px;
+      width: 23px;
+      background-color: #28a745; /* Green background for Home */
+      color: white;
+      font-weight: bold;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .home-button-inner:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+  <a href="index.html" class="floating-home-button">
+    <div class="home-button-inner">
+      Home
+    </div>
+  </a>
+
+</body>
+</html>

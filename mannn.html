@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मन चेकर कैलकुलेटर (100 प्रश्न)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2196F3; /* Blue - for calm, intellect, peace */
+            --secondary-color: #1976D2; /* Darker Blue */
+            --accent-color: #00BCD4; /* Cyan for accent/clarity */
+            --light-bg: #E3F2FD; /* Very light blue background */
+            --dark-text: #333;
+            --light-text: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 2rem 0;
+            height: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .quiz-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .question-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #BBDEFB; /* Light Blue tint */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #90CAF9; /* Darker blue tint on hover */
+            border-color: var(--primary-color);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .custom-radio {
+            position: absolute;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 2px solid var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked ~ .custom-radio {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-radio::after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .option input:checked ~ .custom-radio::after {
+            display: block;
+        }
+
+        .option-text {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: var(--dark-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .score-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #F44336, #4CAF50); /* Red (unbalanced mind) to Green (balanced mind) gradient */
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .result-message {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            padding: 0 1rem;
+        }
+
+        .restart-btn {
+            margin-top: 2rem;
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #00838F; /* Darker cyan */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option-text {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .result-title {
+                font-size: 1.5rem;
+            }
+            
+            .score {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .options {
+                gap: 8px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+            
+            .custom-radio {
+                height: 18px;
+                width: 18px;
+            }
+            
+            .option-text {
+                font-size: 0.85rem;
+                margin-left: 8px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animation for options */
+        @keyframes optionAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .option {
+            animation: optionAppear 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .option:nth-child(1) { animation-delay: 0.1s; }
+        .option:nth-child(2) { animation-delay: 0.2s; }
+        .option:nth-child(3) { animation-delay: 0.3s; }
+        .option:nth-child(4) { animation-delay: 0.4s; }
+        .option:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Loading spinner */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-brain"></i> मन चेकर कैलकुलेटर</h1>
+            <p class="subtitle">100 प्रश्नों के साथ आपके मन की स्थिति का विस्तृत विश्लेषण</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+
+        <div id="quiz" class="quiz-container"></div>
+
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prev-btn" disabled>
+                <i class="fas fa-arrow-left"></i> पिछला
+            </button>
+            <button class="btn btn-primary" id="next-btn">
+                अगला <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                परिणाम देखें <i class="fas fa-chart-bar"></i>
+            </button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">आपके मन की स्थिति</h2>
+            <div class="score" id="score">0%</div>
+            
+            <div class="score-bar">
+                <div class="score-progress" id="score-progress"></div>
+            </div>
+            
+            <div class="score-labels">
+                <span>अशांत मन</span>
+                <span>कुछ अशांत</span>
+                <span>संतुलित</span>
+                <span>शांत मन</span>
+                <span>अत्यंत शांत</span>
+            </div>
+            
+            <div class="result-message" id="result-message"></div>
+            
+            <button class="btn restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> फिर से शुरू करें
+            </button>
+        </div>
+    </div>
+
+    <div class="fab" id="fab" title="प्रगति देखें">
+        <i class="fas fa-chart-pie"></i>
+    </div>
+
+    <script>
+        const questions = [
+            // Section 1: मानसिक शांति और स्थिरता (Mental Peace and Stability) - 20 Questions
+            {
+                question: "1. क्या आप अक्सर अपने मन को शांत और स्थिर महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, शायद ही कभी", value: 1 }
+                ]
+            },
+            {
+                question: "2. क्या आप छोटी-मोटी बातों पर आसानी से परेशान हो जाते हैं?",
+                options: [
+                    { text: "नहीं, मैं शांत रहता हूँ", value: 4 },
+                    { text: "कभी-कभी, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत आसानी से", value: 1 }
+                ]
+            },
+            {
+                question: "3. क्या आप रात में अच्छी तरह सो पाते हैं, बिना किसी चिंता के?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, सोने में परेशानी होती है", value: 1 }
+                ]
+            },
+            {
+                question: "4. क्या आप ध्यान या मेडिटेशन का अभ्यास करते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, कभी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "5. क्या आप तनावपूर्ण परिस्थितियों में भी शांत और केंद्रित रह पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी घबरा जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "6. क्या आप नकारात्मक विचारों को अपने मन से आसानी से निकाल पाते हैं?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, वे मुझ पर हावी हो जाते हैं", value: 1 }
+                ]
+            },
+            {
+                question: "7. क्या आप भविष्य की चिंताओं में बहुत अधिक उलझे रहते हैं?",
+                options: [
+                    { text: "नहीं, मैं वर्तमान में जीता हूँ", value: 4 },
+                    { text: "थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत ज्यादा", value: 1 }
+                ]
+            },
+            {
+                question: "8. क्या आप आसानी से माफ कर पाते हैं और बदले की भावना नहीं रखते?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे माफ करना मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "9. क्या आप खुद को भीतर से खुश और संतुष्ट महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर असंतुष्ट रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "10. क्या आप दूसरों की राय से आसानी से प्रभावित नहीं होते?",
+                options: [
+                    { text: "नहीं, मैं आत्मविश्वासी हूँ", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत ज्यादा", value: 1 }
+                ]
+            },
+            {
+                question: "11. क्या आप अपने मन में शांति बनाए रखने के लिए कुछ खास करते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "12. क्या आप नकारात्मक खबरों या घटनाओं से बहुत प्रभावित होते हैं?",
+                options: [
+                    { text: "नहीं, मैं खुद को अलग रखता हूँ", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत ज्यादा प्रभावित होता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "13. क्या आप दूसरों के प्रति ईर्ष्या या द्वेष की भावना रखते हैं?",
+                options: [
+                    { text: "नहीं, मैं सभी के लिए अच्छा चाहता हूँ", value: 4 },
+                    { text: "शायद ही कभी", value: 3 },
+                    { text: "हाँ, कभी-कभी", value: 2 },
+                    { text: "हाँ, अक्सर", value: 1 }
+                ]
+            },
+            {
+                question: "14. क्या आप छोटी-छोटी असफलताओं से आसानी से टूट जाते हैं?",
+                options: [
+                    { text: "नहीं, मैं उनसे सीखता हूँ", value: 4 },
+                    { text: "कभी-कभी, थोड़ा-बहुत", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत आसानी से", value: 1 }
+                ]
+            },
+            {
+                question: "15. क्या आप अपने मन को शांत रखने के लिए प्रकृति के साथ समय बिताते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "16. क्या आप अपने मन को नियंत्रित करने में सक्षम महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, बहुत हद तक", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मेरा मन मुझ पर हावी है", value: 1 }
+                ]
+            },
+            {
+                question: "17. क्या आप वर्तमान क्षण में पूरी तरह से मौजूद रह पाते हैं?",
+                options: [
+                    { text: "हाँ, ज्यादातर समय", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मेरा मन भटकता रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "18. क्या आप अपने भावनात्मक उतार-चढ़ाव को स्थिर रख पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर भावनात्मक रूप से अस्थिर रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "19. क्या आप अपनी भावनाओं को स्वस्थ तरीके से व्यक्त कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "20. क्या आप दूसरों की खुशी में सच्ची खुशी महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं ईर्ष्या महसूस करता हूँ", value: 1 }
+                ]
+            },
+
+            // Section 2: एकाग्रता और फोकस (Concentration and Focus) - 20 Questions
+            {
+                question: "21. क्या आप किसी एक काम पर लंबे समय तक ध्यान केंद्रित कर पाते हैं?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मेरा ध्यान भटकता रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "22. क्या आप पढ़ाई या काम करते समय आसानी से विचलित हो जाते हैं?",
+                options: [
+                    { text: "नहीं, मैं केंद्रित रहता हूँ", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, बहुत आसानी से", value: 1 }
+                ]
+            },
+            {
+                question: "23. क्या आप एक बार में कई काम करने की कोशिश करते हैं (मल्टीटास्किंग)?",
+                options: [
+                    { text: "नहीं, मैं एक समय में एक काम करता हूँ", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "24. क्या आप किसी भी चीज़ पर गहराई से विचार कर पाते हैं?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मेरा मन सतही रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "25. क्या आप अपने लक्ष्य पर ध्यान केंद्रित रख पाते हैं, भले ही बाधाएं आएं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं आसानी से हार मान लेता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "26. क्या आपको किसी काम को पूरा करने में बहुत समय लगता है क्योंकि आप भटक जाते हैं?",
+                options: [
+                    { text: "नहीं, मैं समय पर काम पूरा करता हूँ", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "हाँ, अक्सर", value: 2 },
+                    { text: "हाँ, हमेशा", value: 1 }
+                ]
+            },
+            {
+                question: "27. क्या आप किसी बातचीत या भाषण को पूरी एकाग्रता से सुन पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरा ध्यान भटकता रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "28. क्या आप अपने मन को शांत और केंद्रित रखने के लिए व्यायाम करते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "29. क्या आप अपने विचारों को व्यवस्थित रख पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरे विचार बिखरे रहते हैं", value: 1 }
+                ]
+            },
+            {
+                question: "30. क्या आप किसी भी विषय पर स्पष्ट रूप से सोच पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे स्पष्टता नहीं मिलती", value: 1 }
+                ]
+            },
+            {
+                question: "31. क्या आप अपने मन को अतीत की घटनाओं या भविष्य की चिंताओं में भटकने से रोक पाते हैं?",
+                options: [
+                    { text: "हाँ, ज्यादातर समय", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मेरा मन भटकता रहता है", value: 1 }
+                ]
+            },
+            {
+                question: "32. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके फोकस को बाधित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "33. क्या आप सीखने और नई जानकारी को आत्मसात करने में सक्षम हैं?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मुझे सीखने में परेशानी होती है", value: 1 }
+                ]
+            },
+            {
+                question: "34. क्या आप अपनी प्राथमिकताओं को निर्धारित कर पाते हैं और उन पर ध्यान केंद्रित कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे प्राथमिकताएं तय करने में परेशानी होती है", value: 1 }
+                ]
+            },
+            {
+                question: "35. क्या आप अपने मन को शांत और एकाग्र करने के लिए कोई विशेष तकनीक अपनाते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "36. क्या आप काम पर लंबे समय तक ध्यान केंद्रित कर पाते हैं बिना बोर हुए?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मैं जल्दी बोर हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "37. क्या आप अपनी कल्पना और रचनात्मकता को नियंत्रित कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी कल्पना भटक जाती है", value: 1 }
+                ]
+            },
+            {
+                question: "38. क्या आप अपने लक्ष्यों पर ध्यान केंद्रित कर पाते हैं, भले ही चुनौतियां आएं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं आसानी से हार मान लेता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "39. क्या आप किसी भी स्थिति में अपनी भावनाओं को नियंत्रित कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "40. क्या आप अपने विचारों को व्यवस्थित रख पाते हैं और स्पष्ट निर्णय ले पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे निर्णय लेने में परेशानी होती है", value: 1 }
+                ]
+            },
+
+            // Section 3: विचार प्रक्रिया और तर्क (Thought Process and Reasoning) - 20 Questions
+            {
+                question: "41. क्या आप समस्याओं का समाधान करने के लिए तार्किक रूप से सोच पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "42. क्या आप दूसरों की बातों को बिना किसी पूर्वाग्रह के सुन पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं पूर्वाग्रह रखता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "43. क्या आप नए विचारों और अवधारणाओं को स्वीकार करने के लिए खुले रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं रूढ़िवादी हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "44. क्या आप जटिल समस्याओं को सरल भागों में तोड़कर समझ पाते हैं?",
+                options: [
+                    { text: "हाँ, आसानी से", value: 4 },
+                    { text: "कुछ हद तक", value: 3 },
+                    { text: "मुश्किल से", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "45. क्या आप अपने फैसलों के परिणामों पर विचार करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी निर्णय लेता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "46. क्या आप अपनी गलतियों से सीखने के लिए तैयार रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे अपनी गलती स्वीकार करना मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "47. क्या आप दूसरों की राय का सम्मान करते हैं, भले ही आप असहमत हों?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "48. क्या आप अपने विचारों को स्पष्ट और प्रभावी ढंग से व्यक्त कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "49. क्या आप तथ्यों और भावनाओं के बीच अंतर कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "50. क्या आप दूसरों की समस्याओं को समझने में सक्षम हैं और सहानुभूति रखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे दूसरों की परवाह नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "51. क्या आप विभिन्न दृष्टिकोणों से समस्याओं को देख पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं एक ही दृष्टिकोण रखता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "52. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके निर्णयों को प्रभावित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "53. क्या आप किसी भी स्थिति में शांत और तार्किक रह पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी घबरा जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "54. क्या आप दूसरों की गलतियों को माफ कर पाते हैं और उन्हें आगे बढ़ने में मदद करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे माफ करना मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "55. क्या आप अपने मन को शांत और केंद्रित रखने के लिए नियमित रूप से अभ्यास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "56. क्या आप नए विचारों और दृष्टिकोणों को सीखने के लिए उत्सुक रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे इसमें दिलचस्पी नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "57. क्या आप समस्याओं का समाधान करने के लिए रचनात्मक तरीके खोजते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं रूढ़िवादी हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "58. क्या आप अपने विचारों को दूसरों के साथ साझा करने में सहज महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "59. क्या आप दूसरों की राय को सम्मान देते हैं, भले ही वे आपकी राय से अलग हों?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "60. क्या आप अपने मन को शांत और केंद्रित रखने के लिए प्रकृति के साथ समय बिताते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+
+            // Section 4: भावनात्मक नियंत्रण और बुद्धिमत्ता (Emotional Control and Intelligence) - 20 Questions
+            {
+                question: "61. क्या आप अपनी भावनाओं को पहचानते और समझते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "62. क्या आप अपनी भावनाओं को स्वस्थ तरीके से व्यक्त कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "63. क्या आप दूसरों की भावनाओं को समझते हैं और उनके प्रति सहानुभूति रखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "64. क्या आप तनाव या गुस्से में होने पर भी शांत रह पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी गुस्सा हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "65. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके फैसलों को प्रभावित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "66. क्या आप दूसरों के साथ मजबूत और स्वस्थ संबंध बना पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "67. क्या आप अपनी भावनाओं को नियंत्रित करने के लिए कोई विशेष तकनीक अपनाते हैं?",
+                options: [
+                    { text: "हाँ, नियमित रूप से", value: 4 },
+                    { text: "कभी-कभी", value: 3 },
+                    { text: "शायद ही कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "68. क्या आप दूसरों की आलोचना को सकारात्मक रूप से लेते हैं और उनसे सीखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे आलोचना पसंद नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "69. क्या आप दूसरों के साथ सहयोग करने में सहज महसूस करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "70. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके जीवन को प्रभावित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "71. क्या आप अपनी भावनाओं को संतुलित रख पाते हैं, भले ही बाहरी परिस्थितियां कठिन हों?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी परेशान हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "72. क्या आप दूसरों की भावनाओं को समझते हैं और उनके प्रति संवेदनशीलता रखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे दूसरों की परवाह नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "73. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके रिश्तों को खराब न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं रिश्तों को खराब कर देती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "74. क्या आप दूसरों के साथ सहानुभूति रखते हैं और उनकी मदद करने के लिए तैयार रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे दूसरों की परवाह नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "75. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको उदास न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर उदास रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "76. क्या आप दूसरों के साथ मजबूत और स्वस्थ संबंध बनाए रख पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "77. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको गुस्सा न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी गुस्सा हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "78. क्या आप दूसरों की भावनाओं को समझते हैं और उनके प्रति सम्मान रखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे दूसरों की परवाह नहीं", value: 1 }
+                ]
+            },
+            {
+                question: "79. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको तनाव न दें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर तनाव में रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "80. क्या आप दूसरों के साथ सकारात्मक और उत्पादक बातचीत कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+
+            // Section 5: आत्म-जागरूकता और आत्म-नियंत्रण (Self-Awareness and Self-Control) - 20 Questions
+            {
+                question: "81. क्या आप अपनी शक्तियों और कमजोरियों को जानते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "82. क्या आप अपनी भावनाओं को पहचानते और नियंत्रित करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "83. क्या आप अपनी प्रतिक्रियाओं को नियंत्रित कर पाते हैं, खासकर जब आप तनाव में हों?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी प्रतिक्रियाएं बेकाबू होती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "84. क्या आप अपनी सीमाओं को जानते हैं और उन्हें स्वीकार करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "85. क्या आप अपनी आदतों और व्यवहारों को नियंत्रित कर पाते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "86. क्या आप अपनी गलतियों को स्वीकार करते हैं और उनसे सीखते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे अपनी गलती स्वीकार करना मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "87. क्या आप अपनी भावनाओं को नियंत्रित करने के लिए सचेत प्रयास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं ऐसा नहीं करता", value: 1 }
+                ]
+            },
+            {
+                question: "88. क्या आप अपने मन को शांत और केंद्रित रखने के लिए आत्म-अनुशासन का अभ्यास करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे आत्म-अनुशासन मुश्किल लगता है", value: 1 }
+                ]
+            },
+            {
+                question: "89. क्या आप अपनी कमजोरियों पर काम करने के लिए तैयार रहते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "90. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके व्यवहार को प्रभावित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं मुझ पर हावी हो जाती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "91. क्या आप अपनी आंतरिक शांति बनाए रखने के लिए बाहरी विकर्षणों को कम करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "92. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको तनाव न दें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर तनाव में रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "93. क्या आप अपनी गलतियों को स्वीकार करते हैं और उन्हें सुधारने के लिए काम करते हैं?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मुझे मुश्किल होती है", value: 1 }
+                ]
+            },
+            {
+                question: "94. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको उदास न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर उदास रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "95. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको गुस्सा न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं जल्दी गुस्सा हो जाता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "96. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपके रिश्तों को खराब न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मेरी भावनाएं रिश्तों को खराब कर देती हैं", value: 1 }
+                ]
+            },
+            {
+                question: "97. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको ईर्ष्या न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर ईर्ष्या महसूस करता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "98. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको हताश न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर हताश रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "99. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको निराशा न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर निराश रहता हूँ", value: 1 }
+                ]
+            },
+            {
+                question: "100. क्या आप अपनी भावनाओं को नियंत्रित कर पाते हैं ताकि वे आपको क्रोधित न करें?",
+                options: [
+                    { text: "हाँ, हमेशा", value: 4 },
+                    { text: "ज्यादातर समय", value: 3 },
+                    { text: "कभी-कभी", value: 2 },
+                    { text: "नहीं, मैं अक्सर क्रोधित रहता हूँ", value: 1 }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const userAnswers = {}; // Store answers {questionIndex: selectedValue}
+        const totalQuestions = questions.length;
+        const maxPossibleScore = totalQuestions * 4; // Each question has max 4 points
+
+        const quizDiv = document.getElementById('quiz');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizProgress = document.getElementById('quiz-progress');
+        const loader = document.getElementById('loader');
+        const resultContainer = document.getElementById('result-container');
+        const scoreDisplay = document.getElementById('score');
+        const scoreProgress = document.getElementById('score-progress');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const fab = document.getElementById('fab');
+
+        function loadQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                const q = questions[currentQuestionIndex];
+                let optionsHtml = '';
+                q.options.forEach((option, optionIndex) => {
+                    const isChecked = userAnswers[currentQuestionIndex] === option.value;
+                    optionsHtml += `
+                        <div class="option">
+                            <input type="radio" id="q${currentQuestionIndex}o${optionIndex}" name="q${currentQuestionIndex}" value="${option.value}" ${isChecked ? 'checked' : ''}>
+                            <label for="q${currentQuestionIndex}o${optionIndex}">
+                                <span class="custom-radio"></span>
+                                <span class="option-text">${option.text}</span>
+                            </label>
+                        </div>
+                    `;
+                });
+
+                quizDiv.innerHTML = `
+                    <div class="question-counter">प्रश्न ${currentQuestionIndex + 1} / ${totalQuestions}</div>
+                    <div class="question">${q.question}</div>
+                    <div class="options">${optionsHtml}</div>
+                `;
+
+                // Add event listeners for radio buttons
+                quizDiv.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', (event) => {
+                        userAnswers[currentQuestionIndex] = parseInt(event.target.value);
+                        updateNavigationButtons();
+                    });
+                });
+
+                updateNavigationButtons();
+                updateProgressBar();
+            } else {
+                showResult();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            quizProgress.style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'none' : 'flex';
+            submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'flex' : 'none';
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                // Ensure an option is selected before moving next
+                if (userAnswers[currentQuestionIndex] === undefined) {
+                    alert('कृपया अगले प्रश्न पर जाने से पहले एक विकल्प चुनें।');
+                    return;
+                }
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        function calculateScore() {
+            let totalScore = 0;
+            for (const key in userAnswers) {
+                totalScore += userAnswers[key];
+            }
+            // Normalize score to a percentage (higher percentage means healthier mind)
+            // Max score is totalQuestions * 4 (if all are 4 points)
+            // Min score is totalQuestions * 1 (if all are 1 point)
+            // Convert score to a 0-100 scale where 100 is excellent (healthy mind).
+
+            const minPossibleScore = totalQuestions * 1;
+            const scoreRange = maxPossibleScore - minPossibleScore; // 400 - 100 = 300
+            const adjustedScore = totalScore - minPossibleScore; // score between 0 and 300
+            const percentage = (adjustedScore / scoreRange) * 100; // normalized to 0-100
+            return Math.round(percentage);
+        }
+
+        function getResultMessage(percentage) {
+            let message = "";
+            let color = "";
+            // Adjust ranges for Man: higher % means healthier mind, lower % means more disturbed mind
+            if (percentage >= 80) { // High score = Very Healthy Mind
+                message = "उत्कृष्ट! आपका मन बहुत शांत, संतुलित और स्वस्थ है। आप मानसिक रूप से मजबूत और स्थिर व्यक्ति हैं।";
+                color = "#4CAF50"; // Green for healthy mind
+            } else if (percentage >= 60) {
+                message = "अच्छा! आपका मन ज्यादातर स्थितियों में शांत और केंद्रित रहता है, लेकिन कुछ क्षेत्रों में और सुधार की गुंजाइश है।";
+                color = "#8BC34A"; // Light Green
+            } else if (percentage >= 40) {
+                message = "संतुलित। आपको अपने मन पर काम करने की आवश्यकता है। मानसिक शांति और एकाग्रता बढ़ाने के लिए कदम उठाएं।";
+                color = "#FFC107"; // Amber
+            } else if (percentage >= 20) {
+                message = "चिंताजनक। आपके मन में अशांति और असंतुलन का स्तर काफी उच्च है। यह आपके जीवन की गुणवत्ता को प्रभावित कर सकता है।";
+                color = "#FF9800"; // Orange
+            } else { // Low score = Very Unhealthy Mind
+                message = "बहुत चिंताजनक! आपका मन बहुत अशांत और असंतुलित है। आपको तुरंत आत्म-निरीक्षण और पेशेवर मदद पर विचार करना चाहिए।";
+                color = "#F44336"; // Red for disturbed mind
+            }
+            scoreProgress.style.backgroundColor = color;
+            return message;
+        }
+
+        function showResult() {
+            if (Object.keys(userAnswers).length !== totalQuestions) {
+                if (!confirm('आपने सभी प्रश्नों का उत्तर नहीं दिया है। क्या आप फिर भी परिणाम देखना चाहते हैं?')) {
+                    return;
+                }
+            }
+
+            quizDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+            fab.style.display = 'none'; // Hide FAB on result page
+
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+                const finalScore = calculateScore();
+                scoreDisplay.textContent = `${finalScore}%`;
+                scoreProgress.style.width = `${finalScore}%`; // Score goes from 0-100%. Red to Green gradient.
+                resultMessage.innerHTML = getResultMessage(finalScore);
+            }, 1500); // Simulate loading time
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            quizDiv.style.display = 'block';
+            resultContainer.style.display = 'none';
+            fab.style.display = 'flex'; // Show FAB on quiz start
+            loadQuestion();
+            updateProgressBar();
+        }
+
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', showResult);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // FAB functionality - allows jumping to the result even if not all questions are answered
+        fab.addEventListener('click', () => {
+            showResult();
+        });
+
+        // Initial load
+        loadQuestion();
+    </script>
+     <style>
+    .floating-home-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .home-button-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 70px;
+      width: 23px;
+      background-color: #28a745; /* Green background for Home */
+      color: white;
+      font-weight: bold;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .home-button-inner:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+  <a href="index.html" class="floating-home-button">
+    <div class="home-button-inner">
+      Home
+    </div>
+  </a>
+</body>
+</html>

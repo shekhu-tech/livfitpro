@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कामवासना चेकर कैलकुलेटर (100+ प्रश्न)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #9c27b0;
+            --secondary-color: #7b1fa2;
+            --accent-color: #e91e63;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #f0e5f5;
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 2rem 0;
+            height: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .quiz-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .question-counter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #f0e5f5;
+            border-color: var(--primary-color);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .custom-radio {
+            position: absolute;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 2px solid var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        .option input:checked ~ .custom-radio {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-radio::after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .option input:checked ~ .custom-radio::after {
+            display: block;
+        }
+
+        .option-text {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: var(--dark-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .score-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .result-message {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+            padding: 0 1rem;
+        }
+
+        .restart-btn {
+            margin-top: 2rem;
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #d81b60;
+        }
+
+        .category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option-text {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .result-title {
+                font-size: 1.5rem;
+            }
+            
+            .score {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quiz-container, .result-container {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .options {
+                gap: 8px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+            
+            .custom-radio {
+                height: 18px;
+                width: 18px;
+            }
+            
+            .option-text {
+                font-size: 0.85rem;
+                margin-left: 8px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animation for options */
+        @keyframes optionAppear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .option {
+            animation: optionAppear 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .option:nth-child(1) { animation-delay: 0.1s; }
+        .option:nth-child(2) { animation-delay: 0.2s; }
+        .option:nth-child(3) { animation-delay: 0.3s; }
+        .option:nth-child(4) { animation-delay: 0.4s; }
+        .option:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Loading spinner */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> कामवासना चेकर कैलकुलेटर</h1>
+            <p class="subtitle">100+ प्रश्नों के साथ आपके कामुकता स्तर का विस्तृत विश्लेषण</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+
+        <div id="quiz">
+            </div>
+
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prev-btn" disabled>
+                <i class="fas fa-arrow-left"></i> पिछला
+            </button>
+            <button class="btn btn-primary" id="next-btn">
+                अगला <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                परिणाम देखें <i class="fas fa-chart-bar"></i>
+            </button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">आपका कामवासना स्कोर</h2>
+            <div class="score" id="score">0%</div>
+            
+            <div class="score-bar">
+                <div class="score-progress" id="score-progress"></div>
+            </div>
+            
+            <div class="score-labels">
+                <span>बहुत कम</span>
+                <span>सामान्य</span>
+                <span>उच्च</span>
+                <span>बहुत उच्च</span>
+            </div>
+            
+            <div class="result-message" id="result-message">
+                </div>
+            
+            <button class="btn restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> फिर से शुरू करें
+            </button>
+        </div>
+    </div>
+
+    <div class="fab" id="fab" title="प्रगति देखें">
+        <i class="fas fa-chart-pie"></i>
+    </div>
+
+    <script>
+        // All questions with categories
+        const questions = [
+            // Category 1: General Thoughts
+            {
+                category: "सामान्य विचार और आदतें",
+                questions: [
+                    {
+                        text: "1. आप कितनी बार कामुक विचारों में खो जाते हैं?",
+                        options: [
+                            { text: "कभी-कभी (महीने में 1-2 बार)", value: 5 },
+                            { text: "साप्ताहिक (हफ्ते में 1-2 बार)", value: 15 },
+                            { text: "दैनिक (रोज़ाना)", value: 30 },
+                            { text: "लगातार (दिन में कई बार)", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "2. कामुक सामग्री देखने की आपकी आदत कैसी है?",
+                        options: [
+                            { text: "कभी नहीं देखता/देखती", value: 0 },
+                            { text: "कभी-कभी (महीने में 1-2 बार)", value: 10 },
+                            { text: "नियमित (हफ्ते में कई बार)", value: 25 },
+                            { text: "दैनिक (रोज़ाना)", value: 40 },
+                            { text: "लगातार (दिन में कई बार)", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "3. कामुक सपने आपको कितनी बार आते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "साल में 1-2 बार", value: 5 },
+                            { text: "महीने में 1-2 बार", value: 15 },
+                            { text: "हफ्ते में 1-2 बार", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "4. आप कितनी बार कामुक किताबें/कहानियाँ पढ़ते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "कभी-कभी", value: 10 },
+                            { text: "नियमित रूप से", value: 25 },
+                            { text: "बहुत अधिक", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "5. कामुक चुटकुले सुनने/सुनाने में आपकी रुचि कैसी है?",
+                        options: [
+                            { text: "बिल्कुल रुचि नहीं", value: 0 },
+                            { text: "कभी-कभी सुन लेता/लेती हूँ", value: 5 },
+                            { text: "मजे लेकर सुनता/सुनती हूँ", value: 15 },
+                            { text: "अक्सर सुनता/सुनती और सुनाता/सुनाती हूँ", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "6. कामुक विषयों पर बात करने में आपकी रुचि कैसी है?",
+                        options: [
+                            { text: "बिल्कुल रुचि नहीं", value: 0 },
+                            { text: "केवल करीबी दोस्तों के साथ", value: 10 },
+                            { text: "जब भी मौका मिले", value: 25 },
+                            { text: "हर संभव अवसर पर", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "7. आप कितनी बार कामुक गाने सुनते हैं या देखते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "कभी-कभी", value: 5 },
+                            { text: "अक्सर", value: 15 },
+                            { text: "बहुत अधिक", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "8. कामुक विज्ञापनों या मॉडल्स को देखकर आपकी प्रतिक्रिया कैसी होती है?",
+                        options: [
+                            { text: "कोई विशेष प्रतिक्रिया नहीं", value: 0 },
+                            { text: "थोड़ा आकर्षण महसूस होता है", value: 10 },
+                            { text: "ध्यान खींच लेते हैं", value: 20 },
+                            { text: "मन विचलित हो जाता है", value: 35 }
+                        ]
+                    },
+                    {
+                        text: "9. आप कितनी बार कामुक वेबसाइट्स या ऐप्स पर जाते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "कभी-कभी (महीने में 1-2 बार)", value: 15 },
+                            { text: "नियमित (हफ्ते में कई बार)", value: 30 },
+                            { text: "दैनिक (रोज़ाना)", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "10. कामुक विषयों पर शोध या पढ़ाई में आपकी रुचि कैसी है?",
+                        options: [
+                            { text: "बिल्कुल रुचि नहीं", value: 0 },
+                            { text: "सामान्य ज्ञान के लिए", value: 5 },
+                            { text: "विशेष रुचि के साथ", value: 15 },
+                            { text: "नियमित रूप से अध्ययन करता/करती हूँ", value: 30 }
+                        ]
+                    }
+                ]
+            },
+            // Category 2: Daily Life Impact
+            {
+                category: "दैनिक जीवन पर प्रभाव",
+                questions: [
+                    {
+                        text: "11. कामवासना आपके दैनिक जीवन को कितना प्रभावित करती है?",
+                        options: [
+                            { text: "बिल्कुल प्रभावित नहीं करती", value: 0 },
+                            { text: "थोड़ा प्रभावित करती है", value: 15 },
+                            { text: "मध्यम रूप से प्रभावित करती है", value: 30 },
+                            { text: "बहुत ज्यादा प्रभावित करती है", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "12. कामुक विचारों के कारण आप कितनी बार अपने काम से विचलित होते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "बहुत अधिक", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "13. कामुक विचारों के कारण आप कितनी बार नींद से समझौता करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "रोज़ाना", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "14. कामवासना के कारण आप कितनी बार महत्वपूर्ण कार्यों को टाल देते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "15. कामुक विचार आपके मूड को कितना प्रभावित करते हैं?",
+                        options: [
+                            { text: "बिल्कुल प्रभावित नहीं करते", value: 0 },
+                            { text: "थोड़ा प्रभावित करते हैं", value: 10 },
+                            { text: "मध्यम रूप से प्रभावित करते हैं", value: 25 },
+                            { text: "बहुत ज्यादा प्रभावित करते हैं", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "16. कामुक विचारों के कारण आप कितनी बार सामाजिक समारोहों से दूर रहते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "17. कामवासना के कारण आप कितनी बार व्यायाम या स्वास्थ्यकर गतिविधियों को नजरअंदाज करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "18. कामुक विचार आपके खान-पान की आदतों को कितना प्रभावित करते हैं?",
+                        options: [
+                            { text: "बिल्कुल प्रभावित नहीं करते", value: 0 },
+                            { text: "थोड़ा प्रभावित करते हैं", value: 10 },
+                            { text: "मध्यम रूप से प्रभावित करते हैं", value: 25 },
+                            { text: "बहुत ज्यादा प्रभावित करते हैं", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "19. कामवासना के कारण आप कितनी बार ध्यान या प्रार्थना से विचलित होते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "20. कामुक विचार आपके पारिवारिक जीवन को कितना प्रभावित करते हैं?",
+                        options: [
+                            { text: "बिल्कुल प्रभावित नहीं करते", value: 0 },
+                            { text: "थोड़ा प्रभावित करते हैं", value: 10 },
+                            { text: "मध्यम रूप से प्रभावित करते हैं", value: 25 },
+                            { text: "बहुत ज्यादा प्रभावित करते हैं", value: 45 }
+                        ]
+                    }
+                ]
+            },
+            // Category 3: Self-Control
+            {
+                category: "आत्म-नियंत्रण",
+                questions: [
+                    {
+                        text: "21. कामुक इच्छाओं को नियंत्रित करने में आपकी सफलता दर क्या है?",
+                        options: [
+                            { text: "हमेशा नियंत्रण में रहता/रहती हूँ", value: 0 },
+                            { text: "ज्यादातर समय नियंत्रण में", value: 10 },
+                            { text: "कभी-कभी नियंत्रण खो देता/देती हूँ", value: 25 },
+                            { text: "नियंत्रण करने में असमर्थ", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "22. जब आप कामुक इच्छाओं को नियंत्रित करने की कोशिश करते हैं तो कितना सफल होते हैं?",
+                        options: [
+                            { text: "हमेशा सफल", value: 0 },
+                            { text: "ज्यादातर सफल", value: 15 },
+                            { text: "कभी-कभी सफल", value: 30 },
+                            { text: "शायद ही कभी सफल", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "23. कामुक सामग्री देखने की इच्छा को रोक पाने में आप कितने सफल हैं?",
+                        options: [
+                            { text: "हमेशा सफल", value: 0 },
+                            { text: "ज्यादातर सफल", value: 10 },
+                            { text: "कभी-कभी सफल", value: 25 },
+                            { text: "शायद ही कभी सफल", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "24. कामुक विचारों को मन से निकालने में आप कितने सक्षम हैं?",
+                        options: [
+                            { text: "बहुत आसानी से", value: 0 },
+                            { text: "कुछ प्रयास के बाद", value: 10 },
+                            { text: "काफी मुश्किल से", value: 25 },
+                            { text: "लगभग असंभव", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "25. कामुक इच्छाओं को टालने की आपकी क्षमता कैसी है?",
+                        options: [
+                            { text: "बहुत अच्छी", value: 0 },
+                            { text: "सामान्य", value: 10 },
+                            { text: "कमजोर", value: 25 },
+                            { text: "बहुत कमजोर", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "26. कामुक आवेगों का विरोध करने में आप कितने सक्षम हैं?",
+                        options: [
+                            { text: "पूरी तरह सक्षम", value: 0 },
+                            { text: "ज्यादातर सक्षम", value: 10 },
+                            { text: "कभी-कभी सक्षम", value: 25 },
+                            { text: "लगभग अक्षम", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "27. कामुक इच्छाओं के समय ध्यान भटकाने की आपकी रणनीति कितनी कारगर है?",
+                        options: [
+                            { text: "बहुत कारगर", value: 0 },
+                            { text: "कुछ हद तक कारगर", value: 10 },
+                            { text: "थोड़ी कारगर", value: 25 },
+                            { text: "बिल्कुल कारगर नहीं", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "28. कामुक आदतों को बदलने के आपके प्रयासों का क्या परिणाम रहा है?",
+                        options: [
+                            { text: "पूरी तरह सफल", value: 0 },
+                            { text: "कुछ सफलता मिली", value: 10 },
+                            { text: "थोड़ी सफलता मिली", value: 25 },
+                            { text: "कोई सफलता नहीं मिली", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "29. कामुक विचारों से बचने के लिए आप कितने सचेत प्रयास करते हैं?",
+                        options: [
+                            { text: "निरंतर प्रयासरत", value: 0 },
+                            { text: "ज्यादातर प्रयासरत", value: 10 },
+                            { text: "कभी-कभी प्रयास करता/करती हूँ", value: 25 },
+                            { text: "शायद ही कभी प्रयास करता/करती हूँ", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "30. कामुक इच्छाओं को नियंत्रित करने के लिए आप कितनी बार दूसरों से सहायता लेते हैं?",
+                        options: [
+                            { text: "हमेशा सहायता लेता/लेती हूँ", value: 0 },
+                            { text: "ज्यादातर समय", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "शायद ही कभी", value: 45 },
+                            { text: "कभी नहीं", value: 60 }
+                        ]
+                    }
+                ]
+            },
+            // Category 4: Emotional Impact
+            {
+                category: "भावनात्मक प्रभाव",
+                questions: [
+                    {
+                        text: "31. कामवासना के कारण आपको कभी शर्मिंदगी या पछतावा हुआ है?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "32. कामुक गतिविधियों के बाद आप कैसा महसूस करते हैं?",
+                        options: [
+                            { text: "पूरी तरह संतुष्ट और खुश", value: 0 },
+                            { text: "सामान्य", value: 10 },
+                            { text: "थोड़ा असहज", value: 25 },
+                            { text: "बहुत शर्मिंदा या दुखी", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "33. कामुक विचार आपके आत्म-सम्मान को कितना प्रभावित करते हैं?",
+                        options: [
+                            { text: "बिल्कुल प्रभावित नहीं करते", value: 0 },
+                            { text: "थोड़ा प्रभावित करते हैं", value: 10 },
+                            { text: "मध्यम रूप से प्रभावित करते हैं", value: 25 },
+                            { text: "बहुत ज्यादा प्रभावित करते हैं", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "34. कामवासना के कारण आप कितनी बार चिंता या तनाव महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "35. कामुक आदतों के कारण आप कितनी बार अपने बारे में नकारात्मक सोचते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "36. कामुक विचारों से ध्यान हटाने में आपको कितनी कठिनाई होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "37. कामुक इच्छाओं के कारण आप कितनी बार मूड स्विंग्स का अनुभव करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "38. कामवासना के कारण आप कितनी बार अकेलापन महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "39. कामुक विचारों के कारण आप कितनी बार अपराधबोध या दुख महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "40. कामवासना के कारण आपके रिश्तों पर क्या प्रभाव पड़ा है?",
+                        options: [
+                            { text: "कोई नकारात्मक प्रभाव नहीं", value: 0 },
+                            { text: "थोड़ा नकारात्मक प्रभाव", value: 15 },
+                            { text: "मध्यम नकारात्मक प्रभाव", value: 30 },
+                            { text: "बहुत नकारात्मक प्रभाव", value: 50 }
+                        ]
+                    }
+                ]
+            },
+            // Category 5: Social & Relational Aspects
+            {
+                category: "सामाजिक और संबंधपरक पहलू",
+                questions: [
+                    {
+                        text: "41. आप कितनी बार विपरीत लिंग के लोगों से कामुक रूप से आकर्षित होते हैं?",
+                        options: [
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "लगभग हमेशा", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "42. कामुक आकर्षण आपके सामाजिक व्यवहार को कितना प्रभावित करता है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "43. आप कितनी बार कामुक इच्छाओं के कारण अजनबियों के साथ बातचीत करने से हिचकिचाते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "44. कामुक विचार आपके सार्वजनिक प्रदर्शन को कितना प्रभावित करते हैं?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "45. आप कितनी बार कामुक इच्छाओं के कारण रिश्तों में समस्या महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "46. कामुक विचारों के कारण आप कितनी बार किसी के प्रति गलत व्यवहार करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "47. कामवासना के कारण आप कितनी बार सामाजिक मेल-जोल से दूर भागते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "48. कामुक आकर्षण आपके निर्णय लेने की क्षमता को कितना प्रभावित करता है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "49. आप कितनी बार कामुक विचारों के कारण अपने दोस्तों या परिवार से दूरी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "50. कामवासना के कारण आप कितनी बार अपने भविष्य के लक्ष्यों से भटक जाते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "बहुत अधिक", value: 60 }
+                        ]
+                    }
+                ]
+            },
+            // Category 6: Physical Sensations and Drives
+            {
+                category: "शारीरिक संवेदनाएं और इच्छाएं",
+                questions: [
+                    {
+                        text: "51. आप कितनी बार कामुक उत्तेजना महसूस करते हैं?",
+                        options: [
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी (महीने में 1-2 बार)", value: 15 },
+                            { text: "नियमित (हफ्ते में 1-2 बार)", value: 30 },
+                            { text: "अक्सर (रोज़ाना)", value: 50 },
+                            { text: "बहुत अधिक (दिन में कई बार)", value: 70 }
+                        ]
+                    },
+                    {
+                        text: "52. कामुक इच्छाओं के कारण आप कितनी बार शारीरिक बेचैनी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "53. आप कितनी बार यौन गतिविधियों में संलग्न होने की तीव्र इच्छा महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "कभी-कभी", value: 10 },
+                            { text: "नियमित रूप से", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "बहुत अधिक", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "54. कामुक इच्छाएं आपके शारीरिक ऊर्जा स्तर को कितना प्रभावित करती हैं?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा कम", value: 10 },
+                            { text: "मध्यम रूप से कम", value: 25 },
+                            { text: "बहुत कम", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "55. कामवासना के कारण आप कितनी बार शारीरिक तनाव या खिंचाव महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "हमेशा", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "56. आप कितनी बार यौन इच्छाओं के कारण बेचैनी महसूस करते हैं, जिसे आप शांत नहीं कर पाते?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "57. कामुक विचारों से ध्यान भटकाने में शारीरिक रूप से आपको कितनी कठिनाई होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "58. कामवासना के कारण आपको कितनी बार पसीना या धड़कन तेज होने जैसी शारीरिक प्रतिक्रियाएं होती हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "59. कामुक इच्छाओं के कारण आपकी भूख या प्यास कितनी प्रभावित होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 5 },
+                            { text: "मध्यम", value: 15 },
+                            { text: "बहुत", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "60. आप कितनी बार कामुक उत्तेजना के कारण अन्य शारीरिक गतिविधियों से विचलित होते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 }
+                        ]
+                    }
+                ]
+            },
+            // Category 7: Impact on Productivity and Focus
+            {
+                category: "उत्पादकता और एकाग्रता पर प्रभाव",
+                questions: [
+                    {
+                        text: "61. कामुक विचारों के कारण आपकी पढ़ाई या काम पर ध्यान केंद्रित करने की क्षमता कितनी प्रभावित होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 15 },
+                            { text: "मध्यम", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "62. आप कितनी बार कामुक विचारों के कारण अपने लक्ष्यों को पूरा करने में असमर्थ महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "63. कामवासना के कारण आप कितनी बार अपनी उत्पादकता में कमी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "64. कामुक विचारों के कारण आप कितनी बार रचनात्मकता में कमी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "65. कामवासना के कारण आप कितनी बार निर्णय लेने में कठिनाई महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "66. कामुक विचारों के कारण आप कितनी बार प्रेरणा में कमी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "67. कामुक इच्छाओं के कारण आप कितनी बार अपनी याददाश्त में कमजोरी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "68. कामवासना के कारण आप कितनी बार समय बर्बाद करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "बहुत अधिक", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "69. कामुक विचारों के कारण आपकी सीखने की क्षमता कितनी प्रभावित होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "70. कामवासना के कारण आप कितनी बार महत्वपूर्ण अवसरों को गंवा देते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    }
+                ]
+            },
+            // Category 8: Long-term Impact and Lifestyle
+            {
+                category: "दीर्घकालिक प्रभाव और जीवन शैली",
+                questions: [
+                    {
+                        text: "71. कामुक इच्छाएं आपके दीर्घकालिक स्वास्थ्य को कितना प्रभावित करती हैं?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा", value: 15 },
+                            { text: "मध्यम", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "72. आप कितनी बार कामुक आदतों के कारण अपने जीवन में असंतुलन महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "73. कामवासना के कारण आपके वित्तीय स्थिति पर क्या प्रभाव पड़ा है?",
+                        options: [
+                            { text: "कोई नकारात्मक प्रभाव नहीं", value: 0 },
+                            { text: "थोड़ा नकारात्मक प्रभाव", value: 10 },
+                            { text: "मध्यम नकारात्मक प्रभाव", value: 25 },
+                            { text: "बहुत नकारात्मक प्रभाव", value: 45 }
+                        ]
+                    },
+                    {
+                        text: "74. कामुक विचारों के कारण आप कितनी बार अपनी आध्यात्मिक प्रगति में बाधा महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "हमेशा", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "75. कामवासना के कारण आप कितनी बार अपने भविष्य के लिए चिंतित महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "बहुत अधिक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "76. आप कितनी बार कामुक इच्छाओं के कारण अपनी नैतिकता या मूल्यों से समझौता करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "77. कामवासना के कारण आप कितनी बार अपनी व्यक्तिगत स्वच्छता या दिखावट को नजरअंदाज करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "78. कामुक विचारों के कारण आप कितनी बार एकांत पसंद करने लगते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "79. कामवासना के कारण आप कितनी बार अपने शौक या रुचियों को छोड़ देते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "80. कामुक इच्छाएं आपके जीवन में खुशी और संतुष्टि को कितना प्रभावित करती हैं?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा कम", value: 15 },
+                            { text: "मध्यम रूप से कम", value: 30 },
+                            { text: "बहुत कम", value: 50 }
+                        ]
+                    }
+                ]
+            },
+            // Category 9: Seeking Help and Awareness
+            {
+                category: "सहायता और जागरूकता की तलाश",
+                questions: [
+                    {
+                        text: "81. कामवासना के बारे में आपको कितनी जानकारी है?",
+                        options: [
+                            { text: "बहुत कम", value: 0 },
+                            { text: "सामान्य", value: 10 },
+                            { text: "अच्छी", value: 20 },
+                            { text: "उत्कृष्ट", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "82. आप कितनी बार कामुक इच्छाओं के बारे में सलाह या मार्गदर्शन चाहते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "हमेशा", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "83. कामुक इच्छाओं को नियंत्रित करने के लिए आपने कितनी बार पेशेवर सहायता ली है?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "एक बार", value: 10 },
+                            { text: "कुछ बार", value: 25 },
+                            { text: "नियमित रूप से", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "84. आप कितनी बार कामुक इच्छाओं के बारे में दूसरों से बात करने में सहज महसूस करते हैं?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "85. कामवासना के बारे में जागरूकता बढ़ाने में आपकी कितनी रुचि है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "86. आप कितनी बार कामुक इच्छाओं को कम करने के लिए आत्म-सहायता तकनीकों का उपयोग करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 },
+                            { text: "रोज़ाना", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "87. कामवासना के बारे में गलतफहमी को दूर करने में आपकी कितनी रुचि है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 10 },
+                            { text: "मध्यम", value: 25 },
+                            { text: "बहुत", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "88. कामुक इच्छाओं के लिए समर्थन समूहों में शामिल होने के बारे में आपकी क्या राय है?",
+                        options: [
+                            { text: "कोई रुचि नहीं", value: 0 },
+                            { text: "शायद विचार करूँ", value: 5 },
+                            { text: "इच्छुक हूँ", value: 15 },
+                            { text: "शामिल होना चाहता/चाहती हूँ", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "89. कामवासना के बारे में विश्वसनीय जानकारी खोजने में आप कितनी बार समय बिताते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "90. कामुक इच्छाओं को नियंत्रित करने के लिए आप कितनी बार अपने डॉक्टर या थेरेपिस्ट से चर्चा करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "एक बार", value: 10 },
+                            { text: "कुछ बार", value: 25 },
+                            { text: "नियमित रूप से", value: 40 }
+                        ]
+                    }
+                ]
+            },
+            // Category 10: Overall Well-being and Future Outlook
+            {
+                category: "समग्र कल्याण और भविष्य का दृष्टिकोण",
+                questions: [
+                    {
+                        text: "91. कामवासना आपके समग्र मानसिक स्वास्थ्य को कितना प्रभावित करती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ा नकारात्मक", value: 15 },
+                            { text: "मध्यम नकारात्मक", value: 30 },
+                            { text: "बहुत नकारात्मक", value: 50 }
+                        ]
+                    },
+                    {
+                        text: "92. आप कितनी बार कामुक इच्छाओं के कारण अपने भविष्य के बारे में निराशावादी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "93. कामवासना के कारण आप कितनी बार खुशी या संतोष की कमी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "94. कामुक विचारों के कारण आप कितनी बार अपनी पूरी क्षमता को महसूस नहीं कर पाते?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "95. कामवासना के कारण आप कितनी बार अपने जीवन में उद्देश्य की कमी महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 5 },
+                            { text: "कभी-कभी", value: 15 },
+                            { text: "अक्सर", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "96. आप कितनी बार कामुक आदतों को छोड़ने के लिए दृढ़ संकल्पित महसूस करते हैं?",
+                        options: [
+                            { text: "बहुत दृढ़", value: 0 },
+                            { text: "कुछ हद तक दृढ़", value: 10 },
+                            { text: "कम दृढ़", value: 25 },
+                            { text: "बिल्कुल दृढ़ नहीं", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "97. कामवासना के कारण आपकी नींद की गुणवत्ता कितनी प्रभावित होती है?",
+                        options: [
+                            { text: "बिल्कुल नहीं", value: 0 },
+                            { text: "थोड़ी", value: 5 },
+                            { text: "मध्यम", value: 15 },
+                            { text: "बहुत", value: 30 }
+                        ]
+                    },
+                    {
+                        text: "98. कामुक विचारों के कारण आप कितनी बार अपनी ऊर्जा का क्षय महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 }
+                        ]
+                    },
+                    {
+                        text: "99. कामवासना के कारण आप कितनी बार अपने जीवन में तनाव या चिंता महसूस करते हैं?",
+                        options: [
+                            { text: "कभी नहीं", value: 0 },
+                            { text: "शायद ही कभी", value: 10 },
+                            { text: "कभी-कभी", value: 25 },
+                            { text: "अक्सर", value: 40 },
+                            { text: "हमेशा", value: 60 }
+                        ]
+                    },
+                    {
+                        text: "100. कामुक इच्छाओं को नियंत्रित करने से आपके जीवन की गुणवत्ता कितनी बेहतर होगी?",
+                        options: [
+                            { text: "बहुत बेहतर", value: 0 },
+                            { text: "बेहतर", value: -20 },
+                            { text: "कुछ बेहतर", value: -40 },
+                            { text: "कोई फर्क नहीं", value: -60 } // Negative values indicate less impact
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const userAnswers = {};
+        let totalQuestions = 0;
+
+        // Calculate total questions dynamically
+        questions.forEach(category => {
+            totalQuestions += category.questions.length;
+        });
+
+        const quizDiv = document.getElementById('quiz');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizProgress = document.getElementById('quiz-progress');
+        const resultContainer = document.getElementById('result-container');
+        const scoreDisplay = document.getElementById('score');
+        const scoreProgress = document.getElementById('score-progress');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const loader = document.getElementById('loader');
+        const fab = document.getElementById('fab');
+
+        function loadQuestion() {
+            quizDiv.innerHTML = ''; // Clear previous question
+            resultContainer.style.display = 'none'; // Hide result container
+
+            if (currentQuestionIndex >= totalQuestions) {
+                showResult();
+                return;
+            }
+
+            const flatQuestions = questions.flatMap(cat => cat.questions);
+            const questionData = flatQuestions[currentQuestionIndex];
+
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.classList.add('category-title');
+            const currentCategory = questions.find(cat => cat.questions.includes(questionData)).category;
+            categoryTitle.textContent = currentCategory;
+            quizDiv.appendChild(categoryTitle);
+
+            const questionCounter = document.createElement('div');
+            questionCounter.classList.add('question-counter');
+            questionCounter.textContent = `प्रश्न ${currentQuestionIndex + 1} / ${totalQuestions}`;
+            quizDiv.appendChild(questionCounter);
+
+            const questionText = document.createElement('div');
+            questionText.classList.add('question');
+            questionText.textContent = questionData.text;
+            quizDiv.appendChild(questionText);
+
+            const optionsDiv = document.createElement('div');
+            optionsDiv.classList.add('options');
+
+            questionData.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('option');
+
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `question-${currentQuestionIndex}`;
+                input.id = `q${currentQuestionIndex}-option${index}`;
+                input.value = option.value;
+                input.addEventListener('change', (e) => {
+                    userAnswers[currentQuestionIndex] = parseInt(e.target.value);
+                    updateNavigationButtons();
+                });
+
+                const label = document.createElement('label');
+                label.htmlFor = `q${currentQuestionIndex}-option${index}`;
+
+                const customRadio = document.createElement('span');
+                customRadio.classList.add('custom-radio');
+
+                const optionText = document.createElement('span');
+                optionText.classList.add('option-text');
+                optionText.textContent = option.text;
+
+                label.appendChild(customRadio);
+                label.appendChild(optionText);
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                optionsDiv.appendChild(optionDiv);
+
+                // Pre-select if already answered
+                if (userAnswers[currentQuestionIndex] === option.value) {
+                    input.checked = true;
+                }
+            });
+
+            quizDiv.appendChild(optionsDiv);
+            updateProgressBar();
+            updateNavigationButtons();
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            quizProgress.style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.style.display = currentQuestionIndex < totalQuestions - 1 ? 'flex' : 'none';
+            submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'flex' : 'none';
+
+            // Check if current question has an answer to enable next button
+            const hasAnswer = userAnswers.hasOwnProperty(currentQuestionIndex);
+            if (currentQuestionIndex < totalQuestions - 1) {
+                nextBtn.disabled = !hasAnswer;
+            } else {
+                submitBtn.disabled = !hasAnswer;
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function calculateScore() {
+            let totalScore = 0;
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers.hasOwnProperty(i)) {
+                    totalScore += userAnswers[i];
+                }
+            }
+
+            // Normalize score to a percentage (0-100)
+            // Max possible score: sum of max values for each question
+            let maxPossibleScore = 0;
+            questions.flatMap(cat => cat.questions).forEach(q => {
+                const maxOptionValue = Math.max(...q.options.map(o => o.value));
+                maxPossibleScore += maxOptionValue;
+            });
+
+            const percentageScore = (totalScore / maxPossibleScore) * 100;
+            return Math.min(100, Math.max(0, Math.round(percentageScore))); // Ensure score is between 0 and 100
+        }
+
+        function getResultMessage(score) {
+            if (score >= 0 && score <= 25) {
+                return "आपका कामवासना स्तर <b>बहुत कम</b> है। ऐसा लगता है कि आप अपनी कामुक इच्छाओं को बहुत अच्छी तरह से नियंत्रित करते हैं और ये आपके जीवन पर बहुत कम प्रभाव डालती हैं। यह एक स्वस्थ और संतुलित दृष्टिकोण को दर्शाता है।";
+            } else if (score > 25 && score <= 50) {
+                return "आपका कामवासना स्तर <b>सामान्य</b> है। आपके कामुक विचार और इच्छाएं आपके दैनिक जीवन को सामान्य रूप से प्रभावित करती हैं। आप इनका प्रबंधन करने में सक्षम हैं और यह एक औसत स्तर है।";
+            } else if (score > 50 && score <= 75) {
+                return "आपका कामवासना स्तर <b>उच्च</b> है। आपके कामुक विचार और इच्छाएं आपके दैनिक जीवन को महत्वपूर्ण रूप से प्रभावित कर सकती हैं। आपको आत्म-नियंत्रण पर अधिक ध्यान देने की आवश्यकता हो सकती है।";
+            } else {
+                return "आपका कामवासना स्तर <b>बहुत उच्च</b> है। ऐसा प्रतीत होता है कि कामुक इच्छाएं आपके जीवन पर अत्यधिक हावी हैं, जिससे आपकी एकाग्रता, रिश्ते और समग्र कल्याण प्रभावित हो सकते हैं। इस पर ध्यान देना और यदि आवश्यक हो तो सहायता लेना आपके लिए फायदेमंद हो सकता है।";
+            }
+        }
+
+        function showResult() {
+            quizDiv.style.display = 'none';
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+
+                const finalScore = calculateScore();
+                scoreDisplay.textContent = `${finalScore}%`;
+                scoreProgress.style.width = `${finalScore}%`;
+                resultMessage.innerHTML = getResultMessage(finalScore);
+            }, 1500); // Simulate loading time
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            for (const key in userAnswers) {
+                delete userAnswers[key];
+            }
+            quizDiv.style.display = 'block';
+            resultContainer.style.display = 'none';
+            loadQuestion();
+        }
+
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', showResult);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // FAB functionality - allows jumping to the result even if not all questions are answered
+        fab.addEventListener('click', () => {
+            if (currentQuestionIndex < totalQuestions) {
+                // Confirm if user wants to see results without completing all questions
+                if (confirm('क्या आप सभी प्रश्न पूरे किए बिना परिणाम देखना चाहते हैं?')) {
+                    showResult();
+                }
+            } else {
+                // If already at the end, just show results (or restart if desired)
+                showResult();
+            }
+        });
+
+        // Initial load
+        loadQuestion();
+    </script>
+     <style>
+    .floating-home-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .home-button-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 70px;
+      width: 23px;
+      background-color: #28a745; /* Green background for Home */
+      color: white;
+      font-weight: bold;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .home-button-inner:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+  <a href="index.html" class="floating-home-button">
+    <div class="home-button-inner">
+      Home
+    </div>
+  </a>
+</body>
+</html>
