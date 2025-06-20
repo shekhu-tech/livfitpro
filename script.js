@@ -40,9 +40,6 @@ function injectHeader() {
         <div class="nav-item">
           <a href="donate.html" class="donate-btn">Donate</a>
         </div>
-         <div class="nav-item">
-          <a href="user.html" class="donate-btn">User</a>
-        </div>
       </nav>
       <div class="menu-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
