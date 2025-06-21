@@ -228,11 +228,6 @@
   border-left: 2px solid var(--isme-orange);
   text-decoration: none; /* Ensure no underline on hover */
 }
-    /* Main Content */
-    main {
-      padding-top: 80px;
-    }
-
     /* Slider Styles with ISME Colors */
     .image-slider {
       width: 100%;
