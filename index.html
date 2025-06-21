@@ -76,110 +76,427 @@
       </div>
     </div>
 
-    <!-- Products Section -->
-    <section class="products-section" id="programs">
-      <h2 class="section-title">Start Your Fitness Journey</h2>
-      <div class="cards-container">
-        <div class="card">
-          <a href="zym.html" class="card-link">
-            <div class="card-background" style="background-image: url('rn.png');"></div>
-            <div class="card-category">Strength</div>
-            <div class="card-content">
-              <h3>Gym Workout Plans</h3>
-              <p>Build muscle and strength with our professional gym workout programs</p>
-            </div>
-          </a>
-        </div>
+ <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
 
-        <div class="card">
-          <a href="calesthenic.html" class="card-link">
-            <div class="card-background" style="background-image: url('cs.png');"></div>
-            <div class="card-category">Bodyweight</div>
-            <div class="card-content">
-              <h3>Calisthenics Training</h3>
-              <p>Master your bodyweight with progressive calisthenics exercises</p>
-            </div>
-          </a>
-        </div>
+        .modal-content {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            padding: 30px 20px 40px;
+            width: 100%;
+            max-width: 950px;
+            border-radius: 20px;
+            overflow-y: auto;
+            max-height: 90vh;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+            color: white; /* Ensure text is visible */
+        }
 
-        <div class="card">
-          <a href="cardio.html" class="card-link">
-            <div class="card-background" style="background-image: url('cr.png');"></div>
-            <div class="card-category">Endurance</div>
-            <div class="card-content">
-              <h3>Cardio Workouts</h3>
-              <p>Boost your endurance and burn fat with effective cardio routines</p>
-            </div>
-          </a>
-        </div>
+        .close-btn {
+            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.2s;
+        }
 
-        <div class="card">
-          <a href="yoga.html" class="card-link">
-            <div class="card-background" style="background-image: url('y.png');"></div>
-            <div class="card-category">Flexibility</div>
-            <div class="card-content">
-              <h3>Yoga Sessions</h3>
-              <p>Improve flexibility, balance and mental clarity with our yoga programs</p>
-            </div>
-          </a>
-        </div>
+        .close-btn:hover {
+            color: #ff4b2b;
+        }
 
-        <div class="card">
-          <a href="meditation.html" class="card-link">
-            <div class="card-background" style="background-image: url('m.png');"></div>
-            <div class="card-category">Mindfulness</div>
-            <div class="card-content">
-              <h3>Meditation Techniques</h3>
-              <p>Reduce stress and improve focus with guided meditation sessions</p>
-            </div>
-          </a>
-        </div>
-        
-        <div class="card">
-          <a href="morningdrink.html" class="card-link">
-            <div class="card-background" style="background-image: url('d.png');"></div>
-            <div class="card-category">Nutrition</div>
-            <div class="card-content">
-              <h3>Detox Drinks</h3>
-              <p>Start your day right with healthy morning detox drink recipes</p>
-            </div>
-          </a>
-        </div>
-        
-        <div class="card">
-          <a href="diet.html" class="card-link">
-            <div class="card-background" style="background-image: url('dte.png');"></div>
-            <div class="card-category">Nutrition</div>
-            <div class="card-content">
-              <h3>Diet Plans</h3>
-              <p>Customized diet plans for weight loss, gain or maintenance</p>
-            </div>
-          </a>
-        </div>
-        
-        <div class="card">
-          <a href="weight.html" class="card-link">
-            <div class="card-background" style="background-image: url('WT.png');"></div>
-            <div class="card-category">Transformation</div>
-            <div class="card-content">
-              <h3>Weight Management</h3>
-              <p>Comprehensive guides for healthy weight loss or gain</p>
-            </div>
-          </a>
-        </div>
+        .modal-content h2 {
+            text-align: center; /* Center the modal heading */
+            font-size: 32px;
+            color: #00e6e6;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
 
-        <div class="card">
-          <a href="sevenchor.html" class="card-link">
-            <div class="card-background" style="background-image: url('sns.png');"></div>
-            <div class="card-category">CheckYourself</div>
-            <div class="card-content">
-              <h3>Check Seven Senses </h3>
-              <p>You Can Check Which Sense Do You have More </p>
+        /* Day Cards Grid (for 30-day challenges) */
+        .day-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+            padding: 0 10px;
+        }
+
+        .day-cards a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            padding: 22px;
+            border-radius: 14px;
+            background: rgba(0, 255, 255, 0.07);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .day-cards a:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.12);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scrollbar Styling */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.4);
+            border-radius: 5px;
+        }
+
+        /* Styles for the inner cards shown in the modal */
+        .modal-inner-cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Display 4 cards horizontally on PC */
+            gap: 2rem;
+            padding: 20px;
+        }
+
+        .modal-inner-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            height: 200px; /* Adjusted height for inner cards */
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align content to the bottom */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal-inner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px #00e6e6;
+        }
+
+        .modal-inner-card .card-background {
+            opacity: 0.8;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .modal-inner-card .card-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.8rem;
+            position: relative;
+            z-index: 2;
+            text-align: center; /* Center the text horizontally */
+        }
+
+        .modal-inner-card .card-content h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin: 0; /* Remove default margin */
+            text-shadow: none; /* Remove text shadow for inner cards for cleaner look */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .modal-inner-cards-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on larger tablets/laptops */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .products-section {
+                padding: 2rem 1rem;
+            }
+            
+            /* For tablets, show 2 cards in a row for inner modal cards */
+            .modal-inner-cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .day-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .modal-content h2 {
+                font-size: 24px;
+            }
+
+            /* For mobile, show 1 card in a row for inner modal cards */
+            .modal-inner-cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <main>
+        <section class="products-section" id="programs">
+            <h2 class="section-title">Start Your Fitness Journey</h2>
+            <div class="cards-container">
+                <div class="card" data-program-type="gym">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('rn.png');"></div>
+                        <div class="card-category">Strength</div>
+                        <div class="card-content">
+                            <h3>Gym Workout Plans</h3>
+                            <p>Build muscle and strength with our professional gym workout programs</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card" data-program-type="calisthenics">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('cs.png');"></div>
+                        <div class="card-category">Bodyweight</div>
+                        <div class="card-content">
+                            <h3>Calisthenics Training</h3>
+                            <p>Master your bodyweight with progressive calisthenics exercises</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card" data-program-type="cardio">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('cr.png');"></div>
+                        <div class="card-category">Endurance</div>
+                        <div class="card-content">
+                            <h3>Cardio Workouts</h3>
+                            <p>Boost your endurance and burn fat with effective cardio routines</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card" data-program-type="yoga">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('y.png');"></div>
+                        <div class="card-category">Flexibility</div>
+                        <div class="card-content">
+                            <h3>Yoga Sessions</h3>
+                            <p>Improve flexibility, balance and mental clarity with our yoga programs</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card" data-program-type="meditation">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('m.png');"></div>
+                        <div class="card-category">Mindfulness</div>
+                        <div class="card-content">
+                            <h3>Meditation Techniques</h3>
+                            <p>Reduce stress and improve focus with guided meditation sessions</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="card" data-program-type="detox">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('d.png');"></div>
+                        <div class="card-category">Nutrition</div>
+                        <div class="card-content">
+                            <h3>Detox Drinks</h3>
+                            <p>Start your day right with healthy morning detox drink recipes</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="card" data-program-type="diet">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('dte.png');"></div>
+                        <div class="card-category">Nutrition</div>
+                        <div class="card-content">
+                            <h3>Diet Plans</h3>
+                            <p>Customized diet plans for weight loss, gain or maintenance</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="card" data-program-type="weight">
+                    <a href="#" class="card-link">
+                        <div class="card-background" style="background-image: url('WT.png');"></div>
+                        <div class="card-category">Transformation</div>
+                        <div class="card-content">
+                            <h3>Weight Management</h3>
+                            <p>Comprehensive guides for healthy weight loss or gain</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-          </a>
+        </section>
+    </main>
+
+    <div class="modal" id="popupModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalContentArea">
+                </div>
         </div>
-      </div>
-    </section>
+    </div>
+
+    <script>
+        const mainCards = document.querySelectorAll('.products-section .card');
+        const popupModal = document.getElementById('popupModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContentArea = document.getElementById('modalContentArea');
+
+        // Function to open modal with specific content
+        function openModal(title, contentHTML) {
+            modalTitle.textContent = title;
+            modalContentArea.innerHTML = contentHTML;
+            popupModal.style.display = 'flex';
+        }
+
+        // Function to generate the inner "program" cards (e.g., Beginner, Intermediate)
+        function generateProgramCards(programType, programTitle, imageUrl) {
+            let cardsHTML = `
+                <div class="modal-inner-cards-container">
+                    <div class="card modal-inner-card" data-program-level="Beginner" data-href="${programType}beginner.html">
+                        <div class="card-background" style="background-image: url('${imageUrl}');"></div>
+                        <div class="card-content">
+                            <h3>Beginner Program</h3>
+                        </div>
+                    </div>
+                    <div class="card modal-inner-card" data-program-level="Intermediate" data-href="${programType}intermidiate.html">
+                        <div class="card-background" style="background-image: url('${imageUrl}');"></div>
+                        <div class="card-content">
+                            <h3>Intermediate Program</h3>
+                        </div>
+                    </div>
+                    <div class="card modal-inner-card" data-program-level="Advanced" data-href="${programType}advance.html">
+                        <div class="card-background" style="background-image: url('${imageUrl}');"></div>
+                        <div class="card-content">
+                            <h3>Advanced Program</h3>
+                        </div>
+                    </div>
+                    <div class="card modal-inner-card" data-program-level="Pro" data-href="${programType}pro.html">
+                        <div class="card-background" style="background-image: url('${imageUrl}');"></div>
+                        <div class="card-content">
+                            <h3>Pro Program</h3>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return cardsHTML;
+        }
+
+        // Function to generate day cards
+        function generateDayCards(programName, hrefPrefix) {
+            let dayCardsHTML = `<div class="day-cards">`;
+            for (let i = 1; i <= 30; i++) {
+                dayCardsHTML += `<a href="${hrefPrefix}">${programName} Day ${i}</a>`;
+            }
+            dayCardsHTML += `</div>`;
+            return dayCardsHTML;
+        }
+
+        // Add event listeners to specific main cards for popup functionality
+        mainCards.forEach(card => {
+            card.addEventListener('click', function(event) {
+                const programType = this.dataset.programType;
+                let modalContent = '';
+                let title = '';
+                let imageUrl = ''; 
+
+                // Only apply popup logic to Gym, Calisthenics, Cardio, and Meditation
+                if (['gym', 'calisthenics', 'cardio', 'meditation'].includes(programType)) {
+                    event.preventDefault(); // Prevent default link behavior for these cards
+
+                    switch (programType) {
+                        case 'gym':
+                            title = 'Gym Workout Plans';
+                            imageUrl = 'rn.png';
+                            modalContent = generateProgramCards('zym', title, imageUrl);
+                            break;
+                        case 'calisthenics':
+                            title = 'Calisthenics Training';
+                            imageUrl = 'cs.png';
+                            modalContent = generateProgramCards('calesthenic', title, imageUrl);
+                            break;
+                        case 'cardio':
+                            title = 'Cardio Workouts';
+                            imageUrl = 'cr.png';
+                            modalContent = generateProgramCards('cardio', title, imageUrl);
+                            break;
+                    }
+                    openModal(title, modalContent);
+
+                    // Add event listeners to the newly injected inner cards
+                    // This needs to be done *after* the content is in the DOM
+                    document.querySelectorAll('.modal-inner-card').forEach(innerCard => {
+                        innerCard.addEventListener('click', function() {
+                            const programLevel = this.dataset.programLevel;
+                            const href = this.dataset.href;
+                            modalTitle.textContent = `🔥 30-Day ${programLevel} Challenge`;
+                            modalContentArea.innerHTML = generateDayCards(programLevel, href);
+                        });
+                    });
+                }
+                // For 'yoga', 'detox', 'diet', 'weight' cards, the default link behavior will apply
+                // as no 'event.preventDefault()' is called for them.
+            });
+        });
+
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            popupModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === popupModal) {
+                popupModal.style.display = 'none';
+            }
+        });
+    </script>
+
 
     <!-- Features Section -->
     <section class="products-section" style="background: var(--isme-light-gray);">
@@ -212,312 +529,560 @@
     </section>
   </main>
 
-    <style> 
-   .section-title1 {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    color: #222;
-    letter-spacing: 1px;
-   }
+   <style>
+       /* Section Title Styles - Modernized */
+        .section-title1 {
+            text-align: center;
+            font-size: 2.5rem; /* Larger, more impactful */
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 3rem; /* More spacing */
+            color: #00e6e6; /* Fallback color */
+            letter-spacing: 2px; /* Increased letter spacing */
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(0, 255, 255, 0.3); /* Glowing effect */
+            background: linear-gradient(to right, #00e6e6, #a100ff); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2; /* Bring title to front */
+        }
 
-     .carousel-wrapper {
-    position: relative;
-  }
+        /* Carousel Wrapper */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px; /* Max width for the carousel */
+            margin: 0 auto;
+        }
 
-      .cards-container1 {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 2rem 1rem 3rem;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-  }
+        /* Cards Container - Now a sleek slider */
+        .cards-container1 {
+            display: flex;
+            gap: 2rem; /* Increased gap */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2.5rem 0; /* More vertical padding */
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            position: relative; /* For overflow gradient */
+            mask-image: linear-gradient(to right,
+                transparent,
+                black 10%,
+                black 90%,
+                transparent); /* Fade edges */
+            -webkit-mask-image: linear-gradient(to right,
+                transparent,
+                black 10%,
+                black 90%,
+                transparent); /* Webkit for fade edges */
+        }
 
-      .cards-container1::-webkit-scrollbar {
-    display: none;
-  }
+        .cards-container1::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Webkit browsers */
+        }
 
-      .card1 {
-    position: relative;
-    flex: 0 0 300px;
-    width: 300px;
-    height: 399px;
-    background: goldenrod;
-    border-radius: 20px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    scroll-snap-align: start;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    gap: 1rem;
-     }
+        /* Individual Card Styles - Smaller and "Pro" */
+        .card1 {
+            position: relative;
+            flex: 0 0 260px; /* Smaller fixed width */
+            height: 350px; /* Smaller fixed height */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)); /* Subtle gradient for depth */
+            border-radius: 25px; /* More rounded corners */
+            backdrop-filter: blur(8px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 255, 0.2); /* Thin, glowing border */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+            padding: 1.8rem; /* More internal padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; /* Distribute content */
+            scroll-snap-align: start;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+            text-align: center; /* Center text */
+            transform-style: preserve-3d; /* For potential 3D effects */
+        }
 
-    .card1:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-     }
+        .card1:hover {
+            transform: translateY(-15px) scale(1.03) rotateY(2deg); /* More dynamic hover */
+            box-shadow: 0 25px 60px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.8); /* Intense glow */
+            border-color: #00ffff; /* Brighter border on hover */
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(0, 255, 255, 0.03));
+        }
 
-    .card1::before {
-    content: "";
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 150px;
-    height: 150px;
-    background-image: url('.png');
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-    opacity: 0.08;
-    z-index: 0;
-    }
+        /* Background Pattern/Icon */
+        .card1::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            right: -20%;
+            width: 80%;
+            height: 80%;
+            background-image: url('rn.png'); /* Using a placeholder, replace with a subtle pattern/logo */
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%; /* Keep it circular */
+            opacity: 0.03; /* Very subtle */
+            z-index: 0;
+            pointer-events: none; /* Ensure it doesn't interfere with clicks */
+            transform: translateZ(-1px); /* Push back in 3D space */
+        }
 
-    .card-content1 {
-      position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-    }
+        .card-content1 {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem; /* Adjusted gap */
+            margin-bottom: 0.8rem; /* Space below content */
+        }
 
-    .card-image {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #eee;
-    }
+        .card-image {
+            width: 140px; /* Slightly smaller image */
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00e6e6; /* Aqua border */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); /* Glow around image */
+            transition: transform 0.3s ease;
+        }
 
-    .card1 h2 {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #222;
-    margin: 0;
-    }
- 
-    .card1 h3 {
-    font-size: 1.1rem;
-    color: #444;
-    margin: 0;
-    }
+        .card1:hover .card-image {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
 
-    .card1 h4 {
-    font-size: 0.95rem;
-    color: #666;
-    margin: 0;
-    }
+        .card1 h2 {
+            font-size: 1.6rem; /* Slightly larger heading */
+            font-weight: bold;
+            color: #00ffff; /* Bright aqua */
+            margin: 0.8rem 0 0.2rem; /* Adjusted margins */
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+        
+        .card1 h3 {
+            font-size: 1.15rem; /* Slightly larger sub-heading */
+            color: #c0c0c0; /* Lighter grey */
+            margin: 0;
+            font-weight: 500;
+        }
 
-    .card1 button {
-    padding: 0.6rem 1rem;
-    border: none;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.6rem;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        .card1 h4 {
+            font-size: 0.9rem; /* Smaller for detail */
+            color: #888; /* Softer grey */
+            margin: 0.5rem 0 0;
+        }
 
-    .card1 button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    }
+        /* Social Media Icons - Vertical Bar on Right */
+        .social-bar {
+            position: absolute;
+            top: 50%;
+            right: 0px; /* Start at the right edge */
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between icons */
+            z-index: 10; /* Ensure it's above other card content */
+            padding: 10px 5px; /* Padding for the bar itself */
+            background: rgba(0, 255, 255, 0.05); /* Subtle background for the bar */
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            box-shadow: -5px 0 15px rgba(0, 255, 255, 0.2); /* Shadow on the left edge */
+            transition: all 0.3s ease;
+        }
 
-    .arrow-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
-    border: none;
-    font-size: 2rem;
-    z-index: 10;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    padding: 0.3rem 0.6rem;
-    }
+        .card1:hover .social-bar {
+            right: 15px; /* Slide in slightly on hover */
+            background: rgba(0, 255, 255, 0.1); /* Slightly more opaque on hover */
+        }
 
-    .arrow-left {
-    left: 10px;
-    }
+        .social-bar a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px; /* Size of the icon button */
+            height: 35px;
+            border-radius: 50%; /* Circular buttons */
+            background: rgba(0, 255, 255, 0.15); /* Background for each icon */
+            color: #00ffff; /* Icon color */
+            font-size: 1.2rem; /* Icon size */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
 
-    .arrow-right {
-    right: 10px;
-   }
+        .social-bar a:hover {
+            background: #00ffff; /* Solid aqua on hover */
+            color: #1a1a2e; /* Dark icon on hover */
+            transform: scale(1.1); /* Pop out on hover */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow on hover */
+            border-color: #00ffff;
+        }
 
-    @media (max-width: 768px) {
-    .card1 {
-      flex: 0 0 85%;
-    }
-   }
+        /* Arrows for Carousel */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 255, 255, 0.2); /* Semi-transparent aqua */
+            color: #00ffff; /* Aqua arrows */
+            border: none;
+            font-size: 2.5rem; /* Larger arrows */
+            z-index: 10;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); /* Glowing shadow */
+            border-radius: 50%;
+            width: 55px; /* Fixed width */
+            height: 55px; /* Fixed height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        .arrow-btn:hover {
+            background: #00ffff; /* Solid aqua on hover */
+            color: #1a1a2e; /* Dark text on hover */
+            box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .arrow-left {
+            left: -25px; /* Slightly outside the carousel for better visibility */
+        }
+
+        .arrow-right {
+            right: -25px; /* Slightly outside the carousel */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .carousel-wrapper {
+                padding: 0 20px; /* Add horizontal padding for smaller screens */
+            }
+            .arrow-left {
+                left: 0px; /* Bring arrows inside if space is tight */
+            }
+            .arrow-right {
+                right: 0px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title1 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+            .card1 {
+                flex: 0 0 220px; /* Even smaller cards on tablets */
+                height: 320px;
+                padding: 1.2rem;
+                border-radius: 20px;
+            }
+            .card-image {
+                width: 120px;
+                height: 120px;
+            }
+            .card1 h2 {
+                font-size: 1.4rem;
+            }
+            .card1 h3 {
+                font-size: 1rem;
+            }
+            .card1 h4 {
+                font-size: 0.85rem;
+            }
+            .social-bar {
+                right: -5px; /* Adjust position on smaller screens */
+                padding: 8px 3px;
+                gap: 8px;
+            }
+            .card1:hover .social-bar {
+                right: 10px; /* Adjust hover slide-in */
+            }
+            .social-bar a {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            .arrow-btn {
+                font-size: 2rem;
+                width: 45px;
+                height: 45px;
+            }
+             .cards-container1 {
+                padding: 1.5rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title1 {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+                margin-bottom: 1.5rem;
+            }
+            .card1 {
+                flex: 0 0 85%; /* Make cards take up more width on small phones */
+                height: 300px;
+                padding: 1rem;
+                border-radius: 18px;
+            }
+            .card-image {
+                width: 100px;
+                height: 100px;
+            }
+            .card1 h2 {
+                font-size: 1.2rem;
+            }
+            .card1 h3 {
+                font-size: 0.9rem;
+            }
+            .card1 h4 {
+                font-size: 0.8rem;
+            }
+            .social-bar {
+                right: -10px; /* Further out on tiny screens */
+                padding: 5px 2px;
+                gap: 6px;
+            }
+            .card1:hover .social-bar {
+                right: 5px;
+            }
+            .social-bar a {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+            .arrow-btn {
+                font-size: 1.8rem;
+                width: 40px;
+                height: 40px;
+            }
+            .cards-container1 {
+                padding: 1rem 0;
+            }
+        }
     </style>
 
-   <div class="section-title1">Our Joined Customers</div>
+
     <div class="carousel-wrapper">
-    <div class="cards-container1" id="cardSlider">
-    <!-- Card 1 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="me.jpg" alt="Drink" class="card-image" />
-    <h2>Shekhar Tyagi</h2>
-    <h3>1st User</h3>
-    <h4>Joined 15-05-2025</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+        <div class="section-title1">Our Esteemed Customers</div>
+        <button class="arrow-btn arrow-left" id="prevBtn">&lt;</button>
+        <div class="cards-container1" id="cardSlider">
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="me.jpg" alt="Shekhar Tyagi" class="card-image" />
+                    <h2>Shekhar Tyagi</h2>
+                    <h3>Joined 15-05-2025</h3>
+                    <h3>for Yoga</h3>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
- <!-- Card 2 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=User+2" alt="Customer Name" class="card-image" />
+                    <h2>Jane Doe</h2>
+                    <h3>Fitness Enthusiast</h3>
+                    <h4>Joined 01-06-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 3 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/33FF57/FFFFFF?text=User+3" alt="Customer Name" class="card-image" />
+                    <h2>John Smith</h2>
+                    <h3>Weight Loss Journey</h3>
+                    <h4>Joined 10-06-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 4 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/3357FF/FFFFFF?text=User+4" alt="Customer Name" class="card-image" />
+                    <h2>Emily White</h2>
+                    <h3>Yoga Practitioner</h3>
+                    <h4>Joined 18-06-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 5 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/FFFF33/000000?text=User+5" alt="Customer Name" class="card-image" />
+                    <h2>Michael Brown</h2>
+                    <h3>Cardio Champion</h3>
+                    <h4>Joined 25-06-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 6 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/8A2BE2/FFFFFF?text=User+6" alt="Customer Name" class="card-image" />
+                    <h2>Sarah Green</h2>
+                    <h3>Strength Trainer</h3>
+                    <h4>Joined 02-07-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 7 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/00CED1/FFFFFF?text=User+7" alt="Customer Name" class="card-image" />
+                    <h2>David Lee</h2>
+                    <h3>Calisthenics Master</h3>
+                    <h4>Joined 09-07-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 8 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/FFD700/000000?text=User+8" alt="Customer Name" class="card-image" />
+                    <h2>Olivia Chen</h2>
+                    <h3>Mindfulness Seeker</h3>
+                    <h4>Joined 16-07-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 9 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/8B0000/FFFFFF?text=User+9" alt="Customer Name" class="card-image" />
+                    <h2>Daniel Kim</h2>
+                    <h3>Nutrition Focus</h3>
+                    <h4>Joined 23-07-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
 
-<!-- Card 10 -->
-<div class="card1"> 
-  <div class="card-content1">
-    <img src="rn.png" alt="Drink" class="card-image" />
-    <h2>00000</h2>
-    <h3>00000 User</h3>
-    <h4>Joined 00-00-0000</h4>
-  </div>
-  <div class="social-nav">
-    <a href="#" target="_blank" class="social-icon fb">Instagram</a>
-    <a href="#" target="_blank" class="social-icon tw">facebook</a>
-    <a href="#" target="_blank" class="social-icon ln">Snapchat</a>
-  </div>
-</div>
-    <!-- Add more cards here if needed -->
-  </div>
+            <div class="card1">
+                <div class="card-content1">
+                    <img src="https://via.placeholder.com/150/4B0082/FFFFFF?text=User+10" alt="Customer Name" class="card-image" />
+                    <h2>Sophia Rodriguez</h2>
+                    <h3>Wellness Advocate</h3>
+                    <h4>Joined 30-07-2025</h4>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
+        </div>
+        <button class="arrow-btn arrow-left" id="prevBtn">&lt;</button>
+        <button class="arrow-btn arrow-right" id="nextBtn">&gt;</button>
+    </div>
+
+    <script>
+        const cardSlider = document.getElementById('cardSlider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Function to scroll the carousel
+        const scrollCarousel = (direction) => {
+            const firstCard = cardSlider.querySelector('.card1');
+            const cardWidth = firstCard.offsetWidth;
+            // Get the computed gap value
+            const gap = parseFloat(getComputedStyle(cardSlider).gap);
+            const scrollAmount = cardWidth + gap;
+
+            if (direction === 'left') {
+                cardSlider.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                cardSlider.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        };
+
+        prevBtn.addEventListener('click', () => scrollCarousel('left'));
+        nextBtn.addEventListener('click', () => scrollCarousel('right'));
+
+        // Optional: Implement keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                scrollCarousel('left');
+            } else if (e.key === 'ArrowRight') {
+                scrollCarousel('right');
+            }
+        });
+
+        // Optional: Auto-scroll carousel
+        let autoScrollInterval;
+        const startAutoScroll = () => {
+            autoScrollInterval = setInterval(() => {
+                const maxScrollLeft = cardSlider.scrollWidth - cardSlider.clientWidth;
+                if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 5) {
+                    cardSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    scrollCarousel('right');
+                }
+            }, 3000); // Scroll every 3 seconds
+        };
+
+        const stopAutoScroll = () => {
+            clearInterval(autoScrollInterval);
+        };
+
+        // Start auto-scroll on page load
+        startAutoScroll();
+
+        // Pause auto-scroll on hover
+        cardSlider.addEventListener('mouseenter', stopAutoScroll);
+        cardSlider.addEventListener('mouseleave', startAutoScroll);
+        prevBtn.addEventListener('mouseenter', stopAutoScroll);
+        nextBtn.addEventListener('mouseenter', stopAutoScroll);
+        prevBtn.addEventListener('mouseleave', startAutoScroll);
+        nextBtn.addEventListener('mouseleave', startAutoScroll);
+    </script>
 
    <script>
   const slider = document.getElementById('cardSlider');
