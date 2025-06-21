@@ -267,20 +267,6 @@
   transform: scale(1);
   z-index: 2;
 }
-
-/* ✅ Full-width, slider-height blue overlay */
-.slider-overlay::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;       /* full width */
-  height: 100%;      /* only height of slider */
-  background: linear-gradient(to right, rgba(0, 51, 102, 0.7), rgba(0, 86, 179, 0.5));
-  z-index: 0;
-  pointer-events: none;
-}
-
 /* Overlay Content */
 .slider-overlay {
   position: relative;
