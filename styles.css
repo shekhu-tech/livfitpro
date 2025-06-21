@@ -436,11 +436,23 @@
     }
   }
   
-  @media (max-width: 768px) {
-    .cards-container {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
+  @media (max-width: 375px) {
+  .card {
+    min-height: 220px;
   }
+  .card-background {
+    height: 80px;
+  }
+  .card-content {
+    padding: 1rem;
+  }
+  .card-content h3 {
+    font-size: 1rem;
+  }
+  .card-content p {
+    font-size: 0.8rem;
+  }
+}
 
 
     /* Footer Styles with ISME Colors */
