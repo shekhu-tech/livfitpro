@@ -390,7 +390,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      max-width: 1800px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -399,7 +399,7 @@
       border-radius: 12px;
       overflow: hidden;
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       position: relative;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
@@ -434,6 +434,7 @@
     .card-content {
       padding: 1.5rem;
       color: var(--isme-dark-gray);
+      height: 120px;
       position: relative;
       z-index: 2;
       background: var(--isme-white);
@@ -492,7 +493,7 @@
     min-height: 220px;
   }
   .card-background {
-    height: 80px;
+    height: 100px;
   }
   .card-content {
     padding: 1rem;
