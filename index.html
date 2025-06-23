@@ -731,34 +731,7 @@
             }
         });
 
-        // Optional: Auto-scroll carousel
-        let autoScrollInterval;
-        const startAutoScroll = () => {
-            autoScrollInterval = setInterval(() => {
-                const maxScrollLeft = cardSlider.scrollWidth - cardSlider.clientWidth;
-                if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 5) {
-                    cardSlider.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    scrollCarousel('right');
-                }
-            }, 3000); // Scroll every 3 seconds
-        };
-
-        const stopAutoScroll = () => {
-            clearInterval(autoScrollInterval);
-        };
-
-        // Start auto-scroll on page load
-        startAutoScroll();
-
-        // Pause auto-scroll on hover
-        cardSlider.addEventListener('mouseenter', stopAutoScroll);
-        cardSlider.addEventListener('mouseleave', startAutoScroll);
-        prevBtn.addEventListener('mouseenter', stopAutoScroll);
-        nextBtn.addEventListener('mouseenter', stopAutoScroll);
-        prevBtn.addEventListener('mouseleave', startAutoScroll);
-        nextBtn.addEventListener('mouseleave', startAutoScroll);
-    </script>
+           </script>
 
    <script>
   const slider = document.getElementById('cardSlider');
