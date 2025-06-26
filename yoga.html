@@ -73,178 +73,1026 @@
    <!-- Header will be injected here -->
   <div id="header-container"></div>
   <!-- Main Content -->
-  <main>
-   <section class="products-section">
-   <h2 class="section-title">Yoga Workout</h2>
-  <div class="cards-container">
-    <div class="card">
-      <a href="ygabeginner.html" class="card-link">
-       <div class="card-background" style="background-image: url('y.png');"></div></a>
-        <div class="card-content">
-         <h3>Beginner</h3>
-       <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
 
-    <div class="card">
-      <a href="ygaintermidiate.html" class="card-link">
-  <div class="card-background" style="background-image: url('y.png');"></div></a>
-      <div class="card-content">
-         <h3>Intermediate</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="ygaadvance.html" class="card-link">
-  <div class="card-background" style="background-image: url('y.png');"></div></a>
-      <div class="card-content">
-         <h3>Advanced</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="ygapro.html" class="card-link">
-  <div class="card-background" style="background-image: url('y.png');"></div></a>
-      <div class="card-content">
-      <h3>Pro</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-</section>
 <style>
-.products-section {
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  text-align: center;
-}
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #121212, #1e1e1e);
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: white;
+        }
 
-.section-title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 30px;
+        }
 
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  height: 270px;
-  width: 100%;
-  max-width: 399px;
-  position: relative;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 260px; /* Ensures enough room */
-}
+        .page-header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #ff4b2b;
-}
+        .page-header p {
+            font-size: 1.2em;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
 
-.card-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.7;
-  z-index: 1;
-}
+        /* Yoga Cards Grid */
+        .yoga-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
 
-.card-content {
-  padding: 0.2rem;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-}
+        .yoga-video-card {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-.card-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+        .yoga-video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+        }
 
-.card-content p {
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
-}
+        .yoga-video-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #333333, #252525);
+        }
 
-.btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 30px;
-  background: #ff416c;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
+        .yoga-video-card .card-header {
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-.btn:hover {
-  background: #ff416c;
-  box-shadow: 0 0 10px transparent;
-}
+        .yoga-video-card .asanas {
+            font-size: 0.9em;
+            color: #ffffff;
+            background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-/* Responsive adjustments for tablets and below */
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+        .yoga-video-card .card-title {
+            font-size: 1.6em;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
 
-/* Extra responsiveness for small mobile devices */
-@media (max-width: 480px) {
-  .products-section {
-    padding: 2rem 1rem;
-  }
+        .yoga-video-card .card-description {
+            font-size: 1.05em;
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
 
-  .card {
-    height: auto;
-  }
+        .yoga-video-card .play-button {
+            background: linear-gradient(45deg, var(--card-color1), var(--card-color2));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-top: 10px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-  .card-content h3 {
-    font-size: 1.1rem;
-  }
+        .yoga-video-card .play-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
 
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    width: auto;
-    min-width: 100px;
-  }
-}
-</style>
+        .yoga-video-card .duration {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
 
-</div>
-  </section>
-</main>
+        /* Subcategory styling */
+        .subcategory-section {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .subcategory-title {
+            font-size: 1.8em;
+            color: var(--card-color1);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--card-color1);
+            display: flex;
+            align-items: center;
+        }
+
+        .subcategory-title i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* --- Fullscreen Video Player Overlay --- */
+        #videoPlayerOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        #videoPlayerOverlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #videoPlayerOverlay .video-container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1280px;
+            max-height: 720px;
+        }
+
+        #videoPlayerOverlay .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        .close-button {
+            color: #ffffff;
+            font-size: 45px;
+            font-weight: bold;
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .close-button:hover {
+            color: #ff4d4d;
+            transform: scale(1.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1024px) {
+            .yoga-card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+            }
+            
+            .subcategory-title {
+                font-size: 1.6em;
+            }
+            
+            .yoga-video-card {
+                padding: 25px;
+            }
+            
+            .yoga-video-card .card-title {
+                font-size: 1.4em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2em;
+            }
+            
+            .page-header p {
+                font-size: 1.1em;
+            }
+            
+            .yoga-card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 20px;
+            }
+            
+            .subcategory-title {
+                font-size: 1.4em;
+            }
+            
+            .yoga-video-card .card-title {
+                font-size: 1.3em;
+            }
+            
+            .yoga-video-card .card-description {
+                font-size: 0.95em;
+            }
+            
+            .close-button {
+                font-size: 35px;
+                top: 20px;
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .page-header p {
+                font-size: 1em;
+            }
+            
+            .yoga-card-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .subcategory-title {
+                font-size: 1.3em;
+            }
+            
+            .yoga-video-card {
+                padding: 20px;
+            }
+            
+            .yoga-video-card .card-title {
+                font-size: 1.2em;
+            }
+            
+            .close-button {
+                font-size: 30px;
+                top: 15px;
+                right: 20px;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Comprehensive Yoga Programs</h1>
+            <p>Explore our extensive collection of yoga sessions designed to improve flexibility, strength, balance and mental clarity. Each program is carefully structured with detailed asana sequences.</p>
+        </header>
+
+        <main id="yogaProgramsContainer">
+            <!-- Yoga programs will be inserted here by JavaScript -->
+        </main>
+    </div>
+
+    <div id="videoPlayerOverlay">
+        <span class="close-button" id="closeVideoPlayer">&times;</span>
+        <div class="video-container">
+            <!-- Video iframe will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yogaProgramsContainer = document.getElementById('yogaProgramsContainer');
+            const videoPlayerOverlay = document.getElementById('videoPlayerOverlay');
+            const closeVideoPlayer = document.getElementById('closeVideoPlayer');
+            const videoPlayerContainer = videoPlayerOverlay.querySelector('.video-container');
+            const backToTopButton = document.getElementById('backToTop');
+
+            // Yoga Programs Data with expanded Asanas and Subcategories
+            const yogaPrograms = {
+                "Beginner Yoga": {
+                    color1: "#4CAF50", color2: "#8BC34A",
+                    icon: "fa-user",
+                    subcategories: {
+                        "Foundational Poses": [
+                            { 
+                                title: "Basic Standing Poses", 
+                                description: "Learn essential standing poses including Mountain (Tadasana), Tree (Vrksasana), and Warrior I (Virabhadrasana I).", 
+                                shortId: "36b_k79c054", 
+                                duration: "18 min",
+                                asanas: "Tadasana, Vrksasana, Virabhadrasana I"
+                            },
+                            { 
+                                title: "Seated Poses Introduction", 
+                                description: "Master basic seated poses including Staff (Dandasana), Seated Forward Bend (Paschimottanasana), and Bound Angle (Baddha Konasana).", 
+                                shortId: "beg_seated_001", 
+                                duration: "20 min",
+                                asanas: "Dandasana, Paschimottanasana, Baddha Konasana"
+                            },
+                            { 
+                                title: "Supine Poses Basics", 
+                                description: "Gentle floor poses including Reclining Hand-to-Big-Toe (Supta Padangusthasana), Bridge (Setu Bandhasana), and Corpse Pose (Savasana).", 
+                                shortId: "beg_supine_002", 
+                                duration: "22 min",
+                                asanas: "Supta Padangusthasana, Setu Bandhasana, Savasana"
+                            }
+                        ],
+                        "Breathing & Relaxation": [
+                            { 
+                                title: "Pranayama Fundamentals", 
+                                description: "Introduction to proper breathing techniques including Dirga (Three-Part Breath) and Nadi Shodhana (Alternate Nostril Breathing).", 
+                                shortId: "beg_breath_001", 
+                                duration: "15 min",
+                                asanas: "Dirga Pranayama, Nadi Shodhana"
+                            },
+                            { 
+                                title: "Evening Relaxation Sequence", 
+                                description: "Gentle sequence to unwind including Child's Pose (Balasana), Reclining Bound Angle (Supta Baddha Konasana), and Legs-Up-the-Wall (Viparita Karani).", 
+                                shortId: "beg_evening_002", 
+                                duration: "25 min",
+                                asanas: "Balasana, Supta Baddha Konasana, Viparita Karani"
+                            }
+                        ],
+                        "Morning Flow": [
+                            { 
+                                title: "Gentle Morning Wake-up", 
+                                description: "Start your day with Cat-Cow (Marjaryasana-Bitilasana), Downward Dog (Adho Mukha Svanasana), and Sun Salutation A (Surya Namaskar A).", 
+                                shortId: "beg_morning_001", 
+                                duration: "20 min",
+                                asanas: "Marjaryasana, Bitilasana, Adho Mukha Svanasana, Surya Namaskar A"
+                            },
+                            { 
+                                title: "Energy Boost Sequence", 
+                                description: "Simple sequence to energize your body including Warrior II (Virabhadrasana II), Triangle (Trikonasana), and Extended Side Angle (Utthita Parsvakonasana).", 
+                                shortId: "beg_morning_003", 
+                                duration: "22 min",
+                                asanas: "Virabhadrasana II, Trikonasana, Utthita Parsvakonasana"
+                            }
+                        ],
+                        "Balance & Stability": [
+                            { 
+                                title: "Balance Poses Introduction", 
+                                description: "Improve your balance with Tree (Vrksasana), Eagle (Garudasana), and Dancer (Natarajasana) poses.", 
+                                shortId: "beg_balance_001", 
+                                duration: "18 min",
+                                asanas: "Vrksasana, Garudasana, Natarajasana"
+                            },
+                            { 
+                                title: "Core Strengthening Basics", 
+                                description: "Build core strength with Boat (Navasana), Plank (Phalakasana), and Forearm Plank (Dolphin Pose Prep).", 
+                                shortId: "beg_core_002", 
+                                duration: "20 min",
+                                asanas: "Navasana, Phalakasana, Dolphin Pose Prep"
+                            }
+                        ]
+                    }
+                },
+                "Vinyasa Flow": {
+                    color1: "#2196F3", color2: "#03A9F4",
+                    icon: "fa-water",
+                    subcategories: {
+                        "Sun Salutations": [
+                            { 
+                                title: "Classic Sun Salutation A & B", 
+                                description: "Dynamic sequence including Plank (Phalakasana), Upward Dog (Urdhva Mukha Svanasana), and Warrior I (Virabhadrasana I).", 
+                                shortId: "fRj_W1wU3XQ", 
+                                duration: "25 min",
+                                asanas: "Surya Namaskar A & B, Phalakasana, Urdhva Mukha Svanasana, Virabhadrasana I"
+                            },
+                            { 
+                                title: "Creative Sun Salutation Variations", 
+                                description: "Innovative variations incorporating Side Plank (Vasisthasana) and Revolved Lunge (Parivrtta Anjaneyasana).", 
+                                shortId: "vin_sun_002", 
+                                duration: "30 min",
+                                asanas: "Vasisthasana, Parivrtta Anjaneyasana"
+                            }
+                        ],
+                        "Hip Openers": [
+                            { 
+                                title: "Deep Hip Opening Sequence", 
+                                description: "Flow through Pigeon (Eka Pada Rajakapotasana), Lizard (Utthan Pristhasana), and Fire Log (Agnistambhasana).", 
+                                shortId: "vin_hips_001", 
+                                duration: "35 min",
+                                asanas: "Eka Pada Rajakapotasana, Utthan Pristhasana, Agnistambhasana"
+                            },
+                            { 
+                                title: "Hip Flexor Release", 
+                                description: "Target tight hip flexors with Low Lunge (Anjaneyasana), Runner's Lunge, and Supine Pigeon (Supta Kapotasana).", 
+                                shortId: "vin_hips_003", 
+                                duration: "30 min",
+                                asanas: "Anjaneyasana, Runner's Lunge, Supta Kapotasana"
+                            }
+                        ],
+                        "Arm Balances": [
+                            { 
+                                title: "Arm Balance Foundations", 
+                                description: "Prepare for Crow (Bakasana) with Dolphin (Ardha Pincha Mayurasana) and Side Plank (Vasisthasana).", 
+                                shortId: "vin_armbalance_002", 
+                                duration: "28 min",
+                                asanas: "Bakasana, Ardha Pincha Mayurasana, Vasisthasana"
+                            },
+                            { 
+                                title: "Intermediate Arm Balances", 
+                                description: "Progress to Side Crow (Parsva Bakasana) and Eight-Angle Pose (Astavakrasana).", 
+                                shortId: "vin_armbalance_004", 
+                                duration: "32 min",
+                                asanas: "Parsva Bakasana, Astavakrasana"
+                            }
+                        ],
+                        "Inversions": [
+                            { 
+                                title: "Inversion Preparation", 
+                                description: "Build strength for Headstand (Sirsasana) and Handstand (Adho Mukha Vrksasana) with Dolphin and Wall Walks.", 
+                                shortId: "vin_inversions_001", 
+                                duration: "30 min",
+                                asanas: "Sirsasana Prep, Adho Mukha Vrksasana Prep"
+                            },
+                            { 
+                                title: "Shoulder Opening for Inversions", 
+                                description: "Open shoulders with Gomukhasana arms, Cow Face (Gomukhasana), and Eagle (Garudasana) arms.", 
+                                shortId: "vin_inversions_003", 
+                                duration: "25 min",
+                                asanas: "Gomukhasana, Garudasana Arms"
+                            }
+                        ]
+                    }
+                },
+                "Hatha Yoga": {
+                    color1: "#9C27B0", color2: "#673AB7",
+                    icon: "fa-mountain",
+                    subcategories: {
+                        "Classical Asanas": [
+                            { 
+                                title: "Classical Hatha Sequence", 
+                                description: "Hold poses including Triangle (Trikonasana), Half Moon (Ardha Chandrasana), and Bridge (Setu Bandhasana).", 
+                                shortId: "W5Q-G6d-5s0", 
+                                duration: "35 min",
+                                asanas: "Trikonasana, Ardha Chandrasana, Setu Bandhasana"
+                            },
+                            { 
+                                title: "Standing Poses Deep Dive", 
+                                description: "Detailed exploration of Warrior II (Virabhadrasana II), Extended Side Angle (Utthita Parsvakonasana), and Pyramid (Parsvottanasana).", 
+                                shortId: "hatha_standing_002", 
+                                duration: "40 min",
+                                asanas: "Virabhadrasana II, Utthita Parsvakonasana, Parsvottanasana"
+                            }
+                        ],
+                        "Spine Health": [
+                            { 
+                                title: "Spine Strengthening Sequence", 
+                                description: "Focus on Cobra (Bhujangasana), Locust (Salabhasana), and Bow (Dhanurasana) poses.", 
+                                shortId: "hatha_spine_001", 
+                                duration: "30 min",
+                                asanas: "Bhujangasana, Salabhasana, Dhanurasana"
+                            },
+                            { 
+                                title: "Spinal Twists", 
+                                description: "Release tension with Revolved Triangle (Parivrtta Trikonasana), Revolved Chair (Parivrtta Utkatasana), and Supine Twist (Supta Matsyendrasana).", 
+                                shortId: "hatha_spine_003", 
+                                duration: "28 min",
+                                asanas: "Parivrtta Trikonasana, Parivrtta Utkatasana, Supta Matsyendrasana"
+                            }
+                        ],
+                        "Restorative Hatha": [
+                            { 
+                                title: "Evening Relaxation", 
+                                description: "Wind down with Legs-Up-the-Wall (Viparita Karani), Reclining Bound Angle (Supta Baddha Konasana), and Corpse Pose (Savasana).", 
+                                shortId: "hatha_evening_002", 
+                                duration: "25 min",
+                                asanas: "Viparita Karani, Supta Baddha Konasana, Savasana"
+                            },
+                            { 
+                                title: "Supported Forward Bends", 
+                                description: "Gentle forward folds with props to release back tension.", 
+                                shortId: "hatha_restore_004", 
+                                duration: "30 min",
+                                asanas: "Paschimottanasana, Janu Sirsasana"
+                            }
+                        ],
+                        "Pranayama & Meditation": [
+                            { 
+                                title: "Classical Pranayama", 
+                                description: "Practice Kapalabhati, Bhramari, and Ujjayi breathing techniques.", 
+                                shortId: "hatha_prana_001", 
+                                duration: "20 min",
+                                asanas: "Kapalabhati, Bhramari, Ujjayi"
+                            },
+                            { 
+                                title: "Meditation Foundations", 
+                                description: "Learn proper seated posture and basic mindfulness techniques.", 
+                                shortId: "hatha_med_003", 
+                                duration: "25 min",
+                                asanas: "Sukhasana, Padmasana"
+                            }
+                        ]
+                    }
+                },
+                "Restorative Yoga": {
+                    color1: "#FF5722", color2: "#FF9800",
+                    icon: "fa-couch",
+                    subcategories: {
+                        "Deep Relaxation": [
+                            { 
+                                title: "Full Body Relaxation", 
+                                description: "Supported Fish (Matsyasana), Reclining Hero (Supta Virasana), and Supported Child's Pose (Balasana).", 
+                                shortId: "rVdJ_W1wU3XQ", 
+                                duration: "45 min",
+                                asanas: "Matsyasana, Supta Virasana, Balasana"
+                            },
+                            { 
+                                title: "Yoga Nidra", 
+                                description: "Guided yogic sleep practice for deep relaxation.", 
+                                shortId: "rest_nidra_003", 
+                                duration: "40 min",
+                                asanas: "Savasana"
+                            }
+                        ],
+                        "Neck & Shoulders": [
+                            { 
+                                title: "Neck & Shoulder Release", 
+                                description: "Gentle stretches including Thread the Needle (Parsva Balasana) and Supported Shoulderstand (Salamba Sarvangasana).", 
+                                shortId: "rest_neck_001", 
+                                duration: "35 min",
+                                asanas: "Parsva Balasana, Salamba Sarvangasana"
+                            },
+                            { 
+                                title: "Upper Back Release", 
+                                description: "Target upper back tension with supported chest openers.", 
+                                shortId: "rest_neck_004", 
+                                duration: "30 min",
+                                asanas: "Supported Fish, Supta Baddha Konasana"
+                            }
+                        ],
+                        "Hip Release": [
+                            { 
+                                title: "Hip Release Sequence", 
+                                description: "Supported Pigeon (Eka Pada Rajakapotasana), Reclining Bound Angle (Supta Baddha Konasana), and Supine Twist (Supta Matsyendrasana).", 
+                                shortId: "rest_hips_002", 
+                                duration: "40 min",
+                                asanas: "Eka Pada Rajakapotasana, Supta Baddha Konasana, Supta Matsyendrasana"
+                            },
+                            { 
+                                title: "Deep Hip Openers", 
+                                description: "Long holds in supported butterfly and lizard variations.", 
+                                shortId: "rest_hips_005", 
+                                duration: "45 min",
+                                asanas: "Baddha Konasana, Utthan Pristhasana"
+                            }
+                        ],
+                        "Lower Back Care": [
+                            { 
+                                title: "Lower Back Relief", 
+                                description: "Gentle sequence to release lower back tension with supported poses.", 
+                                shortId: "rest_back_001", 
+                                duration: "35 min",
+                                asanas: "Supta Padangusthasana, Apanasana"
+                            },
+                            { 
+                                title: "Sciatica Relief", 
+                                description: "Poses to alleviate sciatic nerve pain.", 
+                                shortId: "rest_back_006", 
+                                duration: "40 min",
+                                asanas: "Supta Kapotasana, Thread the Needle"
+                            }
+                        ]
+                    }
+                },
+                "Power Yoga": {
+                    color1: "#F44336", color2: "#E91E63",
+                    icon: "fa-fire",
+                    subcategories: {
+                        "Core Work": [
+                            { 
+                                title: "Core Power", 
+                                description: "Intense sequence with Boat (Navasana), Forearm Plank (Phalakasana), and Side Plank (Vasisthasana).", 
+                                shortId: "O4jFzYf1y80", 
+                                duration: "35 min",
+                                asanas: "Navasana, Phalakasana, Vasisthasana"
+                            },
+                            { 
+                                title: "Advanced Core Challenge", 
+                                description: "Take your core strength further with leg lifts and dynamic transitions.", 
+                                shortId: "power_core_003", 
+                                duration: "30 min",
+                                asanas: "Navasana variations, Plank variations"
+                            }
+                        ],
+                        "Full Body": [
+                            { 
+                                title: "Full Body Challenge", 
+                                description: "Powerful flow including Warrior III (Virabhadrasana III), Half Moon (Ardha Chandrasana), and Crow (Bakasana).", 
+                                shortId: "power_fullbody_001", 
+                                duration: "40 min",
+                                asanas: "Virabhadrasana III, Ardha Chandrasana, Bakasana"
+                            },
+                            { 
+                                title: "Dynamic Flow", 
+                                description: "High-energy sequence with jumping transitions and strength-building holds.", 
+                                shortId: "power_fullbody_004", 
+                                duration: "45 min",
+                                asanas: "Chaturanga, Upward Dog, Downward Dog"
+                            }
+                        ],
+                        "Arm Balances": [
+                            { 
+                                title: "Arm Balance Focus", 
+                                description: "Practice Crow (Bakasana), Side Crow (Parsva Bakasana), and Eight-Angle Pose (Astavakrasana).", 
+                                shortId: "power_armbalance_002", 
+                                duration: "30 min",
+                                asanas: "Bakasana, Parsva Bakasana, Astavakrasana"
+                            },
+                            { 
+                                title: "Advanced Arm Balances", 
+                                description: "Progress to Flying Pigeon (Eka Pada Galavasana) and Peacock (Mayurasana).", 
+                                shortId: "power_armbalance_005", 
+                                duration: "35 min",
+                                asanas: "Eka Pada Galavasana, Mayurasana"
+                            }
+                        ],
+                        "Inversions": [
+                            { 
+                                title: "Handstand Prep", 
+                                description: "Build strength and alignment for freestanding handstands.", 
+                                shortId: "power_invert_001", 
+                                duration: "30 min",
+                                asanas: "Adho Mukha Vrksasana Prep"
+                            },
+                            { 
+                                title: "Forearm Balance", 
+                                description: "Work toward Pincha Mayurasana with wall support and drills.", 
+                                shortId: "power_invert_006", 
+                                duration: "35 min",
+                                asanas: "Pincha Mayurasana Prep"
+                            }
+                        ]
+                    }
+                },
+                "Yin Yoga": {
+                    color1: "#607D8B", color2: "#795548",
+                    icon: "fa-moon",
+                    subcategories: {
+                        "Hip Openers": [
+                            { 
+                                title: "Deep Hip Openers", 
+                                description: "Long holds in Dragon (Yin variation of Lizard), Shoelace (Gomukhasana variation), and Sleeping Swan (Yin Pigeon).", 
+                                shortId: "i9_N6m67G1I", 
+                                duration: "50 min",
+                                asanas: "Dragon Pose, Gomukhasana, Yin Pigeon"
+                            },
+                            { 
+                                title: "Butterfly Variations", 
+                                description: "Explore different angles in Bound Angle Pose (Baddha Konasana) for deep release.", 
+                                shortId: "yin_hips_003", 
+                                duration: "45 min",
+                                asanas: "Baddha Konasana variations"
+                            }
+                        ],
+                        "Spine & Shoulders": [
+                            { 
+                                title: "Spine & Shoulders", 
+                                description: "Melting Heart (Anahatasana), Sphinx (Salamba Bhujangasana), and Seal (Makarasana variation).", 
+                                shortId: "yin_spine_001", 
+                                duration: "40 min",
+                                asanas: "Anahatasana, Salamba Bhujangasana, Makarasana"
+                            },
+                            { 
+                                title: "Upper Back Release", 
+                                description: "Target thoracic spine with supported fish and crocodile variations.", 
+                                shortId: "yin_spine_004", 
+                                duration: "45 min",
+                                asanas: "Supported Matsyasana, Crocodile Twist"
+                            }
+                        ],
+                        "Full Body": [
+                            { 
+                                title: "Full Body Release", 
+                                description: "Butterfly (Baddha Konasana), Caterpillar (Paschimottanasana variation), and Reclining Twist (Supta Matsyendrasana).", 
+                                shortId: "yin_fullbody_002", 
+                                duration: "55 min",
+                                asanas: "Baddha Konasana, Paschimottanasana, Supta Matsyendrasana"
+                            },
+                            { 
+                                title: "Meridian Flow", 
+                                description: "Sequence targeting the kidney and urinary bladder meridians.", 
+                                shortId: "yin_fullbody_005", 
+                                duration: "50 min",
+                                asanas: "Saddle, Dragon, Square"
+                            }
+                        ],
+                        "Lower Body": [
+                            { 
+                                title: "Legs & Knees", 
+                                description: "Release tension in quadriceps and IT band with targeted poses.", 
+                                shortId: "yin_legs_001", 
+                                duration: "45 min",
+                                asanas: "Saddle, Half Saddle, Square"
+                            },
+                            { 
+                                title: "Ankles & Feet", 
+                                description: "Improve mobility in ankles and feet with yin approaches.", 
+                                shortId: "yin_legs_006", 
+                                duration: "40 min",
+                                asanas: "Ankle Stretch, Toe Squat"
+                            }
+                        ]
+                    }
+                },
+                "Prenatal Yoga": {
+                    color1: "#FF4081", color2: "#E040FB",
+                    icon: "fa-baby",
+                    subcategories: {
+                        "First Trimester": [
+                            { 
+                                title: "Early Pregnancy Flow", 
+                                description: "Gentle sequence adapted for the first trimester with modified poses.", 
+                                shortId: "prenatal_first_001", 
+                                duration: "25 min",
+                                asanas: "Modified Surya Namaskar, Balasana"
+                            },
+                            { 
+                                title: "Energy Boost", 
+                                description: "Gentle movement to combat fatigue while being pregnancy-safe.", 
+                                shortId: "prenatal_first_003", 
+                                duration: "20 min",
+                                asanas: "Cat-Cow, Supported Bridge"
+                            }
+                        ],
+                        "Second Trimester": [
+                            { 
+                                title: "Safe Prenatal Flow", 
+                                description: "Gentle sequence with Goddess Pose (Utkata Konasana), Supported Bridge (Setu Bandhasana), and Side-Lying Savasana.", 
+                                shortId: "P_2-tCj9_bU", 
+                                duration: "30 min",
+                                asanas: "Utkata Konasana, Setu Bandhasana, Savasana"
+                            },
+                            { 
+                                title: "Hip Openers", 
+                                description: "Gentle hip openers to prepare for childbirth.", 
+                                shortId: "prenatal_second_004", 
+                                duration: "25 min",
+                                asanas: "Supported Baddha Konasana, Squats"
+                            }
+                        ],
+                        "Third Trimester": [
+                            { 
+                                title: "Third Trimester Relaxation", 
+                                description: "Supported Side-Lying Pose, Pelvic Tilts, and Legs-Up-the-Wall (Viparita Karani).", 
+                                shortId: "prenatal_third_002", 
+                                duration: "25 min",
+                                asanas: "Side-Lying Pose, Viparita Karani"
+                            },
+                            { 
+                                title: "Birth Preparation", 
+                                description: "Poses to encourage optimal fetal positioning and pelvic opening.", 
+                                shortId: "prenatal_third_005", 
+                                duration: "30 min",
+                                asanas: "Cat-Cow, Squats, Pelvic Circles"
+                            }
+                        ],
+                        "Postnatal Recovery": [
+                            { 
+                                title: "Early Postpartum", 
+                                description: "Gentle movements to reconnect with core and pelvic floor.", 
+                                shortId: "prenatal_post_001", 
+                                duration: "20 min",
+                                asanas: "Diaphragmatic Breathing, Pelvic Tilts"
+                            },
+                            { 
+                                title: "Core Restoration", 
+                                description: "Safe exercises to rebuild abdominal strength postpartum.", 
+                                shortId: "prenatal_post_006", 
+                                duration: "25 min",
+                                asanas: "Modified Navasana, Bridge"
+                            }
+                        ]
+                    }
+                }
+            };
+
+            // --- Function to open/close overlays ---
+            function openOverlay(overlayElement) {
+                overlayElement.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeOverlay(overlayElement) {
+                overlayElement.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // --- Create Yoga Programs Page ---
+            function createYogaProgramsPage() {
+                for (const categoryName in yogaPrograms) {
+                    const categoryData = yogaPrograms[categoryName];
+                    const categorySection = document.createElement('div');
+                    categorySection.className = 'category-section';
+                    
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.className = 'category-title';
+                    categoryTitle.style.setProperty('--card-color1', categoryData.color1);
+                    categoryTitle.style.setProperty('--card-color2', categoryData.color2);
+                    categoryTitle.innerHTML = `<i class="fas ${categoryData.icon}"></i>${categoryName}`;
+                    
+                    yogaProgramsContainer.appendChild(categoryTitle);
+                    
+                    // Create subcategory sections
+                    for (const subcategoryName in categoryData.subcategories) {
+                        const subcategorySection = document.createElement('div');
+                        subcategorySection.className = 'subcategory-section';
+                        
+                        const subcategoryTitle = document.createElement('h3');
+                        subcategoryTitle.className = 'subcategory-title';
+                        subcategoryTitle.style.setProperty('--card-color1', categoryData.color1);
+                        subcategoryTitle.innerHTML = `<i class="fas ${categoryData.icon}"></i>${subcategoryName}`;
+                        
+                        subcategorySection.appendChild(subcategoryTitle);
+                        
+                        const subcategoryGrid = document.createElement('div');
+                        subcategoryGrid.className = 'yoga-card-grid';
+                        
+                        categoryData.subcategories[subcategoryName].forEach(session => {
+                            const videoCard = document.createElement('div');
+                            videoCard.classList.add('yoga-video-card');
+                            videoCard.dataset.shortId = session.shortId;
+                            videoCard.style.setProperty('--card-color1', categoryData.color1);
+                            videoCard.style.setProperty('--card-color2', categoryData.color2);
+
+                            videoCard.innerHTML = `
+                                <div class="card-header">
+                                    <div class="duration">${session.duration}</div>
+                                    <div class="asanas">${session.asanas}</div>
+                                    <div class="card-title">${session.title}</div>
+                                </div>
+                                <div class="card-description">${session.description}</div>
+                                <button class="play-button">Start Session</button>
+                            `;
+                            subcategoryGrid.appendChild(videoCard);
+
+                            videoCard.addEventListener('click', function() {
+                                const shortId = this.dataset.shortId;
+                                if (shortId && shortId.trim() !== "") {
+                                    playYouTubeShort(shortId);
+                                } else {
+                                    alert(`Sorry, no video available for "${session.title}" yet.`);
+                                }
+                            });
+                        });
+                        
+                        subcategorySection.appendChild(subcategoryGrid);
+                        yogaProgramsContainer.appendChild(subcategorySection);
+                    }
+                }
+            }
+
+            // --- Video Player Logic ---
+            function playYouTubeShort(shortId) {
+                const iframeSrc = `https://www.youtube.com/embed/${shortId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${shortId}&modestbranding=1&playsinline=1`;
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('src', iframeSrc);
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('title', 'YouTube Short');
+
+                videoPlayerContainer.innerHTML = '';
+                videoPlayerContainer.appendChild(iframe);
+                openOverlay(videoPlayerOverlay);
+            }
+
+            closeVideoPlayer.addEventListener('click', function() {
+                closeOverlay(videoPlayerOverlay);
+                videoPlayerContainer.innerHTML = '';
+            });
+
+            videoPlayerOverlay.addEventListener('click', function(event) {
+                if (event.target === videoPlayerOverlay || event.target === closeVideoPlayer) {
+                    closeOverlay(videoPlayerOverlay);
+                    videoPlayerContainer.innerHTML = '';
+                }
+            });
+
+            // --- Back to Top Button Logic ---
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // --- Global Escape Key Listener ---
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    if (videoPlayerOverlay.classList.contains('active')) {
+                        closeOverlay(videoPlayerOverlay);
+                        videoPlayerContainer.innerHTML = '';
+                    }
+                }
+            });
+
+            // Initialize the page
+            createYogaProgramsPage();
+        });
+    </script>
+   
    <!-- Footer will be injected here -->
     <div id="footer-container"></div>
     <!-- JavaScript to inject header and footer -->
