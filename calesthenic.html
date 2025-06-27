@@ -76,13 +76,6 @@
 
       <div class="cards-container">
 
-        <!-- Beginnermix Program Card -->
-        <div class="card" id="mainCard0"> 
-          <div class="card-background" style="background-image: url('cs.png');"></div>
-          <div class="card-content">
-            <h3>Beginner Mix Program</h3>
-          </div>
-        </div>
         <!-- Beginner Program Card -->
         <div class="card" id="mainCard1"> 
           <div class="card-background" style="background-image: url('cs.png');"></div>
@@ -136,11 +129,10 @@
   <script>
     // Get all elements
     const cards = {
-      0: { element: document.getElementById('mainCard0'), program: 'Beginnermix', href: '.html' },
-      1: { element: document.getElementById('mainCard1'), program: 'Beginner', href: '.html' },
-      2: { element: document.getElementById('mainCard2'), program: 'Intermediate', href: '.html' },
-      3: { element: document.getElementById('mainCard3'), program: 'Advanced', href: '.html' },
-      4: { element: document.getElementById('mainCard4'), program: 'Pro', href: '.html' }
+      1: { element: document.getElementById('mainCard1'), program: 'Beginner', href: 'clsbeginner.html' },
+      2: { element: document.getElementById('mainCard2'), program: 'Intermediate', href: 'clsintermidiate.html' },
+      3: { element: document.getElementById('mainCard3'), program: 'Advanced', href: 'clsadvance.html' },
+      4: { element: document.getElementById('mainCard4'), program: 'Pro', href: 'clspro.html' }
     };
     
     const popupModal = document.getElementById('popupModal');
