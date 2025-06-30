@@ -160,16 +160,36 @@
     const dayCardsContainer = document.querySelector('.day-cards');
     const modalTitle = document.getElementById('modalTitle');
 
-    // Days of the week with different colors
-    const daysOfWeek = [
-      { name: 'Monday', color: '#FF6B6B' },    // Red
-      { name: 'Tuesday', color: '#4ECDC4' },   // Teal
-      { name: 'Wednesday', color: '#45B7D1' }, // Blue
-      { name: 'Thursday', color: '#FFBE0B' },  // Yellow
-      { name: 'Friday', color: '#FB5607' },    // Orange
-      { name: 'Saturday', color: '#8338EC' },  // Purple
-      { name: 'Sunday', color: '#3A86FF' }     // Light Blue
-    ];
+    // Days of the week with different colors and individual page links for each program
+    const daysOfWeek = {
+      Intermediate: [
+        { name: 'Monday', color: '#FF6B6B', link: 'intermediate-monday-gym.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'intermediate-tuesday-gym.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'intermediate-wednesday-gym.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'intermediate-thursday-gym.html' },
+        { name: 'Friday', color: '#FB5607', link: 'intermediate-friday-gym.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'intermediate-saturday-gym.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ],
+      Advanced: [
+        { name: 'Monday', color: '#FF6B6B', link: 'advanced-monday-gym.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'advanced-tuesday-gym.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'advanced-wednesday-gym.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'advanced-thursday-gym.html' },
+        { name: 'Friday', color: '#FB5607', link: 'advanced-friday-gym.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'advanced-saturday-gym.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ],
+      Pro: [
+        { name: 'Monday', color: '#FF6B6B', link: 'pro-monday-gym.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'pro-tuesday-gym.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'pro-wednesday-gym.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'pro-thursday-gym.html' },
+        { name: 'Friday', color: '#FB5607', link: 'pro-friday-gym.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'pro-saturday-gym.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ]
+    };
 
     // Function to open modal with specific program
     function openModal(programName, hrefPrefix) {
@@ -177,15 +197,23 @@
       dayCardsContainer.innerHTML = '';
       
       // Set modal title based on program
-      if (programName === 'Beginner' || programName === 'Pro') {
+      if (programName === 'Beginner') {
         modalTitle.textContent = `🔥 30-Day ${programName} Challenge`;
+        
+        // For Beginner program, show 30-day challenge
+        for (let i = 1; i <= 30; i++) {
+          const dayLink = document.createElement('a');
+          dayLink.href = `${hrefPrefix}?day=${i}`;
+          dayLink.textContent = `Day ${i}`;
+          dayCardsContainer.appendChild(dayLink);
+        }
       } else {
         modalTitle.textContent = `🔥 Weekly ${programName} Program`;
-      }
-      
-      // Add days of the week for Intermediate, Advanced and Pro programs
-      if (programName === 'Intermediate' || programName === 'Advanced' || programName === 'Pro') {
-        daysOfWeek.forEach((day, index) => {
+        
+        // Add days of the week for Intermediate, Advanced and Pro programs
+        const programDays = daysOfWeek[programName];
+        
+        programDays.forEach((day) => {
           const dayCard = document.createElement('div');
           dayCard.className = 'day-card';
           dayCard.textContent = day.name;
@@ -202,20 +230,13 @@
             });
           } else {
             dayCard.addEventListener('click', () => {
-              window.location.href = `${hrefPrefix}?day=${day.name.toLowerCase()}`;
+              // Navigate to individual day page for the specific program
+              window.location.href = day.link;
             });
           }
           
           dayCardsContainer.appendChild(dayCard);
         });
-      } else {
-        // For Beginner program, show 30-day challenge
-        for (let i = 1; i <= 30; i++) {
-          const dayLink = document.createElement('a');
-          dayLink.href = `${hrefPrefix}?day=${i}`;
-          dayLink.textContent = `Day ${i}`;
-          dayCardsContainer.appendChild(dayLink);
-        }
       }
       
       // Show modal
