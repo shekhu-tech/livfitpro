@@ -160,8 +160,16 @@
     const dayCardsContainer = document.querySelector('.day-cards');
     const modalTitle = document.getElementById('modalTitle');
 
-    // Days of the week
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    // Days of the week with different colors
+    const daysOfWeek = [
+      { name: 'Monday', color: '#FF6B6B' },    // Red
+      { name: 'Tuesday', color: '#4ECDC4' },   // Teal
+      { name: 'Wednesday', color: '#45B7D1' }, // Blue
+      { name: 'Thursday', color: '#FFBE0B' },  // Yellow
+      { name: 'Friday', color: '#FB5607' },    // Orange
+      { name: 'Saturday', color: '#8338EC' },  // Purple
+      { name: 'Sunday', color: '#3A86FF' }     // Light Blue
+    ];
 
     // Function to open modal with specific program
     function openModal(programName, hrefPrefix) {
@@ -169,17 +177,24 @@
       dayCardsContainer.innerHTML = '';
       
       // Set modal title based on program
-      modalTitle.textContent = `🔥 Weekly ${programName} Program`;
+      if (programName === 'Beginner' || programName === 'Pro') {
+        modalTitle.textContent = `🔥 30-Day ${programName} Challenge`;
+      } else {
+        modalTitle.textContent = `🔥 Weekly ${programName} Program`;
+      }
       
-      // Add days of the week for Intermediate and Advanced programs
-      if (programName === 'Intermediate' || programName === 'Advanced') {
+      // Add days of the week for Intermediate, Advanced and Pro programs
+      if (programName === 'Intermediate' || programName === 'Advanced' || programName === 'Pro') {
         daysOfWeek.forEach((day, index) => {
           const dayCard = document.createElement('div');
           dayCard.className = 'day-card';
-          dayCard.textContent = day;
+          dayCard.textContent = day.name;
+          dayCard.style.backgroundColor = day.color;
+          dayCard.style.borderColor = day.color;
+          dayCard.style.boxShadow = `0 0 15px ${day.color}`;
           
           // Add click event for Sunday
-          if (day === 'Sunday') {
+          if (day.name === 'Sunday') {
             dayCard.addEventListener('click', (e) => {
               e.preventDefault();
               sundayModal.style.display = 'flex';
@@ -187,14 +202,14 @@
             });
           } else {
             dayCard.addEventListener('click', () => {
-              window.location.href = `${hrefPrefix}?day=${day.toLowerCase()}`;
+              window.location.href = `${hrefPrefix}?day=${day.name.toLowerCase()}`;
             });
           }
           
           dayCardsContainer.appendChild(dayCard);
         });
       } else {
-        // For other programs, show 30-day challenge as before
+        // For Beginner program, show 30-day challenge
         for (let i = 1; i <= 30; i++) {
           const dayLink = document.createElement('a');
           dayLink.href = `${hrefPrefix}?day=${i}`;
