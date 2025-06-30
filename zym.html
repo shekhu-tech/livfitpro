@@ -127,6 +127,19 @@
     </div>
   </div>
 
+  <!-- Special Sunday Modal -->
+  <div class="modal" id="sundayModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeSundayModal">&times;</span>
+      <h2>Sunday Special</h2>
+      <div class="sunday-content">
+        <p>Take full rest and enjoy your day! 😊</p>
+        <p>You've worked hard all week - now it's time to recover.</p>
+        <div class="rest-icon">🛌</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer will be injected here -->
   <div id="footer-container"></div>
 
@@ -141,9 +154,14 @@
     };
     
     const popupModal = document.getElementById('popupModal');
+    const sundayModal = document.getElementById('sundayModal');
     const closeModal = document.getElementById('closeModal');
+    const closeSundayModal = document.getElementById('closeSundayModal');
     const dayCardsContainer = document.querySelector('.day-cards');
     const modalTitle = document.getElementById('modalTitle');
+
+    // Days of the week
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     // Function to open modal with specific program
     function openModal(programName, hrefPrefix) {
@@ -151,14 +169,38 @@
       dayCardsContainer.innerHTML = '';
       
       // Set modal title based on program
-      modalTitle.textContent = `🔥 30-Day ${programName} Challenge`;
+      modalTitle.textContent = `🔥 Weekly ${programName} Program`;
       
-      // Add days
-      for (let i = 1; i <= 30; i++) {
-        const dayLink = document.createElement('a');
-        dayLink.href = `${hrefPrefix}`;
-        dayLink.textContent = `Day ${i}`;
-        dayCardsContainer.appendChild(dayLink);
+      // Add days of the week for Intermediate and Advanced programs
+      if (programName === 'Intermediate' || programName === 'Advanced') {
+        daysOfWeek.forEach((day, index) => {
+          const dayCard = document.createElement('div');
+          dayCard.className = 'day-card';
+          dayCard.textContent = day;
+          
+          // Add click event for Sunday
+          if (day === 'Sunday') {
+            dayCard.addEventListener('click', (e) => {
+              e.preventDefault();
+              sundayModal.style.display = 'flex';
+              popupModal.style.display = 'none';
+            });
+          } else {
+            dayCard.addEventListener('click', () => {
+              window.location.href = `${hrefPrefix}?day=${day.toLowerCase()}`;
+            });
+          }
+          
+          dayCardsContainer.appendChild(dayCard);
+        });
+      } else {
+        // For other programs, show 30-day challenge as before
+        for (let i = 1; i <= 30; i++) {
+          const dayLink = document.createElement('a');
+          dayLink.href = `${hrefPrefix}?day=${i}`;
+          dayLink.textContent = `Day ${i}`;
+          dayCardsContainer.appendChild(dayLink);
+        }
       }
       
       // Show modal
@@ -170,15 +212,22 @@
       card.element.addEventListener('click', () => openModal(card.program, card.href));
     });
 
-    // Close modal
+    // Close modals
     closeModal.addEventListener('click', () => {
       popupModal.style.display = 'none';
+    });
+
+    closeSundayModal.addEventListener('click', () => {
+      sundayModal.style.display = 'none';
     });
 
     // Close modal when clicking outside
     window.addEventListener('click', (e) => {
       if (e.target === popupModal) {
         popupModal.style.display = 'none';
+      }
+      if (e.target === sundayModal) {
+        sundayModal.style.display = 'none';
       }
     });
   </script>
@@ -320,7 +369,7 @@
       padding: 0 10px;
     }
 
-    .day-cards a {
+    .day-cards a, .day-card {
       display: block;
       text-decoration: none;
       color: #fff;
@@ -332,12 +381,37 @@
       border: 1px solid rgba(0, 255, 255, 0.2);
       box-shadow: 0 0 15px rgba(0,255,255,0.15);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    .day-cards a:hover {
+    .day-cards a:hover, .day-card:hover {
       transform: translateY(-5px) scale(1.05);
       box-shadow: 0 0 20px rgba(0,255,255,0.6);
       background: rgba(0, 255, 255, 0.12);
+    }
+
+    /* Sunday Modal Styles */
+    .sunday-content {
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .sunday-content p {
+      margin-bottom: 20px;
+    }
+
+    .rest-icon {
+      font-size: 4rem;
+      margin: 20px 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
     /* Animations */
