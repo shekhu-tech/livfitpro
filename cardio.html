@@ -66,185 +66,430 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
   
- <body>
-   <!-- Header will be injected here -->
+<body>
+  <!-- Header will be injected here -->
   <div id="header-container"></div>
+  
+  <!-- Main Content -->
   <main>
-   <section class="products-section">
-   <h2 class="section-title">Cardio Workout</h2>
-     
-  <div class="cards-container">
-    <div class="card">
-      <a href="crdbeginner.html" class="card-link">
-       <div class="card-background" style="background-image: url('cr.png');"></div></a>
-        <div class="card-content">
-         <h3>Beginner</h3>
-       <!-- <a href="#" class="btn">Buy Now</a> -->
+    <section class="products-section">
+      <h2 class="section-title">Cardio Workout</h2>
+      
+      <div class="cards-container">
+        <!-- Beginner Program Card -->
+        <div class="card" id="mainCard1"> 
+          <div class="card-background" style="background-image: url('cr.png');"></div>
+          <div class="card-content">
+            <h3>Beginner Program</h3>
+          </div>
+        </div>
+
+        <!-- Intermediate Program Card -->
+        <div class="card" id="mainCard2"> 
+          <div class="card-background" style="background-image: url('cr.png');"></div>
+          <div class="card-content">
+            <h3>Intermediate Program</h3>
+          </div>
+        </div>
+
+        <!-- Advanced Program Card -->
+        <div class="card" id="mainCard3"> 
+          <div class="card-background" style="background-image: url('cr.png');"></div>
+          <div class="card-content">
+            <h3>Advanced Program</h3>
+          </div>
+        </div>
+
+        <!-- Pro Program Card -->
+        <div class="card" id="mainCard4"> 
+          <div class="card-background" style="background-image: url('cr.png');"></div>
+          <div class="card-content">
+            <h3>Pro Program</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Popup -->
+  <div class="modal" id="popupModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2 id="modalTitle">30-Day Ultimate Challenge</h2>
+      <div class="day-cards">
+        <!-- JS will inject day cards here -->
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <a href="crdintermidiate.html" class="card-link">
-  <div class="card-background" style="background-image: url('cr.png');"></div></a>
-      <div class="card-content">
-         <h3>Intermediate</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
+  <!-- Special Sunday Modal -->
+  <div class="modal" id="sundayModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeSundayModal">&times;</span>
+      <h2>Sunday Special</h2>
+      <div class="sunday-content">
+        <p>Take full rest and enjoy your day! 😊</p>
+        <p>You've worked hard all week - now it's time to recover.</p>
+        <div class="rest-icon">🛌</div>
       </div>
     </div>
-    <div class="card">
-      <a href="crdadvance.html" class="card-link">
-  <div class="card-background" style="background-image: url('cr.png');"></div></a>
-      <div class="card-content">
-         <h3>Advanced</h3>
-        <!--<a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-    <div class="card">
-      <a href="crdpro.html" class="card-link">
-  <div class="card-background" style="background-image: url('cr.png');"></div></a>
-      <div class="card-content">
-      <h3>Pro</h3>
-          <!-- <a href="#" class="btn">Buy Now</a> -->
-      </div>
-    </div>
-</section>
-<style>
-.products-section {
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  text-align: center;
-}
+  </div>
 
-.section-title {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  <!-- JavaScript -->
+  <script>
+    // Get all elements
+    const cards = {
+      1: { element: document.getElementById('mainCard1'), program: 'Beginner', href: 'crdbeginner.html' },
+      2: { element: document.getElementById('mainCard2'), program: 'Intermediate', href: 'crdintermidiate.html' },
+      3: { element: document.getElementById('mainCard3'), program: 'Advanced', href: 'crdadvance.html' },
+      4: { element: document.getElementById('mainCard4'), program: 'Pro', href: 'crdpro.html' }
+    };
+    
+    const popupModal = document.getElementById('popupModal');
+    const sundayModal = document.getElementById('sundayModal');
+    const closeModal = document.getElementById('closeModal');
+    const closeSundayModal = document.getElementById('closeSundayModal');
+    const dayCardsContainer = document.querySelector('.day-cards');
+    const modalTitle = document.getElementById('modalTitle');
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
+    // Days of the week with different colors and individual page links for each program
+    const daysOfWeek = {
+      Intermediate: [
+        { name: 'Monday', color: '#FF6B6B', link: 'intermediate-monday-cardio.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'intermediate-tuesday-cardio.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'intermediate-wednesday-cardio.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'intermediate-thursday-cardio.html' },
+        { name: 'Friday', color: '#FB5607', link: 'intermediate-friday-cardio.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'intermediate-saturday-cardio.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ],
+      Advanced: [
+        { name: 'Monday', color: '#FF6B6B', link: 'advanced-monday-cardio.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'advanced-tuesday-cardio.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'advanced-wednesday-cardio.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'advanced-thursday-cardio.html' },
+        { name: 'Friday', color: '#FB5607', link: 'advanced-friday-cardio.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'advanced-saturday-cardio.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ],
+      Pro: [
+        { name: 'Monday', color: '#FF6B6B', link: 'pro-monday-cardio.html' },
+        { name: 'Tuesday', color: '#4ECDC4', link: 'pro-tuesday-cardio.html' },
+        { name: 'Wednesday', color: '#45B7D1', link: 'pro-wednesday-cardio.html' },
+        { name: 'Thursday', color: '#FFBE0B', link: 'pro-thursday-cardio.html' },
+        { name: 'Friday', color: '#FB5607', link: 'pro-friday-cardio.html' },
+        { name: 'Saturday', color: '#8338EC', link: 'pro-saturday-cardio.html' },
+        { name: 'Sunday', color: '#3A86FF' }
+      ]
+    };
 
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  height: 270px;
-  width: 100%;
-  max-width: 399px;
-  position: relative;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 260px; /* Ensures enough room */
-}
+    // Function to open modal with specific program
+    function openModal(programName, hrefPrefix) {
+      // Clear previous days
+      dayCardsContainer.innerHTML = '';
+      
+      // Set modal title based on program
+      if (programName === 'Beginner') {
+        modalTitle.textContent = `🔥 30-Day ${programName} Challenge`;
+        
+        // For Beginner program, show 30-day challenge
+        for (let i = 1; i <= 30; i++) {
+          const dayLink = document.createElement('a');
+          dayLink.href = `${hrefPrefix}?day=${i}`;
+          dayLink.textContent = `Day ${i}`;
+          dayCardsContainer.appendChild(dayLink);
+        }
+      } else {
+        modalTitle.textContent = `🔥 Weekly ${programName} Program`;
+        
+        // Add days of the week for Intermediate, Advanced and Pro programs
+        const programDays = daysOfWeek[programName];
+        
+        programDays.forEach((day) => {
+          const dayCard = document.createElement('div');
+          dayCard.className = 'day-card';
+          dayCard.textContent = day.name;
+          dayCard.style.backgroundColor = day.color;
+          dayCard.style.borderColor = day.color;
+          dayCard.style.boxShadow = `0 0 15px ${day.color}`;
+          
+          // Add click event for Sunday
+          if (day.name === 'Sunday') {
+            dayCard.addEventListener('click', (e) => {
+              e.preventDefault();
+              sundayModal.style.display = 'flex';
+              popupModal.style.display = 'none';
+            });
+          } else {
+            dayCard.addEventListener('click', () => {
+              // Navigate to individual day page for the specific program
+              window.location.href = day.link;
+            });
+          }
+          
+          dayCardsContainer.appendChild(dayCard);
+        });
+      }
+      
+      // Show modal
+      popupModal.style.display = 'flex';
+    }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #ff4b2b;
-}
+    // Add event listeners to all cards
+    Object.values(cards).forEach(card => {
+      card.element.addEventListener('click', () => openModal(card.program, card.href));
+    });
 
-.card-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.7;
-  z-index: 1;
-}
+    // Close modals
+    closeModal.addEventListener('click', () => {
+      popupModal.style.display = 'none';
+    });
 
-.card-content {
-  padding: 0.2rem;
-  color: black;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-}
+    closeSundayModal.addEventListener('click', () => {
+      sundayModal.style.display = 'none';
+    });
 
-.card-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === popupModal) {
+        popupModal.style.display = 'none';
+      }
+      if (e.target === sundayModal) {
+        sundayModal.style.display = 'none';
+      }
+    });
+  </script>
 
-.card-content p {
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
-}
+  <style>
+    /* Products Section */
+    .products-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      text-align: center;
+    }
 
-.btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 30px;
-  background: #ff416c;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
+    .section-title {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 3rem;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.btn:hover {
-  background: #ff416c;
-  box-shadow: 0 0 10px transparent;
-}
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-/* Responsive adjustments for tablets and below */
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+    /* Card Styles */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 270px;
+      position: relative;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 260px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-/* Extra responsiveness for small mobile devices */
-@media (max-width: 480px) {
-  .products-section {
-    padding: 2rem 1rem;
-  }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #ff4b2b;
+    }
 
-  .card {
-    height: auto;
-  }
+    .card-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+      z-index: 1;
+    }
 
-  .card-content h3 {
-    font-size: 1.1rem;
-  }
+    .card-content {
+      padding: 0.2rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
 
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    width: auto;
-    min-width: 100px;
-  }
-}
-</style>
- 
-</div>
-  </section>
-</main>
-     <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
-    <!-- JavaScript to inject header and footer -->
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin: 0;
+      color: white;
+      text-align: center;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 15, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      padding: 30px 20px 40px;
+      width: 100%;
+      max-width: 950px;
+      border-radius: 20px;
+      overflow-y: auto;
+      max-height: 90vh;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .close-btn {
+      font-size: 28px;
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      cursor: pointer;
+      color: #fff;
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #ff4b2b;
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #00e6e6;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.4);
+    }
+
+    /* Day Cards Grid */
+    .day-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
+      padding: 0 10px;
+    }
+
+    .day-cards a, .day-card {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      padding: 22px;
+      border-radius: 14px;
+      background: rgba(0, 255, 255, 0.07);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .day-cards a:hover, .day-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,255,0.6);
+      background: rgba(0, 255, 255, 0.12);
+    }
+
+    /* Sunday Modal Styles */
+    .sunday-content {
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .sunday-content p {
+      margin-bottom: 20px;
+    }
+
+    .rest-icon {
+      font-size: 4rem;
+      margin: 20px 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Scrollbar Styling */
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: rgba(0,255,255,0.4);
+      border-radius: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .products-section {
+        padding: 2rem 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .day-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+
+      .card-content h3 {
+        font-size: 1.3rem;
+      }
+      
+      .modal-content h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+
+  <!-- Footer will be injected here -->
+  <div id="footer-container"></div>
+  <!-- JavaScript to inject header and footer -->
   <script src="script.js" defer></script>
-  </body>
+</body>
 </html>
