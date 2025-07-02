@@ -6,7 +6,7 @@ function injectHeader() {
     <header id="main-header">
       <div class="logo">
         <a href="index.html">
-          <img src="lfit.png" alt="LivFit Logo">
+          <img src="sti.png" alt="LivFit Logo">
         </a>
       </div>
       <nav>
@@ -52,7 +52,7 @@ function injectHeader() {
         </div>
         <div class="sidebar-logo">
           <a href="index.html">
-            <img src="lfit.png" alt="LivFit Logo">
+            <img src="sti.png" alt="LivFit Logo">
           </a>
         </div>
         <ul>
