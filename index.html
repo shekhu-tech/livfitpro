@@ -206,501 +206,756 @@
     </section>
   </main>
 
-   <style>
-    /* Section Title Styles - Modernized */
-    
+  <style>
+    /* Cosmic Background Animation */
+    @keyframes cosmicBackground {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-    /* Carousel Wrapper - Background made transparent */
+    /* Section Container with Animated Cosmic Background */
+    .showcase-section {
+        position: relative;
+        padding: 5rem 0;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        background-size: 400% 400%;
+        animation: cosmicBackground 15s ease infinite;
+    }
+
+    /* Nebula Overlay */
+    .showcase-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100" height="100" filter="url(%23noise)"/></svg>');
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    /* Section Title - Holographic Effect */
+    .section-title1 {
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 4rem;
+        letter-spacing: 3px;
+        position: relative;
+        z-index: 5;
+        text-shadow: 0 0 20px rgba(0, 230, 230, 0.7);
+        background: linear-gradient(90deg, #00e6e6, #a100ff, #00e6e6);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+
+    /* Floating Particles */
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(0, 230, 230, 0.6);
+        box-shadow: 0 0 10px 2px rgba(0, 230, 230, 0.8);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* Carousel Wrapper with Glass Morphism */
     .carousel-wrapper {
         position: relative;
         width: 100%;
-        max-width: 1200px; /* Max width for the carousel */
+        max-width: 1400px;
         margin: 0 auto;
-        background: transparent; /* Transparent background */
+        padding: 0 20px;
+        z-index: 2;
     }
 
-    /* Cards Container - Now a sleek slider */
+    /* Cards Container - Futuristic Design */
     .cards-container1 {
         display: flex;
-        gap: 2rem; /* Increased gap */
+        gap: 2.5rem;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        padding: 2.5rem 0; /* More vertical padding */
+        padding: 3rem 0;
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
-        scrollbar-width: none; /* Hide scrollbar for Firefox */
-        position: relative; /* For overflow gradient */
-        mask-image: linear-gradient(to right,
+        scrollbar-width: none;
+        position: relative;
+        mask-image: linear-gradient(
+            to right,
             transparent,
-            black 10%,
-            black 90%,
-            transparent); /* Fade edges */
-        -webkit-mask-image: linear-gradient(to right,
+            black 5%,
+            black 95%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
             transparent,
-            black 10%,
-            black 90%,
-            transparent); /* Webkit for fade edges */
+            black 5%,
+            black 95%,
+            transparent
+        );
     }
 
     .cards-container1::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Webkit browsers */
+        display: none;
     }
 
-    /* Individual Card Styles - Smaller and "Pro" */
+    /* Individual Card - Cyberpunk Style */
     .card1 {
         position: relative;
-        flex: 0 0 260px; /* Smaller fixed width */
-        height: 350px; /* Smaller fixed height */
-        background: rgba(128, 128, 128, 0.2); /* Gray background kept as requested */
-        border-radius: 25px; /* More rounded corners */
-        backdrop-filter: blur(8px); /* Frosted glass effect */
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(0, 255, 255, 0.2); /* Thin, glowing border */
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
-        padding: 1.8rem; /* More internal padding */
+        flex: 0 0 300px;
+        height: 420px;
+        background: rgba(25, 25, 60, 0.6);
+        border-radius: 30px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 230, 230, 0.3);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                    inset 0 0 15px rgba(0, 230, 230, 0.2);
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between; /* Distribute content */
+        justify-content: space-between;
         scroll-snap-align: start;
         overflow: hidden;
-        transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-        text-align: center; /* Center text */
-        transform-style: preserve-3d; /* For potential 3D effects */
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: center;
+        transform-style: preserve-3d;
+        perspective: 1000px;
     }
 
-    .card1:hover {
-        transform: translateY(-15px) scale(1.03) rotateY(2deg); /* More dynamic hover */
-        box-shadow: 0 25px 60px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.8); /* Intense glow */
-        border-color: #00ffff; /* Brighter border on hover */
-        background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(0, 255, 255, 0.03));
-    }
-
-    /* Background Pattern/Icon */
+    /* Card Holographic Border Effect */
     .card1::before {
         content: "";
         position: absolute;
-        top: -20%;
-        right: -20%;
-        width: 80%;
-        height: 80%;
-        background-image: url('rn.png'); /* Using a placeholder, replace with a subtle pattern/logo */
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%; /* Keep it circular */
-        opacity: 0.03; /* Very subtle */
-        z-index: 0;
-        pointer-events: none; /* Ensure it doesn't interfere with clicks */
-        transform: translateZ(-1px); /* Push back in 3D space */
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #00e6e6, #a100ff, #00e6e6);
+        background-size: 200% 200%;
+        z-index: -1;
+        border-radius: 32px;
+        opacity: 0;
+        transition: 0.5s;
+        animation: borderGlow 4s linear infinite;
     }
 
+    @keyframes borderGlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card1:hover {
+        transform: translateY(-20px) scale(1.05) rotateY(5deg);
+        box-shadow: 0 30px 70px rgba(0, 230, 230, 0.7),
+                    inset 0 0 20px rgba(0, 230, 230, 0.4);
+        background: rgba(30, 30, 70, 0.7);
+    }
+
+    .card1:hover::before {
+        opacity: 0.7;
+    }
+
+    /* Card Content */
     .card-content1 {
         position: relative;
-        z-index: 1;
+        z-index: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.6rem; /* Adjusted gap */
-        margin-bottom: 0.8rem; /* Space below content */
+        gap: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    /* Cyberpunk Image Frame */
+    .card-image-container {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        padding: 5px;
+        background: linear-gradient(135deg, #00e6e6, #a100ff);
+        box-shadow: 0 0 20px rgba(0, 230, 230, 0.5);
+        margin-bottom: 1.5rem;
+        transition: all 0.5s ease;
+    }
+
+    .card1:hover .card-image-container {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 0 30px rgba(0, 230, 230, 0.8);
     }
 
     .card-image {
-        width: 140px; /* Slightly smaller image */
-        height: 140px;
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
         object-fit: cover;
-        border: 4px solid #00e6e6; /* Aqua border */
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); /* Glow around image */
+        border: 3px solid #0f0c29;
+    }
+
+    /* Neon Text Effects */
+    .card1 h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #00ffff;
+        margin: 0.5rem 0;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        position: relative;
+        display: inline-block;
+    }
+
+    .card1 h2::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        transform: scaleX(0);
         transition: transform 0.3s ease;
     }
 
-    .card1:hover .card-image {
-        transform: scale(1.05); /* Slight zoom on hover */
+    .card1:hover h2::after {
+        transform: scaleX(1);
     }
 
-    .card1 h2 {
-        font-size: 1.6rem; /* Slightly larger heading */
-        font-weight: bold;
-        color: #00ffff; /* Bright aqua */
-        margin: 0.8rem 0 0.2rem; /* Adjusted margins */
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-    }
-    
     .card1 h3 {
-        font-size: 1.15rem; /* Slightly larger sub-heading */
-        color: #c0c0c0; /* Lighter grey */
-        margin: 0;
+        font-size: 1.3rem;
+        color: #c0c0c0;
+        margin: 0.3rem 0;
         font-weight: 500;
     }
 
     .card1 h4 {
-        font-size: 0.9rem; /* Smaller for detail */
-        color: #888; /* Softer grey */
+        font-size: 1rem;
+        color: #888;
         margin: 0.5rem 0 0;
     }
 
-    /* Social Media Icons - Vertical Bar on Right */
+    /* Social Media Icons - Futuristic HUD */
     .social-bar {
         position: absolute;
         top: 50%;
-        right: 0px; /* Start at the right edge */
+        right: -50px;
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 10px; /* Space between icons */
-        z-index: 10; /* Ensure it's above other card content */
-        padding: 10px 5px; /* Padding for the bar itself */
-        background: rgba(0, 255, 255, 0.05); /* Subtle background for the bar */
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        box-shadow: -5px 0 15px rgba(0, 255, 255, 0.2); /* Shadow on the left edge */
-        transition: all 0.3s ease;
+        gap: 15px;
+        z-index: 10;
+        padding: 15px 8px;
+        background: rgba(0, 230, 230, 0.1);
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        box-shadow: -5px 0 20px rgba(0, 230, 230, 0.3);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(5px);
     }
 
     .card1:hover .social-bar {
-        right: 15px; /* Slide in slightly on hover */
-        background: rgba(0, 255, 255, 0.1); /* Slightly more opaque on hover */
+        right: 20px;
+        background: rgba(0, 230, 230, 0.15);
     }
 
     .social-bar a {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 35px; /* Size of the icon button */
-        height: 35px;
-        border-radius: 50%; /* Circular buttons */
-        background: rgba(0, 255, 255, 0.15); /* Background for each icon */
-        color: #00ffff; /* Icon color */
-        font-size: 1.2rem; /* Icon size */
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 230, 230, 0.2);
+        color: #00ffff;
+        font-size: 1.3rem;
         text-decoration: none;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(0, 230, 230, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .social-bar a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 230, 230, 0.4), transparent);
+        transition: 0.5s;
     }
 
     .social-bar a:hover {
-        background: #00ffff; /* Solid aqua on hover */
-        color: #1a1a2e; /* Dark icon on hover */
-        transform: scale(1.1); /* Pop out on hover */
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow on hover */
+        background: #00ffff;
+        color: #0f0c29;
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 230, 230, 0.9);
         border-color: #00ffff;
+    }
+
+    .social-bar a:hover::before {
+        left: 100%;
+    }
+
+    /* Testimonial Quote */
+    .testimonial {
+        font-style: italic;
+        color: #aaa;
+        margin: 1rem 0;
+        position: relative;
+        padding: 0 1rem;
+    }
+
+    .testimonial::before,
+    .testimonial::after {
+        content: '"';
+        font-size: 2rem;
+        color: rgba(0, 230, 230, 0.5);
+        position: absolute;
+    }
+
+    .testimonial::before {
+        top: -15px;
+        left: -5px;
+    }
+
+    .testimonial::after {
+        bottom: -25px;
+        right: -5px;
+    }
+
+    /* Rating Stars */
+    .rating {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin: 0.5rem 0;
+    }
+
+    .star {
+        color: #ffcc00;
+        text-shadow: 0 0 5px rgba(255, 204, 0, 0.7);
+    }
+
+    /* Floating Elements */
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(161, 0, 255, 0.2);
+        box-shadow: 0 0 30px rgba(161, 0, 255, 0.5);
+        filter: blur(1px);
+        z-index: 1;
+        pointer-events: none;
     }
 
     /* Responsive Adjustments */
     @media (max-width: 1200px) {
-        .carousel-wrapper {
-            padding: 0 20px; /* Add horizontal padding for smaller screens */
+        .section-title1 {
+            font-size: 3rem;
+        }
+        .card1 {
+            flex: 0 0 280px;
+            height: 400px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .section-title1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .card1 {
+            flex: 0 0 250px;
+            height: 380px;
+            padding: 1.5rem;
+        }
+        .card-image-container {
+            width: 140px;
+            height: 140px;
         }
     }
 
     @media (max-width: 768px) {
         .section-title1 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .cards-container1 {
+            padding: 2rem 0;
+            gap: 1.5rem;
         }
         .card1 {
-            flex: 0 0 220px; /* Even smaller cards on tablets */
-            height: 0px;
+            flex: 0 0 220px;
+            height: 360px;
             padding: 1.2rem;
-            border-radius: 20px;
         }
-        .card-image {
+        .card-image-container {
             width: 120px;
             height: 120px;
         }
         .card1 h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
         .card1 h3 {
-            font-size: 1rem;
-        }
-        .card1 h4 {
-            font-size: 0.85rem;
-        }
-        .social-bar {
-            right: -5px; /* Adjust position on smaller screens */
-            padding: 8px 3px;
-            gap: 8px;
-        }
-        .card1:hover .social-bar {
-            right: 10px; /* Adjust hover slide-in */
-        }
-        .social-bar a {
-            width: 30px;
-            height: 30px;
-            font-size: 1rem;
-        }
-         .cards-container1 {
-            padding: 1.5rem 0;
+            font-size: 1.1rem;
         }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
         .section-title1 {
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
         }
         .card1 {
-            flex: 0 0 85%; /* Make cards take up more width on small phones */
-            height: 300px;
-            padding: 1rem;
-            border-radius: 18px;
-        }
-        .card-image {
-            width: 100px;
-            height: 100px;
-        }
-        .card1 h2 {
-            font-size: 1.2rem;
-        }
-        .card1 h3 {
-            font-size: 0.9rem;
-        }
-        .card1 h4 {
-            font-size: 0.8rem;
+            flex: 0 0 85%;
+            height: 340px;
         }
         .social-bar {
-            right: -10px; /* Further out on tiny screens */
-            padding: 5px 2px;
-            gap: 6px;
-        }
-        .card1:hover .social-bar {
-            right: 5px;
+            right: -40px;
+            padding: 10px 5px;
+            gap: 10px;
         }
         .social-bar a {
-            width: 28px;
-            height: 28px;
-            font-size: 0.9rem;
+            width: 35px;
+            height: 35px;
+            font-size: 1.1rem;
         }
-        .cards-container1 {
-            padding: 1rem 0;
-        }
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
     }
 </style>
 
-<div class="carousel-wrapper">
-   <br> <br> <br>
-    <div class="section-title1">Our Esteemed Customers</div>
-    <div class="cards-container1" id="cardSlider">
-        <div class="card1">
-            <div class="card-content1">
-                <img src="me.jpg" alt="Shekhar Tyagi" class="card-image" />
-                <h2>Shekhar Tyagi</h2>
-                <h3>Joined 15-05-2025</h3>
-                <h3>for Yoga</h3>
+<section class="showcase-section" id="customerShowcase">
+    <div class="section-title1">Our Valued Community</div>
+    <div class="carousel-wrapper">
+        <div class="cards-container1" id="cardSlider">
+            <!-- Card 1 -->
+            <div class="card1">
+                <div class="card-content1">
+                    <div class="card-image-container">
+                        <img src="me.jpg" alt="Shekhar Tyagi" class="card-image" />
+                    </div>
+                    <h2>Shekhar Tyagi</h2>
+                    <h3>Yoga Practitioner</h3>
+                    <h4>Member since May 2025</h4>
+                    
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    
+                    <p class="testimonial">
+                        This community transformed my practice with incredible support and resources. The energy here is amazing!
+                    </p>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
 
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=User+2" alt="Customer Name" class="card-image" />
-                <h2>Jane Doe</h2>
-                <h3>Fitness Enthusiast</h3>
-                <h4>Joined 01-06-2025</h4>
+            <!-- Card 2 -->
+            <div class="card1">
+                <div class="card-content1">
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/300/FF5733/FFFFFF?text=User+2" alt="Jane Doe" class="card-image" />
+                    </div>
+                    <h2>Jane Doe</h2>
+                    <h3>Fitness Coach</h3>
+                    <h4>Member since June 2025</h4>
+                    
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    
+                    <p class="testimonial">
+                        The knowledge I've gained here has taken my coaching to the next level. Forever grateful!
+                    </p>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+                </div>
             </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
 
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/33FF57/FFFFFF?text=User+3" alt="Customer Name" class="card-image" />
-                <h2>John Smith</h2>
-                <h3>Weight Loss Journey</h3>
-                <h4>Joined 10-06-2025</h4>
+            <!-- Card 3 -->
+            <div class="card1">
+                <div class="card-content1">
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/300/33FF57/FFFFFF?text=User+3" alt="John Smith" class="card-image" />
+                    </div>
+                    <h2>John Smith</h2>
+                    <h3>Wellness Advocate</h3>
+                    <h4>Member since June 2025</h4>
+                    
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    
+                    <p class="testimonial">
+                        This is more than a community - it's a family that supports each other's growth at every step.
+                    </p>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
             </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
 
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/3357FF/FFFFFF?text=User+4" alt="Customer Name" class="card-image" />
-                <h2>Emily White</h2>
-                <h3>Yoga Practitioner</h3>
-                <h4>Joined 18-06-2025</h4>
+            <!-- Card 4 -->
+            <div class="card1">
+                <div class="card-content1">
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/300/3357FF/FFFFFF?text=User+4" alt="Emily White" class="card-image" />
+                    </div>
+                    <h2>Emily White</h2>
+                    <h3>Nutrition Expert</h3>
+                    <h4>Member since July 2025</h4>
+                    
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    
+                    <p class="testimonial">
+                        The holistic approach here blends perfectly with my nutrition philosophy. Life-changing experience!
+                    </p>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" title="Blog"><i class="fas fa-blog"></i></a>
+                </div>
             </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
 
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/FFFF33/000000?text=User+5" alt="Customer Name" class="card-image" />
-                <h2>Michael Brown</h2>
-                <h3>Cardio Champion</h3>
-                <h4>Joined 25-06-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
-
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/8A2BE2/FFFFFF?text=User+6" alt="Customer Name" class="card-image" />
-                <h2>Sarah Green</h2>
-                <h3>Strength Trainer</h3>
-                <h4>Joined 02-07-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
-
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/00CED1/FFFFFF?text=User+7" alt="Customer Name" class="card-image" />
-                <h2>David Lee</h2>
-                <h3>Calisthenics Master</h3>
-                <h4>Joined 09-07-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
-
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/FFD700/000000?text=User+8" alt="Customer Name" class="card-image" />
-                <h2>Olivia Chen</h2>
-                <h3>Mindfulness Seeker</h3>
-                <h4>Joined 16-07-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
-
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/8B0000/FFFFFF?text=User+9" alt="Customer Name" class="card-image" />
-                <h2>Daniel Kim</h2>
-                <h3>Nutrition Focus</h3>
-                <h4>Joined 23-07-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-            </div>
-        </div>
-
-        <div class="card1">
-            <div class="card-content1">
-                <img src="https://via.placeholder.com/150/4B0082/FFFFFF?text=User+10" alt="Customer Name" class="card-image" />
-                <h2>Sophia Rodriguez</h2>
-                <h3>Wellness Advocate</h3>
-                <h4>Joined 30-07-2025</h4>
-            </div>
-            <div class="social-bar">
-                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            <!-- Card 5 -->
+            <div class="card1">
+                <div class="card-content1">
+                    <div class="card-image-container">
+                        <img src="https://via.placeholder.com/300/FFFF33/000000?text=User+5" alt="Michael Brown" class="card-image" />
+                    </div>
+                    <h2>Michael Brown</h2>
+                    <h3>Meditation Guide</h3>
+                    <h4>Member since July 2025</h4>
+                    
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    
+                    <p class="testimonial">
+                        The depth of wisdom shared in this community is unparalleled. My practice has deepened exponentially.
+                    </p>
+                </div>
+                <div class="social-bar">
+                    <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank" title="Clubhouse"><i class="fas fa-comment-alt"></i></a>
+                    <a href="#" target="_blank" title="Podcast"><i class="fas fa-podcast"></i></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script>
-    const cardSlider = document.getElementById('cardSlider');
-    let autoScrollInterval;
-    let isMobile = false;
-
-    // Function to check if device is mobile
-    const checkIfMobile = () => {
-        isMobile = window.matchMedia("(pointer: coarse)").matches;
-    };
-
-    // Function to auto-scroll the carousel
-    const autoScroll = () => {
-        const firstCard = cardSlider.querySelector('.card1');
-        if (!firstCard) return;
+    // Create floating particles
+    function createParticles() {
+        const section = document.querySelector('.showcase-section');
+        const particleCount = window.innerWidth < 768 ? 15 : 30;
         
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(cardSlider).gap);
-        const scrollAmount = cardWidth + gap;
-        
-        if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 5) {
-            // If at end, scroll back to start
-            cardSlider.scrollTo({
-                left: 0,
-                behavior: 'smooth'
-            });
-        } else {
-            // Otherwise scroll by one card
-            cardSlider.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    };
-
-    // Initialize the carousel
-    const initCarousel = () => {
-        checkIfMobile();
-        
-        // Only auto-scroll on non-mobile devices
-        if (!isMobile) {
-            // Start auto-scrolling every 7 seconds
-            autoScrollInterval = setInterval(autoScroll, 7000);
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
             
-            // Pause auto-scroll when user hovers over the slider
-            cardSlider.addEventListener('mouseenter', () => {
-                clearInterval(autoScrollInterval);
-            });
+            // Random size between 2px and 6px
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
             
-            // Resume auto-scroll when user leaves the slider
-            cardSlider.addEventListener('mouseleave', () => {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = setInterval(autoScroll, 7000);
-            });
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+            particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Random opacity
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            
+            section.appendChild(particle);
         }
+    }
+
+    // Create floating elements
+    function createFloatingElements() {
+        const section = document.querySelector('.showcase-section');
+        const elementCount = window.innerWidth < 768 ? 3 : 6;
         
-        // Infinite scrolling effect - duplicate cards when reaching end
-        cardSlider.addEventListener('scroll', () => {
+        for (let i = 0; i < elementCount; i++) {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+            
+            // Random size between 50px and 150px
+            const size = Math.random() * 100 + 50;
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            
+            // Random position
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation
+            const duration = Math.random() * 30 + 20;
+            const delay = Math.random() * 10;
+            element.style.animation = `pulse ${duration}s ease-in-out ${delay}s infinite`;
+            
+            section.appendChild(element);
+        }
+    }
+
+    // Auto-scroll carousel
+    function setupCarousel() {
+        const cardSlider = document.getElementById('cardSlider');
+        let autoScrollInterval;
+        let isMobile = false;
+        let scrollAmount = 0;
+        const scrollSpeed = 1; // Pixels per frame
+
+        // Check if device is mobile
+        const checkIfMobile = () => {
+            isMobile = window.matchMedia("(pointer: coarse)").matches;
+        };
+
+        // Auto-scroll function
+        const autoScroll = () => {
+            const firstCard = cardSlider.querySelector('.card1');
+            if (!firstCard) return;
+            
+            const cardWidth = firstCard.offsetWidth;
+            const gap = parseFloat(getComputedStyle(cardSlider).gap);
+            const scrollStep = cardWidth + gap;
+            
             if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 100) {
-                // Clone first few cards and append to end
-                const firstCards = Array.from(cardSlider.querySelectorAll('.card1')).slice(0, 3);
-                firstCards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    cardSlider.appendChild(clone);
+                // If at end, smoothly scroll back to start
+                cardSlider.scrollTo({
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                scrollAmount = 0;
+            } else {
+                // Smooth continuous scrolling
+                scrollAmount += scrollSpeed;
+                cardSlider.scrollLeft = scrollAmount;
+            }
+        };
+
+        // Initialize carousel
+        const initCarousel = () => {
+            checkIfMobile();
+            
+            // Only auto-scroll on non-mobile devices
+            if (!isMobile) {
+                // Start auto-scrolling
+                autoScrollInterval = setInterval(autoScroll, 20); // Smooth scrolling
+                
+                // Pause auto-scroll when user interacts
+                cardSlider.addEventListener('mouseenter', () => {
+                    clearInterval(autoScrollInterval);
+                });
+                
+                cardSlider.addEventListener('touchstart', () => {
+                    clearInterval(autoScrollInterval);
+                });
+                
+                // Resume auto-scroll when user leaves
+                cardSlider.addEventListener('mouseleave', () => {
+                    clearInterval(autoScrollInterval);
+                    autoScrollInterval = setInterval(autoScroll, 20);
                 });
             }
-        });
-    };
+            
+            // Infinite scrolling effect
+            cardSlider.addEventListener('scroll', () => {
+                if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 200) {
+                    // Clone first few cards and append to end
+                    const firstCards = Array.from(cardSlider.querySelectorAll('.card1')).slice(0, 3);
+                    firstCards.forEach(card => {
+                        const clone = card.cloneNode(true);
+                        cardSlider.appendChild(clone);
+                    });
+                }
+            });
+        };
 
-    // Initialize on load
-    window.addEventListener('load', initCarousel);
-    
-    // Re-initialize on resize (in case of orientation change)
-    window.addEventListener('resize', () => {
-        clearInterval(autoScrollInterval);
-        initCarousel();
-    });
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initCarousel();
+            createParticles();
+            createFloatingElements();
+        });
+        
+        // Re-initialize on resize
+        window.addEventListener('resize', () => {
+            clearInterval(autoScrollInterval);
+            initCarousel();
+            
+            // Recreate particles and elements
+            document.querySelectorAll('.particle, .floating-element').forEach(el => el.remove());
+            createParticles();
+            createFloatingElements();
+        });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', setupCarousel);
 </script>
    
     <!-- Footer will be injected here -->
