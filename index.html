@@ -543,218 +543,516 @@
                 padding: 1rem 0;
             }
         }
-    </style>
+   <style>
+    /* Section Title Styles - Modernized */
+    .section-title1 {
+        text-align: center;
+        font-size: 2.5rem; /* Larger, more impactful */
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 3rem; /* More spacing */
+        color: #00e6e6; /* Fallback color */
+        letter-spacing: 2px; /* Increased letter spacing */
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(0, 255, 255, 0.3); /* Glowing effect */
+        background: linear-gradient(to right, #00e6e6, #a100ff); /* Gradient text */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        z-index: 2; /* Bring title to front */
+    }
 
+    /* Carousel Wrapper - Background made transparent */
+    .carousel-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1200px; /* Max width for the carousel */
+        margin: 0 auto;
+        background: transparent; /* Transparent background */
+    }
 
-    <div class="carousel-wrapper">
-       <br> <br> <br>
-        <div class="section-title1">Our Esteemed Customers</div>
-        <button class="arrow-btn arrow-left" id="prevBtn">&lt;</button>
-        <div class="cards-container1" id="cardSlider">
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="me.jpg" alt="Shekhar Tyagi" class="card-image" />
-                    <h2>Shekhar Tyagi</h2>
-                    <h3>Joined 15-05-2025</h3>
-                    <h3>for Yoga</h3>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
+    /* Cards Container - Now a sleek slider */
+    .cards-container1 {
+        display: flex;
+        gap: 2rem; /* Increased gap */
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 2.5rem 0; /* More vertical padding */
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        position: relative; /* For overflow gradient */
+        mask-image: linear-gradient(to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent); /* Fade edges */
+        -webkit-mask-image: linear-gradient(to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent); /* Webkit for fade edges */
+    }
+
+    .cards-container1::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Webkit browsers */
+    }
+
+    /* Individual Card Styles - Smaller and "Pro" */
+    .card1 {
+        position: relative;
+        flex: 0 0 260px; /* Smaller fixed width */
+        height: 350px; /* Smaller fixed height */
+        background: rgba(128, 128, 128, 0.2); /* Gray background kept as requested */
+        border-radius: 25px; /* More rounded corners */
+        backdrop-filter: blur(8px); /* Frosted glass effect */
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(0, 255, 255, 0.2); /* Thin, glowing border */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+        padding: 1.8rem; /* More internal padding */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between; /* Distribute content */
+        scroll-snap-align: start;
+        overflow: hidden;
+        transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+        text-align: center; /* Center text */
+        transform-style: preserve-3d; /* For potential 3D effects */
+    }
+
+    .card1:hover {
+        transform: translateY(-15px) scale(1.03) rotateY(2deg); /* More dynamic hover */
+        box-shadow: 0 25px 60px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.8); /* Intense glow */
+        border-color: #00ffff; /* Brighter border on hover */
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(0, 255, 255, 0.03));
+    }
+
+    /* Background Pattern/Icon */
+    .card1::before {
+        content: "";
+        position: absolute;
+        top: -20%;
+        right: -20%;
+        width: 80%;
+        height: 80%;
+        background-image: url('rn.png'); /* Using a placeholder, replace with a subtle pattern/logo */
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%; /* Keep it circular */
+        opacity: 0.03; /* Very subtle */
+        z-index: 0;
+        pointer-events: none; /* Ensure it doesn't interfere with clicks */
+        transform: translateZ(-1px); /* Push back in 3D space */
+    }
+
+    .card-content1 {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem; /* Adjusted gap */
+        margin-bottom: 0.8rem; /* Space below content */
+    }
+
+    .card-image {
+        width: 140px; /* Slightly smaller image */
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #00e6e6; /* Aqua border */
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4); /* Glow around image */
+        transition: transform 0.3s ease;
+    }
+
+    .card1:hover .card-image {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .card1 h2 {
+        font-size: 1.6rem; /* Slightly larger heading */
+        font-weight: bold;
+        color: #00ffff; /* Bright aqua */
+        margin: 0.8rem 0 0.2rem; /* Adjusted margins */
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    }
+    
+    .card1 h3 {
+        font-size: 1.15rem; /* Slightly larger sub-heading */
+        color: #c0c0c0; /* Lighter grey */
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .card1 h4 {
+        font-size: 0.9rem; /* Smaller for detail */
+        color: #888; /* Softer grey */
+        margin: 0.5rem 0 0;
+    }
+
+    /* Social Media Icons - Vertical Bar on Right */
+    .social-bar {
+        position: absolute;
+        top: 50%;
+        right: 0px; /* Start at the right edge */
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Space between icons */
+        z-index: 10; /* Ensure it's above other card content */
+        padding: 10px 5px; /* Padding for the bar itself */
+        background: rgba(0, 255, 255, 0.05); /* Subtle background for the bar */
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        box-shadow: -5px 0 15px rgba(0, 255, 255, 0.2); /* Shadow on the left edge */
+        transition: all 0.3s ease;
+    }
+
+    .card1:hover .social-bar {
+        right: 15px; /* Slide in slightly on hover */
+        background: rgba(0, 255, 255, 0.1); /* Slightly more opaque on hover */
+    }
+
+    .social-bar a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px; /* Size of the icon button */
+        height: 35px;
+        border-radius: 50%; /* Circular buttons */
+        background: rgba(0, 255, 255, 0.15); /* Background for each icon */
+        color: #00ffff; /* Icon color */
+        font-size: 1.2rem; /* Icon size */
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .social-bar a:hover {
+        background: #00ffff; /* Solid aqua on hover */
+        color: #1a1a2e; /* Dark icon on hover */
+        transform: scale(1.1); /* Pop out on hover */
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow on hover */
+        border-color: #00ffff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .carousel-wrapper {
+            padding: 0 20px; /* Add horizontal padding for smaller screens */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-title1 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .card1 {
+            flex: 0 0 220px; /* Even smaller cards on tablets */
+            height: 0px;
+            padding: 1.2rem;
+            border-radius: 20px;
+        }
+        .card-image {
+            width: 120px;
+            height: 120px;
+        }
+        .card1 h2 {
+            font-size: 1.4rem;
+        }
+        .card1 h3 {
+            font-size: 1rem;
+        }
+        .card1 h4 {
+            font-size: 0.85rem;
+        }
+        .social-bar {
+            right: -5px; /* Adjust position on smaller screens */
+            padding: 8px 3px;
+            gap: 8px;
+        }
+        .card1:hover .social-bar {
+            right: 10px; /* Adjust hover slide-in */
+        }
+        .social-bar a {
+            width: 30px;
+            height: 30px;
+            font-size: 1rem;
+        }
+         .cards-container1 {
+            padding: 1.5rem 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section-title1 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+        .card1 {
+            flex: 0 0 85%; /* Make cards take up more width on small phones */
+            height: 300px;
+            padding: 1rem;
+            border-radius: 18px;
+        }
+        .card-image {
+            width: 100px;
+            height: 100px;
+        }
+        .card1 h2 {
+            font-size: 1.2rem;
+        }
+        .card1 h3 {
+            font-size: 0.9rem;
+        }
+        .card1 h4 {
+            font-size: 0.8rem;
+        }
+        .social-bar {
+            right: -10px; /* Further out on tiny screens */
+            padding: 5px 2px;
+            gap: 6px;
+        }
+        .card1:hover .social-bar {
+            right: 5px;
+        }
+        .social-bar a {
+            width: 28px;
+            height: 28px;
+            font-size: 0.9rem;
+        }
+        .cards-container1 {
+            padding: 1rem 0;
+        }
+    }
+</style>
+
+<div class="carousel-wrapper">
+   <br> <br> <br>
+    <div class="section-title1">Our Esteemed Customers</div>
+    <div class="cards-container1" id="cardSlider">
+        <div class="card1">
+            <div class="card-content1">
+                <img src="me.jpg" alt="Shekhar Tyagi" class="card-image" />
+                <h2>Shekhar Tyagi</h2>
+                <h3>Joined 15-05-2025</h3>
+                <h3>for Yoga</h3>
             </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=User+2" alt="Customer Name" class="card-image" />
-                    <h2>Jane Doe</h2>
-                    <h3>Fitness Enthusiast</h3>
-                    <h4>Joined 01-06-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/33FF57/FFFFFF?text=User+3" alt="Customer Name" class="card-image" />
-                    <h2>John Smith</h2>
-                    <h3>Weight Loss Journey</h3>
-                    <h4>Joined 10-06-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/3357FF/FFFFFF?text=User+4" alt="Customer Name" class="card-image" />
-                    <h2>Emily White</h2>
-                    <h3>Yoga Practitioner</h3>
-                    <h4>Joined 18-06-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/FFFF33/000000?text=User+5" alt="Customer Name" class="card-image" />
-                    <h2>Michael Brown</h2>
-                    <h3>Cardio Champion</h3>
-                    <h4>Joined 25-06-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/8A2BE2/FFFFFF?text=User+6" alt="Customer Name" class="card-image" />
-                    <h2>Sarah Green</h2>
-                    <h3>Strength Trainer</h3>
-                    <h4>Joined 02-07-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/00CED1/FFFFFF?text=User+7" alt="Customer Name" class="card-image" />
-                    <h2>David Lee</h2>
-                    <h3>Calisthenics Master</h3>
-                    <h4>Joined 09-07-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/FFD700/000000?text=User+8" alt="Customer Name" class="card-image" />
-                    <h2>Olivia Chen</h2>
-                    <h3>Mindfulness Seeker</h3>
-                    <h4>Joined 16-07-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/8B0000/FFFFFF?text=User+9" alt="Customer Name" class="card-image" />
-                    <h2>Daniel Kim</h2>
-                    <h3>Nutrition Focus</h3>
-                    <h4>Joined 23-07-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="card-content1">
-                    <img src="https://via.placeholder.com/150/4B0082/FFFFFF?text=User+10" alt="Customer Name" class="card-image" />
-                    <h2>Sophia Rodriguez</h2>
-                    <h3>Wellness Advocate</h3>
-                    <h4>Joined 30-07-2025</h4>
-                </div>
-                <div class="social-bar">
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
             </div>
         </div>
-        <button class="arrow-btn arrow-left" id="prevBtn">&lt;</button>
-        <button class="arrow-btn arrow-right" id="nextBtn">&gt;</button>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=User+2" alt="Customer Name" class="card-image" />
+                <h2>Jane Doe</h2>
+                <h3>Fitness Enthusiast</h3>
+                <h4>Joined 01-06-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/33FF57/FFFFFF?text=User+3" alt="Customer Name" class="card-image" />
+                <h2>John Smith</h2>
+                <h3>Weight Loss Journey</h3>
+                <h4>Joined 10-06-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/3357FF/FFFFFF?text=User+4" alt="Customer Name" class="card-image" />
+                <h2>Emily White</h2>
+                <h3>Yoga Practitioner</h3>
+                <h4>Joined 18-06-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/FFFF33/000000?text=User+5" alt="Customer Name" class="card-image" />
+                <h2>Michael Brown</h2>
+                <h3>Cardio Champion</h3>
+                <h4>Joined 25-06-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/8A2BE2/FFFFFF?text=User+6" alt="Customer Name" class="card-image" />
+                <h2>Sarah Green</h2>
+                <h3>Strength Trainer</h3>
+                <h4>Joined 02-07-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/00CED1/FFFFFF?text=User+7" alt="Customer Name" class="card-image" />
+                <h2>David Lee</h2>
+                <h3>Calisthenics Master</h3>
+                <h4>Joined 09-07-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/FFD700/000000?text=User+8" alt="Customer Name" class="card-image" />
+                <h2>Olivia Chen</h2>
+                <h3>Mindfulness Seeker</h3>
+                <h4>Joined 16-07-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/8B0000/FFFFFF?text=User+9" alt="Customer Name" class="card-image" />
+                <h2>Daniel Kim</h2>
+                <h3>Nutrition Focus</h3>
+                <h4>Joined 23-07-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+
+        <div class="card1">
+            <div class="card-content1">
+                <img src="https://via.placeholder.com/150/4B0082/FFFFFF?text=User+10" alt="Customer Name" class="card-image" />
+                <h2>Sophia Rodriguez</h2>
+                <h3>Wellness Advocate</h3>
+                <h4>Joined 30-07-2025</h4>
+            </div>
+            <div class="social-bar">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <script>
-        const cardSlider = document.getElementById('cardSlider');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+<script>
+    const cardSlider = document.getElementById('cardSlider');
+    let autoScrollInterval;
+    let isMobile = false;
 
-        // Function to scroll the carousel
-        const scrollCarousel = (direction) => {
-            const firstCard = cardSlider.querySelector('.card1');
-            const cardWidth = firstCard.offsetWidth;
-            // Get the computed gap value
-            const gap = parseFloat(getComputedStyle(cardSlider).gap);
-            const scrollAmount = cardWidth + gap;
+    // Function to check if device is mobile
+    const checkIfMobile = () => {
+        isMobile = window.matchMedia("(pointer: coarse)").matches;
+    };
 
-            if (direction === 'left') {
-                cardSlider.scrollBy({
-                    left: -scrollAmount,
-                    behavior: 'smooth'
+    // Function to auto-scroll the carousel
+    const autoScroll = () => {
+        const firstCard = cardSlider.querySelector('.card1');
+        if (!firstCard) return;
+        
+        const cardWidth = firstCard.offsetWidth;
+        const gap = parseFloat(getComputedStyle(cardSlider).gap);
+        const scrollAmount = cardWidth + gap;
+        
+        if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 5) {
+            // If at end, scroll back to start
+            cardSlider.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Otherwise scroll by one card
+            cardSlider.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Initialize the carousel
+    const initCarousel = () => {
+        checkIfMobile();
+        
+        // Only auto-scroll on non-mobile devices
+        if (!isMobile) {
+            // Start auto-scrolling every 7 seconds
+            autoScrollInterval = setInterval(autoScroll, 7000);
+            
+            // Pause auto-scroll when user hovers over the slider
+            cardSlider.addEventListener('mouseenter', () => {
+                clearInterval(autoScrollInterval);
+            });
+            
+            // Resume auto-scroll when user leaves the slider
+            cardSlider.addEventListener('mouseleave', () => {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = setInterval(autoScroll, 7000);
+            });
+        }
+        
+        // Infinite scrolling effect - duplicate cards when reaching end
+        cardSlider.addEventListener('scroll', () => {
+            if (cardSlider.scrollLeft + cardSlider.clientWidth >= cardSlider.scrollWidth - 100) {
+                // Clone first few cards and append to end
+                const firstCards = Array.from(cardSlider.querySelectorAll('.card1')).slice(0, 3);
+                firstCards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    cardSlider.appendChild(clone);
                 });
-            } else {
-                cardSlider.scrollBy({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-            }
-        };
-
-        prevBtn.addEventListener('click', () => scrollCarousel('left'));
-        nextBtn.addEventListener('click', () => scrollCarousel('right'));
-
-        // Optional: Implement keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                scrollCarousel('left');
-            } else if (e.key === 'ArrowRight') {
-                scrollCarousel('right');
             }
         });
+    };
 
-           </script>
-
-   <script>
-  const slider = document.getElementById('cardSlider');
-  let scrollAmount = 0;
-
-   function autoSlide() {
-    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
-      slider.scrollTo({ left: 0, behavior: 'smooth' });
-      scrollAmount = 0;
-    } else {
-      scrollAmount += 324; // 300 card width + 24 gap
-      slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-    }
-    }
-
-    function scrollSlider(direction) {
-    const step = 324;
-    scrollAmount += direction * step;
-     slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-     }
-       </script>
+    // Initialize on load
+    window.addEventListener('load', initCarousel);
+    
+    // Re-initialize on resize (in case of orientation change)
+    window.addEventListener('resize', () => {
+        clearInterval(autoScrollInterval);
+        initCarousel();
+    });
+</script>
    
     <!-- Footer will be injected here -->
     <div id="footer-container"></div>
