@@ -138,6 +138,10 @@ function injectFooter() {
           <a href="weight.html" class="footer-btn">Weight Management</a>
           <a href="donate.html" class="footer-btn">Donate</a>
           <a href="policy.html" class="footer-btn">Privacy Policy</a>
+          <a href="terms.html" class="footer-btn">terms & conditation</a>
+          <a href="refund.html" class="footer-btn">Refund Policy</a>
+          <a href="contact.html" class="footer-btn">Privacy Policy</a>
+          <a href="about.html" class="footer-btn">Privacy Policy</a>
         </div>
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -301,4 +305,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add the button to the body
   document.body.appendChild(button);
+
 
