@@ -6,13 +6,11 @@ function injectHeader() {
     <header id="main-header">
       <div class="logo">
         <a href="index.html">
-          <img src="sti.png" alt="LivFit Logo">
+          <img src="lfit.png" alt="LivFit Logo">
         </a>
       </div>
       <nav>
-      <div class="nav-item">
-          <a href="register.html">Register</a>
-        </div>
+      
         <div class="nav-item">
           <a href="zym.html">Gym</a>
         </div>
@@ -52,7 +50,7 @@ function injectHeader() {
         </div>
         <div class="sidebar-logo">
           <a href="index.html">
-            <img src="sti.png" alt="LivFit Logo">
+            <img src="lfit.png" alt="LivFit Logo">
           </a>
         </div>
         <ul>
@@ -305,5 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add the button to the body
   document.body.appendChild(button);
+
 
 
